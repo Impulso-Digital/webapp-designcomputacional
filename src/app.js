@@ -14,14 +14,18 @@ app.set("views", path.join(__dirname, "views"));
 // Middleware para interpretar JSON
 app.use(express.json());
 
+// Definir a pasta 'public' como a pasta de arquivos estáticos
+app.use(express.static(path.join(__dirname, '../public')));
+
 app.get("/test", (req, res) => {
     res.send("Servidor está funcionando!");
 });
+
 // Rota principal
 app.get("/", (req, res) => {
-    res.send("Bem-vindo à página inicial!");
+    const filePath = path.join(__dirname, '../public', 'index.html');
+    res.sendFile(filePath);
 });
-
 // Rotas de Usuário
 app.use("/api/users", userRoutes);
 console.log("Rotas de usuários carregadas!");
