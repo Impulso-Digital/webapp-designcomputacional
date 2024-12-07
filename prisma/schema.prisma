@@ -30,7 +30,7 @@ model Projeto {
   nome      String
   descricao String
   codigo    String
-  userId    Int      // Relacionamento com o usuário (Professor/Monitor)
+  userId    Int      // Relacionamento com o usuário 
   user      User     @relation("UserProjetos", fields: [userId], references: [id])  // Relacionamento com o modelo User
 }
 

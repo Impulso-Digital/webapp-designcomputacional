@@ -1,7 +1,7 @@
 const express = require('express');
 const userRoutes = require("./routes/userRoutes");
 const projetoRoutes = require("./routes/projetoRoutes");  
-const path = require("path"); // Importando o módulo path
+const path = require("path"); 
 
 
 const app = express();

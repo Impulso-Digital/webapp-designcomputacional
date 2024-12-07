@@ -27,7 +27,7 @@ const getProjetos = async (req, res) => {
       // Busca todos os projetos no banco de dados
       const projetos = await prisma.projeto.findMany({
         include: {
-          user: true,  // Incluir dados do usuário (professor ou monitor) que criou o projeto
+          user: true,  // Incluir dados do usuário que criou o projeto
         },
       });
   

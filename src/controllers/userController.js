@@ -21,7 +21,7 @@ const createUser = async (req, res) => {
             data: {
                 nome,
                 email,
-                senha, // Aqui você pode aplicar uma criptografia na senha, por exemplo
+                senha, 
                 role,
             },
         });
@@ -41,7 +41,7 @@ const getUsers = async (req, res) => {
         // Se encontrar usuários, retorna a lista
         res.status(200).json(users);
     } catch (error) {
-        console.error(error);  // Log para identificar o erro
+        console.error(error);  
         res.status(500).json({ error: "Erro ao buscar usuários" });
     }
 };
