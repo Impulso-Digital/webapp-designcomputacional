@@ -1,0 +1,23 @@
+{
+  "name": "webapp-designcomputacional",
+  "version": "1.0.0",
+  "description": "Aplicação Web destinada a disciplina de Design Computacional, da Universidade Federal do Ceará\r ## 📝 Sobre o Projeto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Impulso-Digital/webapp-designcomputacional.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Impulso-Digital/webapp-designcomputacional/issues"
+  },
+  "homepage": "https://github.com/Impulso-Digital/webapp-designcomputacional#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
