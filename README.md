@@ -3,8 +3,8 @@
 ![CAPA](public/logos/idbanner.png)
 - [📝 Sobre o Projeto](#-sobre-o-projeto)
 - [🎯 Funcionalidades](#-funcionalidades)
-- [⚙️Requisitos Funcionais](#requisitos-funcionais)
-- [⚙️Requisitos Não Funcionais](#requisitos-não-funcionais)
+- [⚙️ Requisitos Funcionais](#requisitos-funcionais)
+- [⚙️ Requisitos Não Funcionais](#requisitos-não-funcionais)
 - [🛠️ Tecnologias e Ferramentas Utilizadas](#️-tecnologias-e-ferramentas-utilizadas)
 - [👥 Integrantes do Grupo](#-integrantes-do-grupo)
 
