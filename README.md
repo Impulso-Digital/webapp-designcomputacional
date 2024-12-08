@@ -1,4 +1,4 @@
-![CAPA](https://github.com/user-attachments/assets/2639ee33-7a90-4020-b459-c0e7d5a02ac3)
+![CAPA](public/logos/idbanner.png)
 
 Aplicação Web destinada a disciplina de Design Computacional, da Universidade Federal do Ceará
 ## 📝 Sobre o Projeto
