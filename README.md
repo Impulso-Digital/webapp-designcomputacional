@@ -1,6 +1,8 @@
 
 
 ![CAPA](public/logos/idbanner.png)
+Aplicação Web em desenvolvimento para a disciplina de Projeto Integrado I, do curso de Sistemas e Mídias Digitais da Universidade Federal do Ceará.
+
 - [📝 Sobre o Projeto](#-sobre-o-projeto)
 - [🎯 Funcionalidades](#-funcionalidades)
 - [⚙️ Requisitos Funcionais](#requisitos-funcionais)
@@ -9,7 +11,7 @@
 - [👥 Integrantes do Grupo](#-integrantes-do-grupo)
 
 
-Aplicação Web em desenvolvimento para a disciplina de Projeto Integrado I, do curso de Sistemas e Mídias Digitais da Universidade Federal do Ceará.
+
 ## 📝 Sobre o Projeto
 
 Nosso objetivo é resolver o problema dos alunos da disciplina de Design Computacional em apresentar e compilar de forma organizada e acessível os projetos produzidos pelos alunos, visando torná-los compreensíveis e atrativos para monitores, alunos atuais, potenciais futuros alunos e demais interessados na disciplina.
