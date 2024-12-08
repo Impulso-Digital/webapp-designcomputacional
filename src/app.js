@@ -34,15 +34,18 @@ console.log("Rotas de usuários carregadas!");
 app.use("/api/projetos", projetoRoutes); // Define a rota de projetos
 
 app.get("/projetos", async (req, res) => {
-    try {
+    
         const response = await fetch("http://localhost:3000/api/projetos");
         const projetos = await response.json();
         res.render("projetos", { projetos });  // Envia os projetos para a página de visualização
-    } catch (err) {
-        console.error(err);
-        res.status(500).send("Erro ao carregar os projetos.");
-    }
+    //Colocar  um try/catch nessa parte caso não encontre projetos 
 });
+
+app.get("/cadastro", async (req, res) => {
+    const filePath = path.join(__dirname, "../public", "cadastro.html");
+    res.sendFile(filePath);
+});
+
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
