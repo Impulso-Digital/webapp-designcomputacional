@@ -1,6 +1,7 @@
 
 
 ![CAPA](public/logos/idbanner.png)
+
 Aplicação Web em desenvolvimento para a disciplina de Projeto Integrado I, do curso de Sistemas e Mídias Digitais da Universidade Federal do Ceará.
 
 - [📝 Sobre o Projeto](#-sobre-o-projeto)
@@ -75,12 +76,14 @@ Nosso objetivo é resolver o problema dos alunos da disciplina de Design Computa
 
 ## 👥 Integrantes do Grupo
 
-- **Rubens Leandro dos Santos**
-- **Guilherme Matos Viana**
-- **Samuel de Sousa Leles**
-- **Levi de Sousa Alves**
-- **Enzo Ranieri Barbosa Rodrigues da Silva**
-- **Carlos Renan Carrilho Lopes Junior**
-- **Gabriel Silva Alves dos Santos**
+
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Rubens Leandro dos Santos** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Guilherme Matos Viana** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Samuel de Sousa Leles** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Levi de Sousa Alves** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Enzo Ranieri Barbosa Rodrigues da Silva** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Carlos Renan Carrilho Lopes Junior** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Gabriel Silva Alves dos Santos**
+
 
 ---
