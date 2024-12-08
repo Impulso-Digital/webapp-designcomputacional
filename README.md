@@ -3,8 +3,8 @@
 ![CAPA](public/logos/idbanner.png)
 - [📝 Sobre o Projeto](#-sobre-o-projeto)
 - [🎯 Funcionalidades](#-funcionalidades)
-- [Requisitos Funcionais](#requisitos-funcionais)
-- [Requisitos Não Funcionais](#requisitos-não-funcionais)
+- [⚙️Requisitos Funcionais](#requisitos-funcionais)
+- [⚙️Requisitos Não Funcionais](#requisitos-não-funcionais)
 - [🛠️ Tecnologias e Ferramentas Utilizadas](#️-tecnologias-e-ferramentas-utilizadas)
 - [👥 Integrantes do Grupo](#-integrantes-do-grupo)
 
@@ -22,35 +22,40 @@ Nosso objetivo é resolver o problema dos alunos da disciplina de Design Computa
 
 ### Requisitos Funcionais
 
-| Código   | Requisito                                              |
-|----------|--------------------------------------------------------|
-| **RF 001** | Cadastro de Usuário                                     |
-| **RF 002** | Autenticação de Usuário (Login)                         |
-| **RF 003** | Atribuição de Funções de Usuário (Professor/Monitor/Aluno) |
-| **RF 004** | Página Inicial (Dashboard)                              |
-| **RF 005** | Adicionar Projetos (Professor/Monitor)                  |
-| **RF 006** | Visualizar Projetos                                     |
-| **RF 007** | Exibição Detalhada de Projetos (código-fonte, execução do código, material auxiliar) |
-| **RF 008** | Sistema de Busca de Projetos                            |
-| **RF 009** | Adicionar Classificação dos Projetos                    |
-| **RF 010** | Tutorial Inicial                                        |
-| **RF 011** | Responsividade para Dispositivos Móveis                 |
-| **RF 012** | Cadastro de Projetos por Alunos                         |
+| Código   | Requisito                                                 |
+|----------|--------------------------------------------------------   |
+| **RF 001** | Permitir o cadastro de usuários com informações básicas (nome, email e senha)                   |
+| **RF 002** | Implementar sistema de autenticação (login e logout)                                            |
+| **RF 003** | Permitir a atribuição de diferentes funções de usuário (Professor, Monitor, Aluno)              |
+| **RF 004** | Exibir página inicial (Dashboard) com informações gerais e links para funcionalidades principais|
+| **RF 005** | Permitir que professores e monitores adicionem novos projetos                                   |
+| **RF 006** | Exibir lista de projetos cadastrados                                                            |
+| **RF 007** | Buscar projetos por palavra-chave                                                               |
+| **RF 008** | Exibir os detalhes de cada projeto, como descrição, código-fonte e materiais auxiliares         |
+| **RF 009** | Exibir os projetos de forma interativa, incluindo execução em tempo real dos códigos            |
+| **RF 010** | Permitir a classificação dos projetos                                                           |
+| **RF 011** | Visualizar tutoriais relacionados à disciplina                                                  |
+| **RF 012** | Adicionar Projetos (Professor, Monitor)                                                         | 
+| **RF 013** | Cadastrar Projetos (Aluno)                                                                      | 
+
+
 
 ### Requisitos Não Funcionais
 
-| Código   | Requisito                                              |
-|----------|--------------------------------------------------------|
-| **RNF 001** | Verificação e Aprovação de Projetos                     |
-| **RNF 002** | Gerenciamento de Perfil do Usuário                      |
-| **RNF 003** | Compatibilidade com Navegadores Populares               |
-| **RNF 004** | Sistema de Moderação de Conteúdo                        |
-| **RNF 005** | Código Organizado e Comentado                           |
-| **RNF 006** | Garantia de Proteção dos Dados dos Usuários             |
-| **RNF 007** | Existência de Backup dos Dados                         |
-| **RNF 008** | Suporte a Múltiplos Usuários Simultaneamente            |
+| Código   | Requisito                                              | Classificação |
+|----------|--------------------------------------------------------|---------------|
+| **RNF 001** | A interface da aplicação deve ser intuitiva, visualmente agradável e consistente com princípios de design        | Usabilidade |
+| **RNF 002** | A aplicação deve responder de forma rápida e eficiente                                                           | Desempenho |
+| **RNF 003** | Os dados dos usuários, incluindo senhas e informações de projetos, devem ser protegidos e criptografados         | Segurança |
+| **RNF 004** | O sistema deve suportar crescimento escalável para acomodar um grande número de usuários simultâneos             | Escalabilidade |
+| **RNF 005** | O código-fonte e a arquitetura do sistema devem ser bem documentados, organizados e seguir boas práticas         | Manutenibilidade |
+| **RNF 006** | O sistema deve seguir regulamentações de privacidade, como a LGPD, garantindo consentimento para uso de dados pessoais | Privacidade |
+| **RNF 007** | A aplicação deve oferecer suporte para integração com APIs relevantes, como p5.js, para execução de códigos visuais    | Integração |
+| **RNF 008** | A aplicação deve ser compatível com os principais navegadores (Chrome, Firefox, Edge, Safari e Opera)            |Interoperabilidade|
+| **RNF 009** | A aplicação deve estar otimizada para dispositivos móveis e desktops, com design responsivo                      | Interoperabilidade|
+| **RNF 010** | O sistema deve incluir backups periódicos e automáticos para evitar perda de dados críticos                      | Recuperação|
+| **RNF 011** | A aplicação deve permitir fácil integração de novos recursos ou extensões no futuro                              | Extensibilidade|
 
----
 
 ## 🛠️ Tecnologias e Ferramentas Utilizadas
 
