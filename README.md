@@ -77,13 +77,13 @@ Nosso objetivo é resolver o problema dos alunos da disciplina de Design Computa
 ## 👥 Integrantes do Grupo
 
 
-<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Rubens Leandro dos Santos** <br>
-<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Guilherme Matos Viana** <br>
-<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Samuel de Sousa Leles** <br>
-<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Levi de Sousa Alves** <br>
-<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Enzo Ranieri Barbosa Rodrigues da Silva** <br>
-<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Carlos Renan Carrilho Lopes Junior** <br>
-<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Gabriel Silva Alves dos Santos**
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Rubens Leandro dos Santos - Desenvolvedor Back-End** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Guilherme Matos Viana - Desenvolvedor Back-End** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Samuel de Sousa Leles - Designer UI** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Levi de Sousa Alves - Desenvolvedor Front-End** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Enzo Ranieri Barbosa Rodrigues da Silva - Designer UI** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Carlos Renan Carrilho Lopes Junior - Desenvolvedor front-end** <br>
+<img src="public/logos/favicon.png" alt="ICONE" width="16" style="vertical-align: middle;">  **Gabriel Silva Alves dos Santos - Designer UX**
 
 
 ---
