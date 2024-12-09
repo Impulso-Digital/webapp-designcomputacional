@@ -8,7 +8,6 @@ router.get("/", userController.getUsers);
 
 // Rota para criar um novo usuário
 router.post("/", (req, res) => {
-    console.log("POST request to /api/users");
     userController.createUser(req, res);
 });
 
