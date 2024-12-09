@@ -11,7 +11,6 @@ const PORT = 3000;
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Middleware para interpretar JSON
 app.use(express.json());
 
 // Definir a pasta 'public' como a pasta de arquivos estáticos
