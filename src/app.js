@@ -40,7 +40,7 @@ app.get("/projetos", async (req, res) => {
     //Colocar  um try/catch nessa parte caso não encontre projetos 
 });
 
-app.get("/cadastro.html", async (req, res) => {
+app.get("/cadastro", async (req, res) => {
     const filePath = path.join(__dirname, "../public", "cadastro.html");
     res.sendFile(filePath);
 });
