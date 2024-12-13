@@ -27,19 +27,16 @@ Nosso objetivo é resolver o problema dos alunos da disciplina de Design Computa
 
 | Código   | Requisito                                                 |
 |----------|--------------------------------------------------------   |
-| **RF 001** | Permitir o cadastro de usuários com informações básicas (nome, email e senha)                   |
-| **RF 002** | Implementar sistema de autenticação (login e logout)                                            |
-| **RF 003** | Permitir a atribuição de diferentes funções de usuário (Professor, Monitor, Aluno)              |
-| **RF 004** | Exibir página inicial (Dashboard) com informações gerais e links para funcionalidades principais|
-| **RF 005** | Permitir que professores e monitores adicionem novos projetos                                   |
-| **RF 006** | Exibir lista de projetos cadastrados                                                            |
-| **RF 007** | Buscar projetos por palavra-chave                                                               |
-| **RF 008** | Exibir os detalhes de cada projeto, como descrição, código-fonte e materiais auxiliares         |
-| **RF 009** | Exibir os projetos de forma interativa, incluindo execução em tempo real dos códigos            |
-| **RF 010** | Permitir a classificação dos projetos                                                           |
-| **RF 011** | Visualizar tutoriais relacionados ao uso da aplicação web                                       |
-| **RF 012** | Adicionar Projetos (Professor, Monitor)                                                         | 
-| **RF 013** | Cadastrar Projetos (Aluno)                                                                      | 
+| **RF 001** | Permitir o cadastro de usuários com informações básicas (nome, email e senha)                              |
+| **RF 002** | Implementar sistema de autenticação (login, logout e recuperação de senha).                                |
+| **RF 003** | Permitir a definição de papéis para os usuários (ex.: administrador, usuário, visitante).                  |
+| **RF 004** | Disponibilizar uma página inicial com informações gerais e links para funcionalidades principais.          |
+| **RF 005** | Permitir que usuários adicionem, editem ou excluam conteúdos conforme suas permissões.                     |
+| **RF 006** | Exibir uma lista de conteúdos cadastrados.                                                                 |
+| **RF 007** | Permitir busca por conteúdo, com base em palavras-chave ou outras características básicas.                 |
+| **RF 008** | Organizar os conteúdos por categorias ou tags.                                                             |
+| **RF 009** | Permitir a visualização detalhada de cada conteúdo.                                                        |
+| **RF 010** | Oferecer orientação básica para o uso da plataforma (ex.: tutorial, FAQ).                                  |
 
 
 
@@ -47,14 +44,14 @@ Nosso objetivo é resolver o problema dos alunos da disciplina de Design Computa
 
 | Código   | Requisito                                              | Classificação |
 |----------|--------------------------------------------------------|---------------|
-| **RNF 001** | A interface da aplicação deve ser intuitiva, visualmente agradável e consistente com princípios de design        | Usabilidade |
-| **RNF 002** | A aplicação deve responder de forma rápida e eficiente                                                           | Desempenho |
-| **RNF 003** | Os dados dos usuários, incluindo senhas e informações de projetos, devem ser protegidos e criptografados         | Segurança |
-| **RNF 004** | O sistema deve suportar crescimento escalável para acomodar um grande número de usuários simultâneos             | Escalabilidade |
-| **RNF 005** | O código-fonte e a arquitetura do sistema devem ser bem documentados, organizados e seguir boas práticas         | Manutenibilidade |
-| **RNF 006** | O sistema deve seguir regulamentações de privacidade, como a LGPD, garantindo consentimento para uso de dados pessoais | Privacidade |
-| **RNF 007** | A aplicação deve estar otimizada para dispositivos móveis e desktops, com design responsivo                      | Interoperabilidade|
-| **RNF 008** | O sistema deve incluir backups periódicos e automáticos para evitar perda de dados críticos                      | Recuperação|
+| **RNF 001** | A interface deve ser intuitiva e agradável visualmente.        | Usabilidade |
+| **RNF 002** | A aplicação deve ser rápida e eficiente.                                                           | Desempenho |
+| **RNF 003** | O Dados dos usuários devem ser protegidos e criptografados.        | Segurança |
+| **RNF 004** | O sistema deve suportar crescimento e um grande número de usuários simultâneos.             | Escalabilidade |
+| **RNF 005** | O código e a arquitetura devem seguir boas práticas e ser bem organizados.         | Manutenibilidade |
+| **RNF 006** | O sistema deve estar em conformidade com a LGPD e garantir o consentimento para uso de dados. | Privacidade |
+| **RNF 007** | A aplicação deve ser compatível com dispositivos móveis e desktops, com design responsivo.                      | Interoperabilidade|
+| **RNF 008** | Deve haver backups periódicos e automáticos para proteger dados importantes.                      | Recuperação|
 
 
 ## 🛠️ Tecnologias e Ferramentas Utilizadas
