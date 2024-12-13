@@ -37,7 +37,7 @@ Nosso objetivo é resolver o problema dos alunos da disciplina de Design Computa
 | **RF 008** | Exibir os detalhes de cada projeto, como descrição, código-fonte e materiais auxiliares         |
 | **RF 009** | Exibir os projetos de forma interativa, incluindo execução em tempo real dos códigos            |
 | **RF 010** | Permitir a classificação dos projetos                                                           |
-| **RF 011** | Visualizar tutoriais relacionados à disciplina                                                  |
+| **RF 011** | Visualizar tutoriais relacionados ao uso da aplicação web                                       |
 | **RF 012** | Adicionar Projetos (Professor, Monitor)                                                         | 
 | **RF 013** | Cadastrar Projetos (Aluno)                                                                      | 
 
@@ -53,11 +53,8 @@ Nosso objetivo é resolver o problema dos alunos da disciplina de Design Computa
 | **RNF 004** | O sistema deve suportar crescimento escalável para acomodar um grande número de usuários simultâneos             | Escalabilidade |
 | **RNF 005** | O código-fonte e a arquitetura do sistema devem ser bem documentados, organizados e seguir boas práticas         | Manutenibilidade |
 | **RNF 006** | O sistema deve seguir regulamentações de privacidade, como a LGPD, garantindo consentimento para uso de dados pessoais | Privacidade |
-| **RNF 007** | A aplicação deve oferecer suporte para integração com APIs relevantes, como p5.js, para execução de códigos visuais    | Integração |
-| **RNF 008** | A aplicação deve ser compatível com os principais navegadores (Chrome, Firefox, Edge, Safari e Opera)            |Interoperabilidade|
-| **RNF 009** | A aplicação deve estar otimizada para dispositivos móveis e desktops, com design responsivo                      | Interoperabilidade|
-| **RNF 010** | O sistema deve incluir backups periódicos e automáticos para evitar perda de dados críticos                      | Recuperação|
-| **RNF 011** | A aplicação deve permitir fácil integração de novos recursos ou extensões no futuro                              | Extensibilidade|
+| **RNF 007** | A aplicação deve estar otimizada para dispositivos móveis e desktops, com design responsivo                      | Interoperabilidade|
+| **RNF 008** | O sistema deve incluir backups periódicos e automáticos para evitar perda de dados críticos                      | Recuperação|
 
 
 ## 🛠️ Tecnologias e Ferramentas Utilizadas
