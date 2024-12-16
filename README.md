@@ -28,18 +28,18 @@ Apresentar e compilar de forma organizada e acessível os projetos produzidos pe
 |**⏳ Pendente** | A funcionalidade ainda não começou ou está aguardando.|
 |**🛠️ Em revisão** |A funcionalidade está sendo testada ou revisada.|
 
-| Código   | Requisito                                                 |Descrição| Status   |
-|:----------:|--------------------------------------------------------|-----|:-------------:            |
-|**RF 001**| Permitir o cadastro de usuários com informações básicas (nome, email e senha).                             |Os usuários podem criar uma conta informando nome, e-mail e senha.|✅|
-|**RF 002**| Implementar sistema de autenticação (login, logout e recuperação de senha).                                |Permite entrar na plataforma com e-mail e senha, sair (logout) e redefinir a senha caso necessário.|🚧|
-|**RF 003**| Permitir a definição de papéis para os usuários (ex.: administrador, usuário, visitante).                  |Define níveis de acesso, como administrador, usuário e visitante, com permissões diferentes.|✅|
-|**RF 004**| Disponibilizar uma página inicial com informações gerais e links para funcionalidades principais.          |Uma página de entrada com informações principais e links para navegar no sistema.|🚧|
-|**RF 005**| Permitir que usuários adicionem, editem ou excluam conteúdos conforme suas permissões.                     |Usuários autorizados podem adicionar, editar ou apagar conteúdos.|🚧|
-|**RF 006**| Exibir uma lista de conteúdos cadastrados.                                                                 |Mostra todos os conteúdos cadastrados de forma organizada para fácil visualização.|✅|
-|**RF 007**| Permitir busca por conteúdo, com base em palavras-chave ou outras características básicas.                 |Permite localizar conteúdos usando palavras-chave ou filtros.|⏳|
-|**RF 008**| Organizar os conteúdos por categorias ou tags.                                                             |Ajuda a organizar e filtrar conteúdos com categorias e palavras-chave (tags).|⏳|
-|**RF 009**| Permitir a visualização detalhada de cada conteúdo.                                                        |Exibe todas as informações de um conteúdo específico, como descrição completa e anexos.|⏳|
-|**RF 010**| Oferecer orientação básica para o uso da plataforma.                                |Oferece tutorial simples para facilitar o uso da plataforma.|⏳|
+| Código   | Requisito                                                 | Status   |
+|:----------:|--------------------------------------------------------|:-------------:            |
+|**RF 001**| Permitir o cadastro de usuários com informações básicas (nome, email e senha).                             |✅|
+|**RF 002**| Implementar sistema de autenticação (login, logout e recuperação de senha).                                |🚧|
+|**RF 003**| Permitir a definição de papéis para os usuários (ex.: administrador, usuário, visitante).                  |✅|
+|**RF 004**| Disponibilizar uma página inicial com informações gerais e links para funcionalidades principais.          |🚧|
+|**RF 005**| Permitir que usuários adicionem, editem ou excluam conteúdos conforme suas permissões.                     |🚧|
+|**RF 006**| Exibir uma lista de conteúdos cadastrados.                                                                 |✅|
+|**RF 007**| Permitir busca por conteúdo, com base em palavras-chave ou outras características básicas.                 |⏳|
+|**RF 008**| Organizar os conteúdos por categorias ou tags.                                                             |⏳|
+|**RF 009**| Permitir a visualização detalhada de cada conteúdo.                                                        |⏳|
+|**RF 010**| Oferecer orientação básica para o uso da plataforma.                                |⏳|
 
 
 
