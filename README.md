@@ -32,11 +32,11 @@ Apresentar e compilar de forma organizada e acessível os projetos produzidos pe
 
 Navegue até a pasta do projeto:
 
-    ```
+   
     cd caminhodorepositorio
     
     npm install
-   ```
+   
 
 ### 3. **Configure o Banco de Dados**
 
