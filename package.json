@@ -2,8 +2,9 @@
   "name": "webapp-designcomputacional",
   "version": "1.0.0",
   "description": "Aplicação Web destinada a disciplina de Design Computacional, da Universidade Federal do Ceará\r ## 📝 Sobre o Projeto",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -19,6 +19,51 @@ Apresentar e compilar de forma organizada e acessível os projetos produzidos pe
 
 ## 🎯 Funcionalidades
 
+
+## **Instalação**
+
+### 1. **Clone o repositório:**
+
+   ```bash
+   git clone https://github.com/Impulso-Digital/webapp-designcomputacional.git
+   cd template-frontend
+   ```
+
+### 2. **Instale as dependências:**
+É necessário ter o Node.js e npm instalados.
+
+Navegue até a pasta do projeto:
+
+    ```bash
+    cd caminhodorepositorio
+    ```
+   
+      ```bash
+   npm install
+   ```
+
+### 3. **Configure o Banco de Dados**
+
+1. Localize o arquivo ```.env..example``` na raiz do projeto.
+2. Renomeie ele para ```.env```
+3. Configure a variável ```DATABASE_URL``` no arquivo ```.env``` com a conexão do banco de dados PostgreSQL.
+
+    Exemplo: 
+    ```DATABASE_URL=postgresql://usuario:senha@localhost:5432/nome_do_banco```
+
+### 4. **Sincronize o Prisma com o Banco de Dados**
+
+Rode o comando ``` npx prisma migrate dev```
+
+### 5. **Inicie o servidor**
+
+```npm start```
+
+E o servidor estará rodando em ```http://localhost:3000```.
+
+
+
+
 ### Requisitos Funcionais
 
 | Status   | Descrição                                                 |
