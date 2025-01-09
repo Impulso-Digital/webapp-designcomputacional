@@ -34,10 +34,8 @@ Navegue até a pasta do projeto:
 
     ```bash
     cd caminhodorepositorio
-    ```
-   
-      ```bash
-   npm install
+    
+    npm install
    ```
 
 ### 3. **Configure o Banco de Dados**
