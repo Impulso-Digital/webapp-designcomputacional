@@ -17,8 +17,6 @@ Aplicação Web em desenvolvimento para a disciplina de Projeto Integrado I, do 
 
 Apresentar e compilar de forma organizada e acessível os projetos produzidos pelos alunos de Design Computacional, visando torná-los compreensíveis e atrativos para monitores, alunos atuais, potenciais futuros alunos e demais interessados na disciplina.
 
-## 🎯 Funcionalidades
-
 
 ## **Instalação**
 
@@ -62,6 +60,7 @@ Rode o comando ``` npx prisma migrate dev```
 E o servidor estará rodando em ```http://localhost:3000```.
 
 
+## 🎯 Funcionalidades
 
 
 ### Requisitos Funcionais
