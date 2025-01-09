@@ -32,7 +32,7 @@ Apresentar e compilar de forma organizada e acessível os projetos produzidos pe
 
 Navegue até a pasta do projeto:
 
-    ```bash
+    ```
     cd caminhodorepositorio
     
     npm install
