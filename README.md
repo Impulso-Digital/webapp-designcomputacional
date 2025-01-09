@@ -94,7 +94,7 @@ E o servidor estará rodando em ```http://localhost:3000```.
 |**RNF 003**| O dados dos usuários devem ser protegidos e criptografados.        | Segurança |⏳|
 |**RNF 004**| O sistema deve suportar crescimento e um grande número de usuários simultâneos.             | Escalabilidade |⏳|
 |**RNF 005**| O código e a arquitetura devem seguir boas práticas e ser bem organizados.         | Manutenibilidade |⏳|
-|**RNF 006**| O sistema deve estar em conformidade com a LGPD. | Privacidade |⏳|
+|**RNF 006**| O sistema deve proteger os dados dos usuários| Privacidade |⏳|
 |**RNF 007**| A aplicação deve ser compatível com dispositivos móveis e desktops, com design responsivo.                      | Interoperabilidade|⏳|
 |**RNF 008**| Deve haver backups periódicos e automáticos para proteger dados importantes.                      | Recuperação|⏳|
 
