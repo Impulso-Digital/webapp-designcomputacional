@@ -37,7 +37,7 @@
             font-weight: bold;
         }
 
-        input {
+        input, button {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
@@ -46,12 +46,9 @@
         }
 
         button {
-            width: 100%;
-            padding: 10px;
             background-color: #007BFF;
             color: white;
             border: none;
-            border-radius: 5px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
@@ -60,16 +57,30 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        .checkbox-group {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
     <h1>Cadastro de Usuário</h1>
-    <form action="/api/users" method="POST">
+    <form id="cadastroForm">
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required>
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required>
+
+        <label>Cargo:</label>
+        <div class="checkbox-group">
+            <label><input type="radio" name="cargo" value="Administrador" required> Administrador</label>
+            <label><input type="radio" name="cargo" value="Usuário" required> Usuário</label>
+            <label><input type="radio" name="cargo" value="Visitante" required> Visitante</label>
+
+        </div>
 
         <label for="senha">Senha:</label>
         <input type="password" id="senha" name="senha" required>
@@ -79,5 +90,45 @@
 
         <button type="submit">Cadastrar</button>
     </form>
+
+    <script>
+        const form = document.getElementById('cadastroForm');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const cargo = document.querySelector('input[name="cargo"]:checked')?.value;
+            const senha = document.getElementById('senha').value;
+            const confirmaSenha = document.getElementById('confirmaSenha').value;
+
+            if (senha !== confirmaSenha) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ nome, email, senha, role: cargo }),
+                });
+
+                if (response.ok) {
+                    alert("Usuário cadastrado com sucesso!");
+                    form.reset();
+                } else {
+                    const error = await response.json();
+                    alert(`Erro: ${error.error || "Erro desconhecido"}`);
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Erro ao enviar os dados.");
+            }
+        });
+    </script>
 </body>
 </html>

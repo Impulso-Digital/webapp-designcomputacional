@@ -1,3 +1,5 @@
+
+
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -5,13 +7,16 @@ const createProjeto = async (req, res) => {
   try {
     const { nome, descricao, codigo, userId } = req.body;
 
+    const parsedUserId = parseInt(userId, 10);
+
+
     // Cria um novo projeto
     const newProjeto = await prisma.projeto.create({
       data: {
         nome,
         descricao,
         codigo,
-        userId,  // O id do professor ou monitor que está criando o projeto
+        userId, parsedUserId,  // O id do professor ou monitor que está criando o projeto
       },
     });
 
