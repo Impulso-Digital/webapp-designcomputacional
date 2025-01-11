@@ -38,56 +38,38 @@ const createUser = async (req, res) => {
 
 // Função para login do usuário
 const loginUser = async (req, res) => {
-    try {
-        const { email, senha } = req.body;
+    const { email, senha } = req.body;
 
-        // Usa a função getUserByEmail para buscar o usuário pelo e-mail
-        const user = await getUserByEmail(email);
+    try {
+        // Verifica se o usuário existe
+        const user = await prisma.user.findUnique({
+            where: { email },
+        });
 
         if (!user) {
-            return res.status(404).json({ error: 'Usuário não encontrado' });
+            return res.status(404).json({ message: 'Usuário não encontrado' });
         }
 
-        // Verifica se a senha fornecida é válida comparando com a senha criptografada
+        // Compara a senha fornecida com o hash armazenado
         const isPasswordValid = await bcrypt.compare(senha, user.senha);
 
         if (!isPasswordValid) {
-            return res.status(401).json({ error: 'Credenciais inválidas' });
+            return res.status(400).json({ message: 'Credenciais inválidas' });
         }
 
-        // Gera um token JWT com o ID e role do usuário
-        const token = jwt.sign({ userId: user.id, role: user.role }, 'chave', { expiresIn: '1h' });
+        // Se a senha for válida, gera um token JWT
+        const token = jwt.sign(
+            { id: user.id, email: user.email },
+            process.env.JWT_SECRET, // Chave secreta armazenada em variáveis de ambiente
+            { expiresIn: '1h' }
+        );
 
-        // Envia o token para o cliente
+        // Retorna o token no formato JSON
         res.status(200).json({ token });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Erro ao fazer login' });
+        res.status(500).json({ message: 'Erro no servidor' });
     }
 };
 
-// Função para buscar um usuário por e-mail
-const getUserByEmail = async (email) => {
-    try {
-        const user = await prisma.user.findUnique({
-            where: { email: email }
-        });
-        return user;
-    } catch (error) {
-        console.error(error);
-        throw new Error('Erro ao buscar usuário');
-    }
-};
-
-// Função para obter todos os usuários (pode ser útil para debug)
-const getUsers = async (req, res) => {
-    try {
-        const users = await prisma.user.findMany();
-        res.status(200).json(users);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Erro ao buscar usuários' });
-    }
-};
-
-module.exports = { getUsers, createUser, loginUser, getUserByEmail };
+module.exports = { createUser, loginUser };

@@ -1,169 +1,190 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../assets/output.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="./assets/output.css" rel="stylesheet">
+
     <title>Site em Desenvolvimento</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        .banner {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-        }
-
-        .message {
-            margin-top: 20px;
-            font-size: 24px;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .button-container {
-            margin-top: 30px;
-        }
-
-        .button {
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        .button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Estilos do Modal */
-        #loginModal {
-            display: none; /* Inicialmente escondido */
-            position: fixed;
-            z-index: 1; /* Fica acima de outros conteúdos */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
-        }
-        #modalContent {
-            background-color: white;
-            margin: 15% auto;
-            padding: 20px;
-            border-radius: 5px;
-            width: 300px;
-        }
-        .close {
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            position: absolute;
-            top: 10px;
-            right: 25px;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
+
 <body>
-    <!-- Banner -->
-    <img src="./logos/idbanner.png" alt="Banner" class="banner">
+    <header class="w-full h-[160px] bg-black flex items-center justify-between px-12 " style="font-family: 'IBM Plex Sans', sans-serif;">
+        <img src="./assets/logo-designcomputacional.png" alt="Logo Design Computacional" class="w-64">
 
-    <!-- Mensagem -->
-    <div class="message">
-        Site em desenvolvimento
-    </div>
-
-    <!-- Botões de Projetos e Cadastro -->
-    <div class="button-container">
-        <a href="./projetos" class="button">Projetos</a>
-        <a href="./cadastro.html" class="button">Cadastrar Usuário</a>
-        <a href="./cadprojeto.html" class="button">Cadastrar Projeto</a>
-        <!-- Botão de Login -->
-        <button id="loginBtn" class="button">Login</button>
-    </div>
-
-    <!-- O Modal de Login -->
-    <div id="loginModal">
-        <div id="modalContent">
-            <span class="close" id="closeBtn">&times;</span>
-            <h2>Login</h2>
-            <form id="loginForm">
-                <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email" required><br><br>
-
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" name="senha" required><br><br>
-
-                <button type="submit">Entrar</button>
-            </form>
+        <div class="flex bg-green-400 rounded-full px-4 py-2 w-96 justify-between">
+            <input 
+                type="text" 
+                placeholder="Busca" 
+                class="bg-transparent text-gray-700 placeholder-black text-2xl"
+            >
+            <button 
+                class="items-center justify-center w-10 h-10 bg-black rounded-full text-green-400">
+                <i class="fas fa-search"></i>
+            </button>
         </div>
-    </div>
 
-    <script>
-        // Abrir o modal de login
-        const modal = document.getElementById("loginModal");
-        const loginBtn = document.getElementById("loginBtn");
-        const closeBtn = document.getElementById("closeBtn");
 
-        loginBtn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // Fechar o modal ao clicar no 'x'
-        closeBtn.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // Fechar o modal se o usuário clicar fora dele
-        window.onclick = function(event) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Submeter o login via formulário
-        document.getElementById('loginForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
-
-            const response = await fetch('/api/users/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, senha }),
-            });
-
-            const data = await response.json();
-            console.log(data);  // Adicionando o console.log para ver a resposta
-
-            if (response.ok) {
-                alert('Login bem-sucedido!');
-                // Armazena o token JWT no LocalStorage
-                localStorage.setItem('token', data.token);
+        <nav class="text-green-400 text-3xl flex gap-24 font-bold">
+        <a href="" > PROJETOS </a>
+        <a href="" > SOBRE </a>
+        <!-- <a href="" class="underline" > ENTRAR </a> -->
+        <button class="open-modal underline" data-modal="modal-1">
+        ENTRAR
+            
+        </button>
+        <dialog id="modal-1" class="w-[350px] h-[450px] rounded-3xl flex-col p-6 bg-white shadow-lg">
+            <form class="w-full">
+                <!-- Cabeçalho do Modal -->
+                <div class="flex justify-between items-center mb-6 text-3xl font-semibold text-gray-800">
+                    <h1>Entre na sua conta</h1>
+                    <button class="close-modal cursor-pointer text-gray-500 text-xl" data-modal="modal-1" type="button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
                 
-                // Redireciona para a página de projetos
-                window.location.href = '/projetos';  // Alterar conforme a URL da página de projetos
-                modal.style.display = "none"; // Fecha o modal
-            } else {
-                alert(`Erro: ${data.message}`);
-            }
-        });
-    </script>
-</body>
+                <!-- Campo de Email -->
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="nome@email.com"
+                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-800 text-xl"
+                    >
+                </div>
+        
+                <!-- Campo de Senha -->
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="*******"
+                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-800 text-xl"
+                    >
+                </div>
+        
+                <!-- Opções de Lembrar Senha e Esqueceu a Senha -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember_password" name="remember_password" class="h-4 w-4 text-green-500 border-gray-300 rounded">
+                        <label for="remember_password" class="ml-2 text-sm text-gray-600">Lembrar senha</label>
+                    </div>
+                    <a href="#" class="text-sm text-green-500 hover:underline">Esqueceu sua senha?</a>
+                </div>
+        
+                <!-- Botão de Login -->
+                <button
+                    id="login_button"
+                    class="w-full bg-green-500 text-white py-2 px-4 rounded-lg text-lg font-semibold hover:bg-green-600 transition"
+                >
+                    Criar conta
+                </button>
+        
+                <!-- Rodapé com Registro -->
+                <div class="text-center mt-6">
+                    <span class="text-sm text-gray-600">Ainda não é cadastrado? </span>
+                    <a href="#" class="text-sm text-green-500 font-semibold hover:underline">Cadastre-se aqui</a>
+                </div>
+            </form>
+        </dialog>
+        <!-- <a href="" class="bg-green-400 px-4 py-1 rounded-full text-black"> Cadastrar </a> -->
+        <button class="open-modal bg-green-400 px-4 py-1 rounded-full text-black" data-modal="modal-2">
+            Cadastrar
+            
+        </button>
+        <dialog id="modal-2" class="w-[350px] h-[550px] rounded-3xl flex-col p-6 bg-white shadow-lg">
+            <form class="w-full">
+                <!-- Cabeçalho do Modal -->
+                <div class="flex justify-between items-center mb-6 text-3xl font-semibold text-gray-800">
+                    <h1>Crie sua conta</h1>
+                    <button class="close-modal cursor-pointer text-gray-500 text-xl" data-modal="modal-2" type="button">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                
+                <!-- Campo de Nome -->
+                <div class="mb-4">
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nome</label>
+                    <input
+                        type="name"
+                        id="name"
+                        name="name"
+                        placeholder="Nome e Sobrenome"
+                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-800 text-xl"
+                    >
+                </div>
+
+                <!-- Campo de Email -->
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="name@example.com"
+                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-800 text-xl"
+                    >
+                </div>
+        
+                <!-- Campo de Senha -->
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="*******"
+                        class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-gray-800 text-xl"
+                    >
+                </div>
+        
+                <!-- Opções de Lembrar Senha e Esqueceu a Senha -->
+                <div class="flex items-center justify-between mb-6">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember_password" name="remember_password" class="h-4 w-4 text-green-500 border-gray-300 rounded">
+                        <label for="remember_password" class="ml-2 text-sm text-gray-600">Lembrar senha</label>
+                    </div>
+                    <a href="#" class="text-sm text-green-500 hover:underline">Esqueceu sua senha?</a>
+                </div>
+        
+                <!-- Botão de Login -->
+                <button
+                    id="login_button"
+                    class="w-full bg-green-500 text-white py-2 px-4 rounded-lg text-lg font-semibold hover:bg-green-600 transition"
+                >
+                    Criar conta
+                </button>
+        
+                <!-- Rodapé com Registro -->
+                <div class="text-center mt-6">
+                    <span class="text-sm text-gray-600">Já é registrado? </span>
+                    <a href="#" class="text-sm text-green-500 font-semibold hover:underline">Logue aqui</a>
+                </div>
+            </form>
+        </dialog>
+        
+
+
+        <script src="./assets/script.js"></script>
+        <script src="../src\app.js"></script>
+        </nav>  
+
+    </header>
+
+
+
+
+
+
 </html>

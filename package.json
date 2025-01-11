@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tailwindcss -i ./public/assets/styles.css -o ./public/assets/output.css --watch"
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,14 @@
   "homepage": "https://github.com/Impulso-Digital/webapp-designcomputacional#readme",
   "dependencies": {
     "@prisma/client": "^6.0.1",
+    "autoprefixer": "^10.4.20",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2"
+    "jsonwebtoken": "^9.0.2",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
     "prisma": "^6.0.1"
