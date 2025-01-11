@@ -24,7 +24,7 @@ Apresentar e compilar de forma organizada e acessível os projetos produzidos pe
 
    ```bash
    git clone https://github.com/Impulso-Digital/webapp-designcomputacional.git
-   cd template-frontend
+   
    ```
 
 ### 2. **Instale as dependências:**
