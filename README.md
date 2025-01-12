@@ -40,8 +40,8 @@ Navegue até a pasta do projeto:
 
 ### 3. **Configure o Banco de Dados**
 
-1. Localize o arquivo ```.env..example``` na raiz do projeto.
-2. Renomeie ele para ```.env```
+1. Vá para a raiz do projeto.
+2. Crie um arquivo com o nome ```.env```
 3. Configure a variável ```DATABASE_URL``` no arquivo ```.env``` com a conexão do banco de dados PostgreSQL.
 
     Exemplo: 
