@@ -45,7 +45,7 @@ Navegue até a pasta do projeto:
 3. Configure a variável ```DATABASE_URL``` no arquivo ```.env``` com a conexão do banco de dados PostgreSQL.
 
     Exemplo: 
-    ```DATABASE_URL=postgresql://usuario:senha@localhost:5432/nome_do_banco(mydb?schema=public*exemplo)```
+    ```DATABASE_URL="postgresql://usuario:senha@localhost:5432/nome_do_banco(mydb?schema=public*exemplo)"```
 
 ### 4. **Sincronize o Prisma com o Banco de Dados**
 
