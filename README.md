@@ -73,7 +73,7 @@ E o servidor estará rodando em ```http://localhost:3000```.
 | Código   | Requisito                                                 | Status   |
 |:----------:|--------------------------------------------------------|:-------------:            |
 |**RF 001**| Permitir o cadastro de usuários com informações básicas (nome, email e senha).                             |✅|
-|**RF 002**| Implementar sistema de autenticação (login, logout e recuperação de senha).                                |🚧|
+|**RF 002**| Implementar sistema de autenticação.                                |🚧|
 |**RF 003**| Permitir a definição de papéis para os usuários (ex.: administrador, usuário, visitante).                  |✅|
 |**RF 004**| Disponibilizar uma página inicial com informações gerais e links para funcionalidades principais.          |🚧|
 |**RF 005**| Permitir que usuários adicionem, editem ou excluam conteúdos conforme suas permissões.                     |🚧|
