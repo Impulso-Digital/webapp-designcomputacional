@@ -5,9 +5,8 @@ const router = express.Router();
 const userController = require('../controllers/userController'); 
 
 // Rota para criar um novo usuário
-router.post("/", (req, res) => {
-    userController.createUser(req, res);
-});
+router.post("/", userController.createUser); // Aqui é direto, sem a necessidade de envolver em função anônima
+
 
 // Rota de login para autenticação
 router.post("/login", async (req, res) => {

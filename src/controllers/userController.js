@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 // Função para criar um novo usuário
 const createUser = async (req, res) => {
     try {
-        const { nome, email, senha, role } = req.body;
+        const { nome, email, senha } = req.body;
 
         // Verifica se o e-mail já existe no banco de dados
         const userExists = await prisma.user.findUnique({
@@ -26,10 +26,14 @@ const createUser = async (req, res) => {
                 nome,
                 email,
                 senha: hashedPassword,
-                role,
             },
         });
-        return res.status(201).json(newUser);
+
+        // Retorna o usuário cadastrado
+        return res.status(201).json({
+            message: 'Usuário criado com sucesso',
+            user: newUser, // Envia os dados do usuário recém-criado
+        });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Erro ao criar o usuário' });
