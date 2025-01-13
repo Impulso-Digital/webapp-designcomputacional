@@ -85,11 +85,71 @@ document.addEventListener('DOMContentLoaded', function () {
     if (cadastrarForm) {
         cadastrarForm.addEventListener('submit', function (event) {
             event.preventDefault();
-            const nome = event.target.nome.value; // Corrigido para o atributo 'name'
+            const nome = event.target.nome.value; 
             const email = event.target.email.value;
-            const senha = event.target.password.value; // Corrigido para o atributo 'name'
+            const senha = event.target.password.value; 
             cadastrarUsuario(nome, email, senha);
         });
     }
 });
 
+
+
+//Projetos
+// Função para abrir o modal
+function openModal() {
+    const modal = document.getElementById('modal-projeto');
+    modal.showModal();
+}
+
+// Função para fechar o modal
+function closeModal() {
+    const modal = document.getElementById('modal-projeto');
+    modal.close();
+}
+
+document.getElementById("projetoForm").addEventListener("submit", async function (event) {
+    event.preventDefault();  // Previne o envio padrão do formulário
+
+    const nome = document.getElementById("projeto_nome").value;
+    const descricao = document.getElementById("projeto_descricao").value;
+    const codigo = document.getElementById("projeto_codigo").value;
+    const userId = 1;  // Aqui você pode configurar o ID do usuário conforme necessário
+
+    try {
+        // Enviar a requisição para o back-end
+        const response = await fetch("http://localhost:3000/api/projetos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nome: nome,
+                descricao: descricao,
+                codigo: codigo,
+                userId: userId,
+            }),
+        });
+
+        // Verificar se a requisição foi bem-sucedida
+        if (!response.ok) {
+            throw new Error("Erro ao cadastrar o projeto.");
+        }
+
+        // Limpar o formulário após o envio
+        document.getElementById("projetoForm").reset();
+
+        // Fechar o modal após o cadastro
+        document.getElementById("modal-projeto").close();
+
+        // Exibir mensagem de sucesso
+        alert("Projeto cadastrado com sucesso!");
+
+        // Atualizar a lista de projetos na interface (se necessário)
+        // Pode chamar uma função que recarregue a lista de projetos aqui
+
+    } catch (error) {
+        console.error("Erro:", error);
+        alert("Erro ao cadastrar o projeto. Tente novamente.");
+    }
+});

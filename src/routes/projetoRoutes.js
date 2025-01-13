@@ -5,8 +5,7 @@ const projetoController = require("../controllers/projetoController");
 // Rota para criar um novo projeto
 router.post("/", projetoController.createProjeto);
 
-// Rota para visualizar todos os projetos
+// Rota para listar todos os projetos
 router.get("/", projetoController.getProjetos);
-
 
 module.exports = router;

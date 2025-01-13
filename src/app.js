@@ -46,7 +46,7 @@ app.get('/src/app.js', (req, res) => {
 app.use("/api/users", userRoutes);
 console.log("Rotas de usuários carregadas!");
 
-// Rotas de Projetos - Protegendo a rota de projetos com o middleware de autenticação
+// Rotas de Projetos 
 app.use("/api/projetos", projetoRoutes); 
 
 app.get("/projetos", async (req, res) => {
