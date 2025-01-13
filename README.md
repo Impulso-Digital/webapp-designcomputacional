@@ -45,7 +45,7 @@ Navegue até a pasta do projeto:
 3. Configure a variável ```DATABASE_URL``` no arquivo ```.env``` com a conexão do banco de dados PostgreSQL.
 
     Exemplo: 
-    ```DATABASE_URL=postgresql://usuario:senha@localhost:5432/nome_do_banco```
+    ```DATABASE_URL=postgresql://usuario:senha@localhost:5432/nome_do_banco(mydb?schema=public*exemplo)```
 
 ### 4. **Sincronize o Prisma com o Banco de Dados**
 
@@ -73,7 +73,7 @@ E o servidor estará rodando em ```http://localhost:3000```.
 | Código   | Requisito                                                 | Status   |
 |:----------:|--------------------------------------------------------|:-------------:            |
 |**RF 001**| Permitir o cadastro de usuários com informações básicas (nome, email e senha).                             |✅|
-|**RF 002**| Implementar sistema de autenticação.                                |🚧|
+|**RF 002**| Implementar sistema de autenticação.                                |✅|
 |**RF 003**| Permitir a definição de papéis para os usuários (ex.: administrador, usuário, visitante).                  |✅|
 |**RF 004**| Disponibilizar uma página inicial com informações gerais e links para funcionalidades principais.          |🚧|
 |**RF 005**| Permitir que usuários adicionem, editem ou excluam conteúdos conforme suas permissões.                     |🚧|
