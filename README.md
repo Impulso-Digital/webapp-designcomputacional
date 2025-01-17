@@ -79,7 +79,7 @@ E o servidor estará rodando em ```http://localhost:3000```.
 |**RF 005**| Permitir que usuários adicionem, editem ou excluam conteúdos conforme suas permissões.                     |🚧|
 |**RF 006**| Exibir uma lista de conteúdos cadastrados.                                                                 |✅|
 |**RF 007**| Permitir busca por conteúdo, com base em palavras-chave ou outras características básicas.                 |⏳|
-|**RF 008**| Organizar os conteúdos por categorias ou tags.                                                             |⏳|
+|**RF 008**| Organizar os conteúdos por categorias.                                                            |⏳|
 |**RF 009**| Permitir a visualização detalhada de cada conteúdo.                                                        |⏳|
 |**RF 010**| Oferecer orientação básica para o uso da plataforma.                                |⏳|
 
