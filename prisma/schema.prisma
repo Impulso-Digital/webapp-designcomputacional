@@ -18,19 +18,19 @@ model User {
   nome      String
   email     String   @unique
   senha     String
-  role      String   @default("Usuário")  // Valores: "Professor", "Monitor", "Aluno" - nao vai ser implementado no checkpoint 2
+  role      String   @default("Usuário") // Valores: "Professor", "Monitor", "Aluno" - nao vai ser implementado no checkpoint 2
   createdAt DateTime @default(now())
 
   // Relação com o modelo Projeto
-  projetos  Projeto[] @relation("UserProjetos")  // Relacionamento com projetos
+  projetos Projeto[] @relation("UserProjetos") // Relacionamento com projetos
 }
 
 model Projeto {
-  id        Int      @id @default(autoincrement())
+  id        Int    @id @default(autoincrement())
   nome      String
   descricao String
+  tags      String
   codigo    String
-  userId    Int      // Relacionamento com o usuário 
-  user      User     @relation("UserProjetos", fields: [userId], references: [id])  // Relacionamento com o modelo User
+  userId    Int // Relacionamento com o usuário 
+  user      User   @relation("UserProjetos", fields: [userId], references: [id]) // Relacionamento com o modelo User
 }
-
