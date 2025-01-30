@@ -10,3 +10,14 @@ dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.637); /* Fundo escuro */
 }
 
+.font-bebas {
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .quadrado {
+    width: 500px;  /* Largura do quadrado */
+    height: 100px; /* Altura do quadrado */
+    background-color: blue; /* Cor do quadrado */
+}
+  
+
