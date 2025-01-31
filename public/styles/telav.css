@@ -6,6 +6,7 @@
 
 body{
     background-color:#2d2d2d;
+    border: none;
 }
 
 header {
@@ -119,6 +120,169 @@ header {
     cursor: pointer; 
     font-family: 'Bebas Neue', sans-serif;
 }
+
+
+
+
+
+
+
+dialog {
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+
+.modal-registro {
+    width: 60%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 10px;
+    padding: 30px;
+    background: #E6E6E6;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Estilo para o lado esquerdo */
+.register-left {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para o lado direito */
+.register-right {
+    width: 350px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;   
+}
+
+
+/* Estilo para a foto de perfil */
+.foto_perfil {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: gray;
+    margin-bottom: 20px; /* Espaço abaixo da foto */
+    margin-left: auto;
+    margin-right: auto;  /* Usando margens automáticas para centralizar */
+}
+
+
+.upload_foto_perfil {
+    background: #CCCCCC;
+    color: #808080;
+    padding: 6px;
+    border-radius: 2px;
+    border-color: #999999;
+    width: 150px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+.consent-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #808080;
+}
+
+
+.consent-checkbox {
+    margin-right: 10px;
+}
+
+/* Estilo para o botão "Registrar-se" */
+.register-button {
+    width: 250px;
+    background-color: #666666;
+    color: white;
+    padding: 5px;
+    border: none;
+    border-radius: 55px;
+    font-size: 25px;
+    cursor: pointer;
+    margin-top: 20px; /* Espaço acima do botão */
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 300;
+}
+
+
+
+
+
+.close-modal {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #666;
+    position: absolute;
+    top: 10px;  /* Ajuste a distância do topo conforme necessário */
+    right: 10px;  /* Ajuste a distância da direita conforme necessário */
+}
+
+
+/* Campos de entrada */
+
+.title-form{
+    font-size: 55px
+}
+
+.form-group label {
+    display: block;
+    font-size: 20px;
+    color: #808080;
+    margin-top: 15px;
+}
+
+
+.form-group input {
+    width: 500px;
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+
+}
+
+.form-group input::placeholder {
+    color: #CCCCCC;
+  }
+
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
