@@ -374,7 +374,7 @@ dialog::backdrop {
 .carrossel {
     position: absolute;
     /* top: 50%; */
-    margin-top: 280px;
+    margin-top: 20%;
     left: 50%;
     transform: translate(-50%, -50%); 
     width: 70%;
@@ -440,7 +440,7 @@ dialog::backdrop {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 600px;
+    margin-top: 45%;
     padding: 20px;
     border-radius: 10px;
 }
