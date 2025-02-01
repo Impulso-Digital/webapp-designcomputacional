@@ -7,8 +7,6 @@
 body{
     background-color:#2d2d2d;
     border: none;
-    min-height: 100vh;
-    flex-direction: column;
 }
 
 header {
@@ -93,41 +91,6 @@ header {
     cursor: pointer;
     font-family: 'Bebas Neue', sans-serif;
 }
-
-
-.box-info {
-    display: flex; 
-    font-family: 'Bebas Neue', sans-serif;
-    justify-content: center;
-    margin-top: 2rem;
-    gap: 4rem;
-}
-
-/* title-info */
-.title-info {
-    font-size: 30px;
-    color: white; 
-    font-family: 'Bebas Neue', sans-serif;
-}
-
-/* button-info */
-.button-info {
-    display: flex;
-    background-color: white; 
-    padding: 0.25rem 1rem;
-    border-radius: 9999px; 
-    color: black; 
-    align-items: center;
-    font-size: 30px; 
-    cursor: pointer; 
-    font-family: 'Bebas Neue', sans-serif;
-    text-decoration: none;
-}
-
-
-
-
-
 
 
 dialog {
@@ -225,10 +188,6 @@ dialog {
     font-family: 'Bebas Neue', sans-serif;
     font-weight: 300;
 }
-
-
-
-
 
 .close-modal {
     background: none;
@@ -367,212 +326,51 @@ dialog::backdrop {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* CARROSSEL */
-
-
-.carrossel {
-    position: absolute;
-    /* top: 50%; */
-    margin-top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    width: 70%;
-    height: 70%;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-
-.imagens {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.5s ease-in-out;
-}
-
-.imagem {
-    min-width: 100%;
-    height: 100%;
-}
-
-.seta {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    /* background: none; */
-    /* border: none; */
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    border-radius: 5px;
-}
-
-.seta:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.esquerda {
-    left: 10px;
-}
-
-.direita {
-    right: 10px;
-}
-
-
-
-
-
-
 /* Catalogo */
 
-.catalogo {
-    width: 70%;
-    height: 170%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanho igual */
+.content {
+    width: 80%;
     gap: 10px; /* Espaço entre os projetos */
     background-color: white;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 45%;
-    padding: 20px;
+    margin-top: 2%;
+    padding: 35px;
     border-radius: 10px;
-}
 
-
-.projeto {
     display: flex;
-    width: 100%;
     flex-direction: column;
-    align-items: flex-start;
-    background: white[];
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 25px;
-    text-align: center;
-    font-family: 'IBM Plex Sans', sans-serif;
+    
 }
 
-.thumbnail {
-    width: 100%;
-    height: 200px; 
-    background-color: gray; 
-    border-radius: 8px;
-}
-
-.info-criador {
-    display: flex;
-    align-items: center; /* Alinha verticalmente */
-    gap: 10px; /* Espaço entre a foto e o nome */
-    margin-top: 10px;
-
-}
-
-.foto-perfil {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: gray; /* Cor temporária */
-}
-
-.nome-criador {
-    font-size: 19px;
-    font-weight: bold;
-    color: #757575;
-}
-
-.descricao {
-    font-size: 14px;
-    margin: 10px 0;
-    color: #555;
-    text-align: justify;
-    text-align-last: left;
-}
-
-.tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 10px;
-}
-
-.tag {
-    background: #B5B5B5;
-    color: 4C4C4C;
-    font-size: 12px;
-    padding: 5px 10px;
-    border-radius: 5px;
-}
-
-
-/* Estilos para o footer */
-footer {
-    background-color: #000000;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
-    margin-top: 137%; /* Isso empurra a div para o final */
-    display: flex;
-    /* flex-direction: row; */
-    padding: 15px;
-    align-items: center;
+.title {
+    font-size: 35px;
+    color: white; 
     font-family: 'Bebas Neue', sans-serif;
-    justify-content: space-between;
-}
-
-
-.footer-left{
     display: flex;
-    gap: 50px;    
-}
-
-footer h1{
-    color: #808080;
-    font-weight: 300;
-    font-size: 30px;
-}
-
-footer a{
-    color: #B3B3B3;
-    font-size: 30px;
-}
-
-.social-icons{
-    font-size: 30px;
-    display: flex;
-    gap: 50px;
-    align-items: center;
+    margin-left: 10%;
+    margin-top: 5%;
 }
 
 
 
+.content h1{
+    font-size: 18px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    color: #4C4C4C;
+    margin-top: 25px;
+    
 
-footer img{
-    width: 110px;
+}
+
+.content h2{
+    font-size: 16px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    color: #4C4C4C;
+    text-align: justify;
+    margin-right: 30px;
+    
 }
