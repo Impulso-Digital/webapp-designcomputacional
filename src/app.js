@@ -8,7 +8,6 @@ const { PrismaClient } = require("@prisma/client"); // Importando PrismaClient
 const jwt = require('jsonwebtoken'); // Para gerar o token de autenticação
 const multer = require("multer");
 //const cors = require('cors');
-const authenticateToken = require("./auth/authenticateToken"); // Importa o middleware de autenticação
 
 const prisma = new PrismaClient(); // Instância do PrismaClient
 
@@ -22,17 +21,6 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true })); // Necessário para processar formulários
 
-//app.use(cors({
-//    origin: 'http://localhost:3000', // Porta onde o frontend está rodando
-//    methods: ['GET', 'POST'],
-//  }));
-
-app.use(session({
-  secret: 'seu-segredo', // Uma chave secreta para assinar o ID da sessão
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // Ajuste para true se estiver usando HTTPS
-}));
 
 // Definir a pasta 'public' como a pasta de arquivos estáticos
 app.use(express.static(path.join(__dirname, "../public")));
@@ -43,7 +31,7 @@ app.get("/test", (req, res) => {
 
 // Rota principal
 app.get("/", (req, res) => {
-  const filePath = path.join(__dirname, "../public", "telavisitante.html");
+  const filePath = path.join(__dirname, "../public", "TelaInicialVisitante.html");
   res.sendFile(filePath);
 });
 
@@ -70,36 +58,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.get('/api/projetos/:username', async (req, res) => {
-  const username = req.params.username;
-  
-  try {
-      const user = await prisma.user.findUnique({
-          where: { nome_usuario: username },
-          include: {
-              projetos: true,  // Retorna os projetos relacionados ao usuário
-          },
-      });
+// Middleware para verificar o token JWT
+const authenticateToken = (req, res, next) => {
+  const token = req.header('Authorization')?.split(' ')[1]; // Pega o token do cabeçalho
 
-      if (!user) {
-          return res.status(404).json({ message: "Usuário não encontrado" });
-      }
+  if (!token) return res.status(403).json({ message: "Token não fornecido" });
 
-      res.json({
-          projetos: user.projetos.map(projeto => ({
-              nome: projeto.nome,
-              descricao: projeto.descricao,
-              tags: projeto.tags,
-              thumbnailUrl: `/uploads/${projeto.thumbnail}`, // Supondo que a thumbnail esteja em /uploads
-          })),
-      });
-  } catch (error) {
-      res.status(500).json({ message: "Erro ao buscar projetos", error });
-  }
-});
-
+  jwt.verify(token, 'seu-segredo', (err, user) => {
+    if (err) return res.status(403).json({ message: "Token inválido" });
+    req.user = user; // Adiciona o usuário no request
+    next();
+  });
+};
 // Cadastro de projetos
-app.use("/api/projetos", projetoRoutes);
+app.use("/api/projetos", authenticateToken, projetoRoutes);
 
 app.get('/api/projetos/:username', async (req, res) => {
   const username = req.params.username;
@@ -131,30 +103,28 @@ app.get('/api/projetos/:username', async (req, res) => {
 });
 
 // Cadastro de projetos
-app.post('/projetos', async (req, res) => {
-  if (!req.session.userId) {
-    return res.status(401).json({ message: 'Você precisa estar logado para criar um projeto' });
-  }
-
+app.post('/projetos', authenticateToken, async (req, res) => {
   const { nome, descricao, codigo, tags } = req.body;
-  const userId = req.session.userId;  // Pega o userId da sessão
+  const userId = req.user.id;  // Pega o userId do token JWT
 
   try {
-    const novoProjeto = await prisma.projeto.create({
-      data: {
-        nome,
-        descricao,
-        codigo,
-        tags: tags.join(','), // Caso as tags venham como array
-        userId, // Associa o projeto ao usuário logado
-      },
-    });
+      const novoProjeto = await prisma.projeto.create({
+          data: {
+              nome,
+              descricao,
+              codigo,
+              tags: tags.join(','), // Caso as tags venham como array
+              userId, // Associa o projeto ao usuário logado
+          },
+      });
 
-    res.status(201).json(novoProjeto);
+      res.status(201).json(novoProjeto);
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao criar o projeto.' });
+      console.error('Erro ao criar o projeto:', error);
+      res.status(500).json({ error: 'Erro ao criar o projeto.' });
   }
 });
+
 
 // Rota para Cadastro de Usuário com Prisma
 
@@ -242,8 +212,12 @@ app.post("/api/login", async (req, res) => {
     const user = await prisma.user.findUnique({ where: { email } });
 
     if (user && user.senha === senha) {
-      // Salva o ID do usuário na sessão para rastrear o login
-      req.session.userId = user.id;
+      // Gerar token JWT
+      const token = jwt.sign(
+        { id: user.id, nome: user.nome, nome_usuario: user.nome_usuario, email: user.email },
+        'seu-segredo',  // Sua chave secreta
+        { expiresIn: '1h' }
+      );
 
       console.log("Usuário logado:", {
         id: user.id,
@@ -253,7 +227,8 @@ app.post("/api/login", async (req, res) => {
         role: user.role,
       });
 
-      res.status(200).send({ message: "Login bem-sucedido!" });
+      // Envia o token para o cliente
+      res.status(200).json({ message: "Login bem-sucedido!", token });
     } else {
       res.status(401).send({ message: "E-mail ou senha incorretos." });
     }
@@ -264,14 +239,16 @@ app.post("/api/login", async (req, res) => {
 });
 
 
-
 app.post('/logout', (req, res) => {
   req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).send('Erro ao sair');
-    }
-    res.clearCookie('connect.sid'); // Limpa o cookie da sessão
-    res.status(200).json({ message: "Logout bem-sucedido!" });
+      if (err) {
+          return res.status(500).send('Erro ao sair');
+      }
+      // Limpa o cookie da sessão (se estiver usando cookies para sessão)
+      res.clearCookie('connect.sid'); 
+
+      // Resposta ao cliente
+      res.status(200).json({ message: "Logout bem-sucedido!" });
   });
 });
 

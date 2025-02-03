@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // verifica log armazenado
                         console.log("Nome armazenado no localStorage:", localStorage.getItem("username"));
                     // Redireciona para a tela de usuário
-                    window.location.href = "telausuario.html";
+                    window.location.href = "TelaInicialUsuario.html";
                 } else {
                     alert(`Erro: ${data.message}`);
                 }
@@ -90,7 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-//LOGIN DE USUÁRIO
+
+
+// LOGIN DE USUÁRIO
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector('.login-main');
@@ -102,10 +104,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // Coleta os dados de login inseridos
             const email = document.getElementById('login_email').value.trim();
             const senha = document.getElementById('login_password').value.trim();
-
-            // Imprimir os valores de email e senha para depuração
-            console.log("Email:", email);  // Verificar se o valor está sendo capturado
-            console.log("Senha:", senha);  // Verificar se o valor está sendo capturado
 
             // Verificando se ambos os campos foram preenchidos
             if (!email || !senha) {
@@ -126,9 +124,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
 
                 if (response.ok) {
-                    // Se o login for bem-sucedido, pode armazenar o token ou redirecionar
-                    alert("Login bem-sucedido!");
-                    window.location.href = "telausuario.html"; // Alterar conforme a necessidade
+                    // Armazenar o token JWT no localStorage
+                    localStorage.setItem('token', data.token);
+                    sessionStorage.setItem('userId', data.userId); // Armazenando o userId, se necessário
+
+                    // Redireciona para a tela inicial
+                    window.location.href = "TelaInicialUsuario.html";
                 } else {
                     // Caso contrário, exibe um erro
                     alert(data.message || "Erro ao tentar fazer login.");
@@ -143,36 +144,99 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+/// LOGOUT
 
+document.addEventListener("DOMContentLoaded", () => {
+    const logoutButton = document.getElementById('logout');
+    
+    if (logoutButton) {
+        logoutButton.addEventListener('click', async (event) => {
+            event.preventDefault();
+            
+            try {
+                const response = await fetch('/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    credentials: 'same-origin' // Garantir que o cookie da sessão seja enviado
+                });
 
+                if (response.ok) {
+                    // Limpar localStorage e sessionStorage para garantir que as informações sejam removidas
+                    localStorage.removeItem('token'); // Limpa o token de autenticação
+                    sessionStorage.removeItem('userId'); // Limpa o ID do usuário
 
-
-document.querySelector('form').addEventListener('submit', async (event) => {
-  event.preventDefault();
-
-  const nome = document.getElementById('project_name').value;
-  const descricao = document.getElementById('description').value;
-  const codigo = document.getElementById('code').value;
-  const tags = Array.from(document.querySelectorAll('input[name="tags"]:checked')).map(cb => cb.value);
-  const userId = 1; // Substitua pelo ID real do usuário logado
-
-  try {
-    const response = await fetch('http://localhost:3000/projetos', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ nome, descricao, codigo, tags, userId }),
-    });
-
-    if (response.ok) {
-      alert('Projeto cadastrado com sucesso!');
-      event.target.reset();
-    } else {
-      alert('Erro ao cadastrar o projeto.');
+                    // Redireciona para a página inicial ou login
+                    window.location.href = '/'; // Ou a página de login
+                } else {
+                    alert('Erro ao realizar o logout.');
+                }
+            } catch (error) {
+                console.error('Erro na requisição de logout:', error);
+                alert('Erro na conexão com o servidor.');
+            }
+        });
     }
-  } catch (error) {
-    console.error('Erro:', error);
-    alert('Erro na conexão com o servidor.');
-  }
 });
+
+
+
+
+
+
+// CADASTRO PROJETOS
+document.querySelector('form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const nome = document.getElementById('nome_projeto').value;
+    const descricao = document.getElementById('descricao_projeto').value;
+    const codigo = document.getElementById('codigo_projeto').value;
+    const tags = Array.from(document.querySelectorAll('.tag-button.selected')).map(tag => tag.textContent.trim());
+    
+    try {
+        const response = await fetch('http://localhost:3000/projetos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}` // Envia o token de autenticação
+            },
+            body: JSON.stringify({ nome, descricao, codigo, tags })
+        });
+
+        if (response.ok) {
+            alert('Projeto cadastrado com sucesso!');
+            event.target.reset();
+            document.querySelectorAll('.tag-button.selected').forEach(tag => tag.classList.remove('selected'));
+        } else {
+            alert('Erro ao cadastrar o projeto.');
+        }
+    } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro na conexão com o servidor.');
+    }
+});
+
+
+  
+  // Lógica para selecionar e limitar tags
+  const tagButtons = document.querySelectorAll('.tag-button');
+  const maxTags = 5;
+  
+  function updateTagSelection(tag) {
+    if (tag.classList.contains('selected')) {
+      tag.classList.remove('selected');
+    } else if (document.querySelectorAll('.tag-button.selected').length < maxTags) {
+      tag.classList.add('selected');
+    } else {
+      alert(`Você pode selecionar no máximo ${maxTags} categorias.`);
+    }
+  }
+  
+  tagButtons.forEach(tag => {
+    tag.addEventListener('click', () => updateTagSelection(tag));
+  });
+  
+
+
+

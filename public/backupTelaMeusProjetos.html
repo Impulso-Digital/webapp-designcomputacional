@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/TelaMeusProjetos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <title>Meus Projetos</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-left">
+            <a href="TelaInicialUsuario.html"><img src="./assets/logo-designcomputacional.png" alt="Logo Design Computacional" class="logo-dc-header"></a>
+            <div class="search-box">
+                <input type="text" placeholder="Buscar categoria ou usuário" class="text-box">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    
+        <nav class="header-right">
+            <a href="#" class="open-modal projetos" data-modal="modal">PROJETOS</a>
+            <a href="#" class="open-modal registrar" data-modal="modal-1">MEUS PROJETOS</a>
+
+            <div class="dropdown">
+                <button class="dropbtn">MINHA CONTA ⬇</button>
+                <div class="dropdown-content">
+                    <a href="./TelaCadUsuario.html">CADASTRAR PROJETO</a>
+                    <a href="#editar-perfil">EDITAR PERFIL</a>
+                    <a href="#configuracoes">CONFIGURAÇÕES</a>
+                    <a href="#" id="logout">SAIR</a>
+                </div>
+            </div>
+
+            <script src="./js/menu-user.js"></script>
+        </nav>
+    </header>
+
+    <span class="title">MEUS PROJETOS</span>
+
+    <div class="catalogo">
+        <div id="projetos-container">
+            <!-- Os projetos serão inseridos aqui dinamicamente -->
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-left">
+            <h1>@2025 IMPULSODIGITAL</h1>
+            <a href="termos.html">TERMOS</a>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com"><i class="fab fa-youtube"></i></a>
+            <img src="./assets/logo-designcomputacional.png">
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            const username = localStorage.getItem("username");
+            const token = localStorage.getItem("token");
+
+            // Fetch para buscar os projetos do usuário
+            try {
+                const response = await fetch(`http://localhost:3000/api/projetos/${username}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Se os projetos foram encontrados, vamos exibi-los
+                    const projectsList = document.getElementById("projetos-container");
+                    if (data.projetos && data.projetos.length > 0) {
+                        data.projetos.forEach(projeto => {
+                            const projectItem = document.createElement("div");
+                            projectItem.classList.add("projeto");
+
+                            projectItem.innerHTML = `
+                                <div class="thumbnail" style="background-image: url('${projeto.thumbnailUrl}')"></div>
+                                <div class="project-info">
+                                    <h3 class="project-name">${projeto.nome}</h3>
+                                    <div class="tags">
+                                        ${projeto.tags.map(tag => `<span class="tag selected">${tag}</span>`).join('')}
+                                    </div>
+                                </div>
+                            `;
+                            projectsList.appendChild(projectItem);
+                        });
+                    } else {
+                        projectsList.innerHTML = "<p>Não há projetos cadastrados.</p>";
+                    }
+                } else {
+                    alert("Erro ao carregar projetos.");
+                }
+            } catch (error) {
+                console.error("Erro ao carregar projetos:", error);
+                alert("Erro ao carregar projetos.");
+            }
+        });
+    </script>
+
+    <script src="./js/show-projects.js"></script>
+</body>
+
+</html>

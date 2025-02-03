@@ -9,10 +9,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-    <title>Site em Desenvolvimento</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+    <title>Cadastro de Projeto</title>
+    <style>
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            background-color: #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .tag.selected {
+            background-color: #4caf50;
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -20,56 +41,68 @@
         <div class="header-left">
             <a href="TelaInicialVisitante.html"><img src="./assets/logo-designcomputacional.png" alt="Logo Design Computacional" class="logo-dc-header"></a>
             <div class="search-box">
-                <input 
-                    type="text" 
-                    placeholder="Buscar categoria ou usuário" 
-                    class="text-box"
-                >
-
+                <input type="text" placeholder="Buscar categoria ou usuário" class="text-box">
                 <button class="search-button">
                     <i class="fas fa-search"></i>
                 </button>
-                
             </div>
         </div>
-    
+
         <nav class="header-right">
             <a href="#" class="open-modal projetos" data-modal="modal">PROJETOS</a>
-            <a href="#" class="open-modal registrar" data-modal="modal-1">MEUS PROJETOS</a>
-
-
+            <a href="TelaMeusProjetos.html" class="open-modal registrar" data-modal="modal-1">MEUS PROJETOS</a>
             <div class="dropdown">
                 <button class="dropbtn">MINHA CONTA ⬇</button>
                 <div class="dropdown-content">
                     <a href="#cadastrar-projeto">CADASTRAR PROJETO</a>
                     <a href="#editar-perfil">EDITAR PERFIL</a>
                     <a href="#configuracoes">CONFIGURAÇÕES</a>
-                    <a href="#sair">SAIR</a>
+                    <a href="#" id="logout">SAIR</a>
                 </div>
             </div>
 
             <script src="./js/menu-user.js"></script>
         </nav>
-    
-       </header>        
-    
-    </div>
-    
+    </header>
+
     <span class="title">CADASTRAR PROJETO</span>
 
-
     <div class="content">
-        
         <img src="./images/about_img1.jpg">
-        
         <form>
             <div class="desc-cat-up">
                 <div class="desc-cat">
-                    <label for="descricao">Descrição:</label>
-                    <textarea name="descricao" placeholder="Adicione uma breve descrição explicando o objetivo e a funcionalidade do seu código." id=""></textarea>
+                    <label for="project_name">Nome do Projeto:</label>
+                    <input type="text" id="nome_projeto" name="nome_projeto" placeholder="Insira o nome do seu projeto">
 
-                    <label for="categorias">Categorias:</label>
-                    <textarea name="categorias" placeholder="Selecione as categoria do projeto aqui..." id="" type="text"></textarea>
+                    <label for="project_description">Descrição:</label>
+                    <textarea id="descricao_projeto" name="descricao" placeholder="Adicione uma breve descrição explicando o objetivo e a funcionalidade do seu código."></textarea>
+
+                    <label for="categorias">Categorias (Escolha de 1 a 5):</label>
+                    <div id="categorias" class="tag-group">
+                        <span class="tag" data-value="animacao">Animação</span>
+                        <span class="tag" data-value="arte-generativa">Arte Generativa</span>
+                        <span class="tag" data-value="captura-de-gestos">Captura de Gestos</span>
+                        <span class="tag" data-value="computacao-grafica">Computação Gráfica</span>
+                        <span class="tag" data-value="design-interativo">Design Interativo</span>
+                        <span class="tag" data-value="deteccao-de-movimento">Deteção de Movimento</span>
+                        <span class="tag" data-value="geracao-algoritmica">Geração Algorítmica</span>
+                        <span class="tag" data-value="instalacoes-interativas">Instalações Interativas</span>
+                        <span class="tag" data-value="interacao-em-tempo-real">Interação em Tempo Real</span>
+                        <span class="tag" data-value="interatividade-sensorial">Interatividade Sensorial</span>
+                        <span class="tag" data-value="kinect">Kinect</span>
+                        <span class="tag" data-value="linguagem-visual">Linguagem Visual</span>
+                        <span class="tag" data-value="microfone">Microfone</span>
+                        <span class="tag" data-value="perifericos-nao-convencionais">Periféricos Não Convencionais</span>
+                        <span class="tag" data-value="pixel-art">Pixel Art</span>
+                        <span class="tag" data-value="processamento-de-imagens">Processamento de Imagens</span>
+                        <span class="tag" data-value="som-e-audio">Som e Áudio</span>
+                        <span class="tag" data-value="tipografia-digital">Tipografia Digital</span>
+                        <span class="tag" data-value="video-em-tempo-real">Vídeo em Tempo Real</span>
+                        <span class="tag" data-value="visualizacao-de-dados">Visualização de Dados</span>
+                        <span class="tag" data-value="visualizacoes-abstratas">Visualizações Abstratas</span>
+                        <span class="tag" data-value="webcam">Webcam</span>
+                    </div>
                 </div>
 
                 <div class="upload-images">
@@ -77,20 +110,16 @@
                     <label for="upload" class="upload_title">Adicione arquivos referentes ao projeto aqui</label>
                     <input type="file" id="upload" name="upload" accept="image/*">
                 </div>
-                
-        </div>
+            </div>
 
-            <label for="codigo">Código:</label>
-            <textarea id="codigo" name="codigo" placeholder="Insira seu código do Porcessing nesta seção!"></textarea>
+            <label for="project_code">Código:</label>
+            <textarea id="codigo_projeto" name="codigo" placeholder="Insira seu código do Processing nesta seção!"></textarea>
 
             <div class="botoes">
                 <button type="submit" class="enviar">Enviar Projeto</button>
                 <button type="reset" class="cancelar">Cancelar</button>
             </div>
-
         </form>
-
-       
     </div>
 
     <footer>
@@ -98,7 +127,6 @@
             <h1>@2025 IMPULSODIGITAL</h1>
             <a href="termos.html">TERMOS</a>
         </div>
-
         <div class="social-icons">
             <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
             <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
@@ -106,7 +134,26 @@
             <img src="./assets/logo-designcomputacional.png">
         </div>
     </footer>
-        <script src="./assets/script.js"></script>
+
+    <script>
+        (function handleTagSelection() {
+            const tags = document.querySelectorAll('.tag');
+            const maxSelections = 5;
+
+            tags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    tag.classList.toggle('selected');
+
+                    const selectedTags = document.querySelectorAll('.tag.selected');
+                    if (selectedTags.length > maxSelections) {
+                        tag.classList.remove('selected');
+                        alert(`Você pode selecionar no máximo ${maxSelections} categorias.`);
+                    }
+                });
+            });
+        })();
+    </script>
+    <script src="./assets/script.js"></script>
 
 </body>
 
