@@ -16,11 +16,14 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   nome      String
+  nome_usuario  String @unique
   email     String   @unique
   senha     String
-  role      String   @default("Usuário") // Valores: "Professor", "Monitor", "Aluno" - nao vai ser implementado no checkpoint 2
+  role      String   @default("Usuário") //
   createdAt DateTime @default(now())
+  lastLogin  DateTime?
 
+  
   // Relação com o modelo Projeto
   projetos Projeto[] @relation("UserProjetos") // Relacionamento com projetos
 }

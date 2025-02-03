@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/app.js",
     "test": "node src/test.js",
-    "dev": "npx tailwindcss -i ./public/assets/style.css -o ./public/assets/output.css --watch"
+    "resetDB": "node clearDatabase.js",
+    "resetID": "node resetIdSequence.js"
   },
   "repository": {
     "type": "git",
@@ -25,9 +26,12 @@
     "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "postcss": "^8.4.49",
     "readline-sync": "^1.4.10",
     "tailwindcss": "^3.4.17"

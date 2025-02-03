@@ -1,32 +1,50 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const multer = require('multer');
+const path = require('path');
 
+// Configuração do multer para o upload da thumbnail
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/thumbnails'); // Pasta onde as imagens serão armazenadas
+  },
+  filename: (req, file, cb) => {
+    const fileName = Date.now() + path.extname(file.originalname);
+    cb(null, fileName);
+  },
+});
+
+const upload = multer({ storage: storage });
+
+// Função para cadastrar um novo projeto
 const createProjeto = async (req, res) => {
   try {
     const { nome, descricao, tags, codigo } = req.body;
 
     // Valida os campos obrigatórios
     if (!nome || !descricao || !tags || !codigo) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos são obrigatórios." });
+      return res.status(400).json({ error: "Todos os campos são obrigatórios." });
     }
 
     // ID do usuário padrão (exemplo)
     const defaultUserId = 1;
 
-    // Cria o projeto com um ID de usuário fixo
+    // Processa a thumbnail se houver
+    const thumbnail = req.file ? req.file.filename : null;
+
+    // Cria o projeto no banco de dados
     const newProjeto = await prisma.projeto.create({
       data: {
         nome,
         descricao,
         tags,
         codigo,
+        thumbnail, // Armazena o nome do arquivo da thumbnail
         userId: defaultUserId,
       },
     });
-    console.log("Projeto cadastrado com sucesso:", newProjeto);
 
+    console.log("Projeto cadastrado com sucesso:", newProjeto);
     return res.status(201).json(newProjeto);
   } catch (error) {
     console.error("Erro ao criar o projeto:", error);
@@ -34,7 +52,7 @@ const createProjeto = async (req, res) => {
   }
 };
 
-// listagem de projetos com e sem filtro (tags)
+// Listagem de projetos com e sem filtro (tags)
 const getProjetos = async (req, res) => {
   try {
     if (req.query.tags) {
@@ -70,4 +88,4 @@ const getProjetos = async (req, res) => {
   }
 };
 
-module.exports = { createProjeto, getProjetos };
+module.exports = { createProjeto, getProjetos, upload };
