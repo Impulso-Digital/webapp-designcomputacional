@@ -70,8 +70,8 @@ E o servidor estará rodando em `http://localhost:3000`.
 | **RF 004** | Disponibilizar uma página inicial com informações gerais e links para funcionalidades principais. |   🚧   |
 | **RF 005** | Permitir que usuários adicionem, editem ou excluam conteúdos conforme suas permissões.            |   🚧   |
 | **RF 006** | Exibir uma lista de conteúdos cadastrados.                                                        |   ✅   |
-| **RF 007** | Permitir busca por conteúdo, com base em palavras-chave ou outras características básicas.        |   🚧   |
-| **RF 008** | Organizar os conteúdos por categorias.                                                            |   🚧   |
+| **RF 007** | Permitir busca por conteúdo, com base em palavras-chave ou outras características básicas.        |   ✅   |
+| **RF 008** | Organizar os conteúdos por categorias.                                                            |   🛠️   |
 | **RF 009** | Permitir a visualização detalhada de cada conteúdo.                                               |   ⏳   |
 | **RF 010** | Oferecer orientação básica para o uso da plataforma.                                              |   ⏳   |
 
@@ -79,11 +79,11 @@ E o servidor estará rodando em `http://localhost:3000`.
 
 |   Código    | Requisito                                                                                  | Classificação      | Status |
 | :---------: | ------------------------------------------------------------------------------------------ | ------------------ | :----: |
-| **RNF 001** | A interface deve ser intuitiva e agradável visualmente.                                    | Usabilidade        |   ⏳   |
-| **RNF 002** | A aplicação deve ser rápida e eficiente.                                                   | Desempenho         |   ⏳   |
+| **RNF 001** | A interface deve ser intuitiva e agradável visualmente.                                    | Usabilidade        |   🚧   |
+| **RNF 002** | A aplicação deve ser rápida e eficiente.                                                   | Desempenho         |   🚧   |
 | **RNF 003** | O dados dos usuários devem ser protegidos e criptografados.                                | Segurança          |   ⏳   |
 | **RNF 004** | O sistema deve suportar crescimento e um grande número de usuários simultâneos.            | Escalabilidade     |   ⏳   |
-| **RNF 005** | O código e a arquitetura devem seguir boas práticas e ser bem organizados.                 | Manutenibilidade   |   ⏳   |
+| **RNF 005** | O código e a arquitetura devem seguir boas práticas e ser bem organizados.                 | Manutenibilidade   |   🚧   |
 | **RNF 006** | O sistema deve proteger os dados dos usuários.                                             | Privacidade        |   ⏳   |
 | **RNF 007** | A aplicação deve ser compatível com dispositivos móveis e desktops, com design responsivo. | Interoperabilidade |   ⏳   |
 | **RNF 008** | Deve haver backups periódicos e automáticos para proteger dados importantes.               | Recuperação        |   ⏳   |
