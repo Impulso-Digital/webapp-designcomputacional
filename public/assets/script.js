@@ -66,10 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (data.token) {
                         localStorage.setItem("token", data.token);
                     }
-                    // Quando o cadastro for bem-sucedido, armazene o nome do usuário no localStorage
-                        localStorage.setItem("username", nomeCompleto);  // ou nomeUsuario, se preferir usar o nome de usuário
+                    // armazena o nome do usuário no localStorage
+                        localStorage.setItem("username", nomeUsuario);  // 
 
-                    // Verifique no console se o nome foi armazenado corretamente
+                    // verifica log armazenado
                         console.log("Nome armazenado no localStorage:", localStorage.getItem("username"));
                     // Redireciona para a tela de usuário
                     window.location.href = "telausuario.html";
@@ -147,79 +147,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// Cadastrar Projeto
-document.addEventListener('DOMContentLoaded', () => {
-    // Tags predefinidas (exemplo)
-    const tags = ["Arte", "Ciência", "Tecnologia", "Educação", "Interatividade"];
-  
-    // Preencher as tags no formulário
-    const tagsContainer = document.getElementById('tagsContainer');
-    tags.forEach(tag => {
-      const label = document.createElement('label');
-      label.innerHTML = `<input type="checkbox" name="tags" value="${tag}"> ${tag}`;
-      tagsContainer.appendChild(label);
+document.querySelector('form').addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const nome = document.getElementById('project_name').value;
+  const descricao = document.getElementById('description').value;
+  const codigo = document.getElementById('code').value;
+  const tags = Array.from(document.querySelectorAll('input[name="tags"]:checked')).map(cb => cb.value);
+  const userId = 1; // Substitua pelo ID real do usuário logado
+
+  try {
+    const response = await fetch('http://localhost:3000/projetos', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ nome, descricao, codigo, tags, userId }),
     });
-  
-    // Função para rodar o código p5.js e exibir a pré-visualização
-    const previewCanvas = document.getElementById('p5preview');
-    const codigoInput = document.getElementById('codigo');
-  
-    codigoInput.addEventListener('input', () => {
-      previewCanvas.innerHTML = ''; // Limpar a pré-visualização
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.textContent = `
-        function setup() {
-          createCanvas(400, 400);
-          ${codigoInput.value}
-        }
-        function draw() {
-          ${codigoInput.value}
-        }
-      `;
-      previewCanvas.appendChild(script);
-    });
-  
-    // Envio do formulário
-    const projetoForm = document.getElementById('projetoForm');
-    projetoForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const descricao = document.getElementById('descricao').value;
-      const tags = Array.from(document.querySelectorAll('input[name="tags"]:checked')).map(tag => tag.value);
-      const codigo = document.getElementById('codigo').value;
-      const thumbnail = document.getElementById('thumbnail').files[0];
-  
-      const formData = new FormData();
-      formData.append('descricao', descricao);
-      formData.append('tags', tags.join(','));
-      formData.append('codigo', codigo);
-      if (thumbnail) {
-        formData.append('thumbnail', thumbnail);
-      }
-  
-      // Enviar para o servidor
-      try {
-        const response = await fetch('/api/projetos', {
-          method: 'POST',
-          body: formData,
-        });
-  
-        if (response.ok) {
-          alert('Projeto cadastrado com sucesso!');
-        } else {
-          alert('Erro ao cadastrar projeto.');
-        }
-      } catch (error) {
-        console.error('Erro no envio do projeto:', error);
-        alert('Erro no servidor.');
-      }
-    });
-  
-    // Cancelar
-    const cancelarBtn = document.getElementById('cancelarBtn');
-    cancelarBtn.addEventListener('click', () => {
-      window.location.href = '/'; // Redirecionar para a página inicial ou outra página desejada
-    });
-  });
-  
+
+    if (response.ok) {
+      alert('Projeto cadastrado com sucesso!');
+      event.target.reset();
+    } else {
+      alert('Erro ao cadastrar o projeto.');
+    }
+  } catch (error) {
+    console.error('Erro:', error);
+    alert('Erro na conexão com o servidor.');
+  }
+});
