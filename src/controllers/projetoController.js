@@ -1,12 +1,12 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const multer = require('multer');
-const path = require('path');
+const multer = require("multer");
+const path = require("path");
 
 // Configuração do multer para o upload da thumbnail
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/thumbnails'); // Pasta onde as imagens serão armazenadas
+    cb(null, "uploads/thumbnails"); // Pasta onde as imagens serão armazenadas
   },
   filename: (req, file, cb) => {
     const fileName = Date.now() + path.extname(file.originalname);
@@ -23,7 +23,9 @@ const createProjeto = async (req, res) => {
 
     // Valida os campos obrigatórios
     if (!nome || !descricao || !tags || !codigo) {
-      return res.status(400).json({ error: "Todos os campos são obrigatórios." });
+      return res
+        .status(400)
+        .json({ error: "Todos os campos são obrigatórios." });
     }
 
     // ID do usuário padrão (exemplo)
@@ -54,12 +56,15 @@ const createProjeto = async (req, res) => {
 
 // Listagem de projetos com e sem filtro (tags)
 const getProjetos = async (req, res) => {
+  const query = req.query;
+  let projetos;
   try {
-    if (req.query.tags) {
-      const tags = req.query.tags.split(",");
-      const projetos = await prisma.projeto.findMany({
+    // filtro por tags
+    if (query.tags) {
+      const tags = query.tags.split(",");
+      projetos = await prisma.projeto.findMany({
         where: {
-          AND: tags.map((tag) => {
+          OR: tags.map((tag) => {
             return {
               tags: {
                 contains: tag,
@@ -71,21 +76,81 @@ const getProjetos = async (req, res) => {
           user: true,
         },
       });
-
-      return res.status(200).json(projetos);
     } else {
       // Busca todos os projetos no banco de dados
-      const projetos = await prisma.projeto.findMany({
+      projetos = await prisma.projeto.findMany({
         include: {
           user: true, // Inclui os dados do usuário relacionado
         },
       });
-      return res.status(200).json(projetos);
     }
+
+    // filtro por busca (APENAS PROJETOS)
+    if (query.search) {
+      const searchTags = query.search
+        .toLowerCase()
+        .split("-")
+        .filter((tag) => tag.length > 1);
+      projetos = projetos.filter((projeto) => {
+        for (let tag of searchTags) {
+          if (projeto.title.toLowerCase().includes(tag)) {
+            return true;
+          }
+        }
+        return false;
+      });
+    }
+
+    // ordenação dos projetos
+    if (query.orderBy) {
+      const order = query.orderBy;
+      try {
+        orderBy(projetos, order);
+      } catch (err) {
+        res.status(400).send(err.message);
+      }
+    }
+
+    return res.status(200).json(projetos);
   } catch (error) {
     console.error("Erro ao buscar projetos:", error);
     return res.status(500).json({ error: "Erro ao buscar projetos." });
   }
 };
+
+//
+// função para ordenar os projetos por título ou data de modificação (POR ORA, DESABILITADO)
+// ordenação básica, sem uso de nenhum algoritmo otimizado
+function orderBy(projects, order) {
+  switch (order) {
+    case "title":
+    case "title-r":
+      projects.sort((a, b) => {
+        const titleA = a.title;
+        const titleB = b.title;
+        if (titleA < titleB) return -1;
+        else return 1;
+      });
+      break;
+    /*
+    case "modifiedAt":
+    case "modifiedAt-r":
+      projects.sort((a, b) => {
+        const dateA = new Date(a.modifiedAt);
+        const dateB = new Date(b.modifiedAt);
+        return dateA - dateB;
+      });
+      break;
+      */
+    default:
+      console.log("Critério de ordenação inexistente.");
+      //throw new Error("Critério de ordenação inexistente.");
+      return;
+  }
+
+  if (order[order.length - 1] === "r") projects.reverse();
+}
+
+//
 
 module.exports = { createProjeto, getProjetos, upload };
