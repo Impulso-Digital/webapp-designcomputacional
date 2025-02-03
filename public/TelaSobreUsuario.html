@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/TelaSobreUsuario.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <title>Site em Desenvolvimento</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-left">
+            <a href="TelaInicialUsuario.html"><img src="./assets/logo-designcomputacional.png" alt="Logo Design Computacional" class="logo-dc-header"></a>
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    placeholder="Buscar categoria ou usuário" 
+                    class="text-box"
+                >
+
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+            </div>
+        </div>
+    
+        <nav class="header-right">
+            <a href="#" class="open-modal projetos" data-modal="modal">PROJETOS</a>
+            <a href="./TelaMeusProjetos.html" class="open-modal registrar">MEUS PROJETOS</a>
+
+
+            <div class="dropdown">
+                <button class="dropbtn">MINHA CONTA ⬇</button>
+                <div class="dropdown-content">
+                    <a href="./TelaCadUsuario.html">CADASTRAR PROJETO</a>
+                    <a href="#editar-perfil">EDITAR PERFIL</a>
+                    <a href="#configuracoes">CONFIGURAÇÕES</a>
+                    <a href="./TelaInicialVisitante.html">SAIR</a>
+                </div>
+            </div>
+
+            <script src="./js/menu-user.js"></script>
+        </nav>
+    
+       </header>
+
+    <span class="title"> O QUE É O DESIGN COMPUTACIONAL?</span>
+
+
+    <div class="background-about">
+        <h1>Design Computacional na UFC: Uma abordagem Inovadora no Design e Arte</h1>
+
+        <span>A disciplina de Design Computacional do Departamento de Arquitetura e Design da UFC explora a interseção entre arte, design e tecnologia, utilizando programação e fabricação digital como ferramentas criativas e inovadoras. Baseada no uso de computadores programáveis e softwares especializados, a disciplina visa capacitar os alunos em design paramétrico e generativo, técnicas que permitem a criação de projetos inéditos e funcionais. </span>
+        
+        <div class="first-paragraph">
+            <span>Embora essas práticas ainda sejam pouco difundidas no Brasil devido à carência de familiaridade com a lógica de programação, os cursos buscam mudar esse cenário. Por meio de investigações artísticas e experimentações, incentivam os alunos a valorizar e aplicar essas técnicas, contribuindo para a inovação nos processos de criação, administração estrutural de projetos e no desenvolvimento de soluções artísticas e práticas.</span>
+            <img src="./images/about_img1.jpg">
+        </div>
+
+        <h2>Projetos de Impacto e Colaborações </h2>
+        <h3>Diversos projetos ilustram a aplicação prática do design computacional na UFC, como: </h3>
+        <h2>Tradução de Frequências Sonoras em Informações Visuais </h3>
+
+        <span>Em parceria com o grupo de violoncelos e a Camerata da UFC, desenvolveu-se uma tecnologia que converte melodias em padrões visuais para beneficiar pessoas com deficiência auditiva. Entre 2019 e 2021, o projeto resultou em apresentações presenciais, lives e aprimoramentos tecnológicos, como o uso de protótipos vibratórios para estímulos sensoriais. </span>
+        
+        <div class="second-paragraph">
+            <img src="./images/about_img1.jpg">
+            <div class="title-and-subtitle">
+                <h4 class="title-second-paragraph">Visão Computacional para Inclusão de Pessoas Cegas </h4>
+                <span>Este projeto utiliza câmeras para identificar o toque em peças táteis e fornecer descrições auditivas automáticas, tornando exposições em museus mais acessíveis. Prototipado em 2018 e testado no Museu da Fotografia, foi implementado em 2021 como parte de uma exposição interativa. Esses exemplos ilustram como o design computacional pode transcender barreiras, promovendo acessibilidade, inclusão e inovação. </span>
+            </div>
+        </div>
+
+        <h2>Objetivos Futuros</h2>
+
+        <span> O curso planeja formar mais alunos nas técnicas desenvolvidas, aprimorar sistemas existentes e dar continuidade às colaborações, como com a Camerata da UFC, para apresentações e eventos futuros. Caso eventos presenciais não sejam viáveis, lives e apresentações virtuais continuarão a difundir os avanços da disciplina. Com foco na convergência entre tecnologia e criatividade, a disciplina de Design Computacional da UFC solidifica seu papel na vanguarda da pesquisa artística e no desenvolvimento de soluções para desafios contemporâneos. </span>
+
+    </div>
+</body>
+
+</html>

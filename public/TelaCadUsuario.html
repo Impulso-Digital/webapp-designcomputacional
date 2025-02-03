@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/TelaCadUsuario.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <title>Site em Desenvolvimento</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-left">
+            <a href="TelaInicialVisitante.html"><img src="./assets/logo-designcomputacional.png" alt="Logo Design Computacional" class="logo-dc-header"></a>
+            <div class="search-box">
+                <input 
+                    type="text" 
+                    placeholder="Buscar categoria ou usuário" 
+                    class="text-box"
+                >
+
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+            </div>
+        </div>
+    
+        <nav class="header-right">
+            <a href="#" class="open-modal projetos" data-modal="modal">PROJETOS</a>
+            <a href="#" class="open-modal registrar" data-modal="modal-1">MEUS PROJETOS</a>
+
+
+            <div class="dropdown">
+                <button class="dropbtn">MINHA CONTA ⬇</button>
+                <div class="dropdown-content">
+                    <a href="#cadastrar-projeto">CADASTRAR PROJETO</a>
+                    <a href="#editar-perfil">EDITAR PERFIL</a>
+                    <a href="#configuracoes">CONFIGURAÇÕES</a>
+                    <a href="#sair">SAIR</a>
+                </div>
+            </div>
+
+            <script src="./js/menu-user.js"></script>
+        </nav>
+    
+       </header>        
+    
+    </div>
+    
+    <span class="title">CADASTRAR PROJETO</span>
+
+
+    <div class="content">
+        
+        <img src="./images/about_img1.jpg">
+        
+        <form>
+            <div class="desc-cat-up">
+                <div class="desc-cat">
+                    <label for="descricao">Descrição:</label>
+                    <textarea name="descricao" placeholder="Adicione uma breve descrição explicando o objetivo e a funcionalidade do seu código." id=""></textarea>
+
+                    <label for="categorias">Categorias:</label>
+                    <textarea name="categorias" placeholder="Selecione as categoria do projeto aqui..." id="" type="text"></textarea>
+                </div>
+
+                <div class="upload-images">
+                    <img src="./images/upload_img.png">
+                    <label for="upload" class="upload_title">Adicione arquivos referentes ao projeto aqui</label>
+                    <input type="file" id="upload" name="upload" accept="image/*">
+                </div>
+                
+        </div>
+
+            <label for="codigo">Código:</label>
+            <textarea id="codigo" name="codigo" placeholder="Insira seu código do Porcessing nesta seção!"></textarea>
+
+            <div class="botoes">
+                <button type="submit" class="enviar">Enviar Projeto</button>
+                <button type="reset" class="cancelar">Cancelar</button>
+            </div>
+
+        </form>
+
+       
+    </div>
+
+    <footer>
+        <div class="footer-left">
+            <h1>@2025 IMPULSODIGITAL</h1>
+            <a href="termos.html">TERMOS</a>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com"><i class="fab fa-youtube"></i></a>
+            <img src="./assets/logo-designcomputacional.png">
+        </div>
+    </footer>
+        <script src="./assets/script.js"></script>
+
+</body>
+
+</html>
