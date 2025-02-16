@@ -37,3 +37,10 @@ model Projeto {
   userId    Int // Relacionamento com o usuário 
   user      User   @relation("UserProjetos", fields: [userId], references: [id]) // Relacionamento com o modelo User
 }
+
+
+model TokenBlacklist {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  createdAt DateTime @default(now())
+}

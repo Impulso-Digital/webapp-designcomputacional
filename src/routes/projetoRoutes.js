@@ -1,11 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const projetoController = require("../controllers/projetoController");
+const { createProjeto, getProjetos, getProjetosByUsername, getProjetosByUserId, upload} = require('../controllers/projetoController');
+const authenticateToken = require ("../auth/authenticateToken");
 
-// Rota para criar um novo projeto com upload de thumbnail
-router.post("/", projetoController.upload.single('thumbnail'), projetoController.createProjeto);
-
-// Rota para listar todos os projetos
-router.get("/", projetoController.getProjetos);
+router.post("/projetos", authenticateToken, upload.single("thumbnail"), createProjeto);
+router.get("/projetos", getProjetos);
+router.get("/projetos/usuario/:username", getProjetosByUsername);
+router.get("/projetos/user/:userId", getProjetosByUserId);
 
 module.exports = router;

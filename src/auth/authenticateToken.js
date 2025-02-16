@@ -1,21 +1,32 @@
-const jwt = require('jsonwebtoken');
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
+const jwt = require("jsonwebtoken");
 
-const authenticateToken = (req, res, next) => {
-  const token = req.header('Authorization')?.replace('Bearer ', '');
+const authenticateToken = async (req, res, next) => {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
 
-  if (!token) {
-    return res.status(403).json({ message: 'Acesso negado. Token não fornecido.' });
-  }
+    if (!token) {
+        return res.status(403).json({ message: "Token não fornecido" });
+    }
 
-  try {
-    // Verifica e decodifica o token
-    const decoded = jwt.verify(token, 'chave'); // A chave secreta usada para gerar o token
-    req.user = decoded; // Coloca os dados do usuário no objeto da requisição
-    next(); // Chama o próximo middleware ou a função da rota
-  } catch (error) {
-    return res.status(403).json({ message: 'Token inválido' });
-  }
-  
+    // Verifica se o token está na blacklist
+    const tokenRevogado = await prisma.tokenBlacklist.findUnique({
+        where: { token },
+    });
 
+    if (tokenRevogado) {
+        return res.status(403).json({ message: "Token inválido ou revogado" });
+    }
+
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err) {
+            return res.status(403).json({ message: "Token inválido" });
+        }
+
+        req.user = user;
+        next();
+    });
 };
+
 module.exports = authenticateToken;

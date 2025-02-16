@@ -128,6 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     localStorage.setItem('token', data.token);
                     sessionStorage.setItem('userId', data.userId); // Armazenando o userId, se necessário
 
+                    // Verifique se o userId foi armazenado corretamente
+                    console.log('userId armazenado:', sessionStorage.getItem('userId'));
+
                     // Redireciona para a tela inicial
                     window.location.href = "TelaInicialUsuario.html";
                 } else {
@@ -144,36 +147,94 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+
+
 /// LOGOUT
 
 document.addEventListener("DOMContentLoaded", () => {
     const logoutButton = document.getElementById('logout');
     
     if (logoutButton) {
-        logoutButton.addEventListener('click', async (event) => {
+      logoutButton.addEventListener('click', async (event) => {
+        event.preventDefault();
+        
+        try {
+          const token = localStorage.getItem("token");  // Obtendo o token
+
+          if (!token) {
+            alert("Usuário não está autenticado!");
+            return;
+          }
+  
+          const response = await fetch('/api/logout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`,  // Envia o token para revogação
+            },
+          });
+  
+          if (response.ok) {
+            // Limpar localStorage e sessionStorage para garantir que as informações sejam removidas
+            localStorage.removeItem('token'); // Limpa o token de autenticação
+            sessionStorage.removeItem('userId'); // Limpa o ID do usuário
+  
+            // Redireciona para a página inicial ou login
+            window.location.href = '/'; // Ou a página de login
+          } else {
+            alert('Erro ao realizar o logout.');
+          }
+        } catch (error) {
+          console.error('Erro na requisição de logout:', error);
+          alert('Erro na conexão com o servidor.');
+        }
+      });
+    }
+  });
+  
+
+
+
+
+// CADASTRO PROJETOS
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector('form');
+    if (form) {
+        form.addEventListener('submit', async (event) => {
             event.preventDefault();
-            
+
+            const nome = document.getElementById('nome_projeto').value;
+            const descricao = document.getElementById('descricao_projeto').value;
+            const codigo = document.getElementById('codigo_projeto').value;
+            const tags = Array.from(document.querySelectorAll('.tag-button.selected')).map(tag => tag.textContent.trim());
+
+            // Verifique se o token está presente no localStorage
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Você precisa estar autenticado para cadastrar um projeto.');
+                return window.location.href = '/login'; // Redireciona para a página de login
+            }
+
             try {
-                const response = await fetch('/logout', {
+                const response = await fetch('http://localhost:3000/api/projetos', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` // Envia o token de autenticação
                     },
-                    credentials: 'same-origin' // Garantir que o cookie da sessão seja enviado
+                    body: JSON.stringify({ nome, descricao, codigo, tags })
                 });
 
                 if (response.ok) {
-                    // Limpar localStorage e sessionStorage para garantir que as informações sejam removidas
-                    localStorage.removeItem('token'); // Limpa o token de autenticação
-                    sessionStorage.removeItem('userId'); // Limpa o ID do usuário
-
-                    // Redireciona para a página inicial ou login
-                    window.location.href = '/'; // Ou a página de login
+                    alert('Projeto cadastrado com sucesso!');
+                    event.target.reset(); // Reseta o formulário
+                    document.querySelectorAll('.tag-button.selected').forEach(tag => tag.classList.remove('selected')); // Limpa as tags selecionadas
                 } else {
-                    alert('Erro ao realizar o logout.');
+                    const errorData = await response.json();
+                    alert(`Erro ao cadastrar o projeto: ${errorData.message || 'Tente novamente mais tarde.'}`);
                 }
             } catch (error) {
-                console.error('Erro na requisição de logout:', error);
+                console.error('Erro:', error);
                 alert('Erro na conexão com o servidor.');
             }
         });
@@ -182,61 +243,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// Lógica para selecionar e limitar tags
+const tagButtons = document.querySelectorAll('.tag-button');
+const maxTags = 5;
 
-
-
-// CADASTRO PROJETOS
-document.querySelector('form').addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const nome = document.getElementById('nome_projeto').value;
-    const descricao = document.getElementById('descricao_projeto').value;
-    const codigo = document.getElementById('codigo_projeto').value;
-    const tags = Array.from(document.querySelectorAll('.tag-button.selected')).map(tag => tag.textContent.trim());
-    
-    try {
-        const response = await fetch('http://localhost:3000/projetos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}` // Envia o token de autenticação
-            },
-            body: JSON.stringify({ nome, descricao, codigo, tags })
-        });
-
-        if (response.ok) {
-            alert('Projeto cadastrado com sucesso!');
-            event.target.reset();
-            document.querySelectorAll('.tag-button.selected').forEach(tag => tag.classList.remove('selected'));
-        } else {
-            alert('Erro ao cadastrar o projeto.');
-        }
-    } catch (error) {
-        console.error('Erro:', error);
-        alert('Erro na conexão com o servidor.');
-    }
-});
-
-
-  
-  // Lógica para selecionar e limitar tags
-  const tagButtons = document.querySelectorAll('.tag-button');
-  const maxTags = 5;
-  
-  function updateTagSelection(tag) {
+function updateTagSelection(tag) {
     if (tag.classList.contains('selected')) {
-      tag.classList.remove('selected');
+        tag.classList.remove('selected');
     } else if (document.querySelectorAll('.tag-button.selected').length < maxTags) {
-      tag.classList.add('selected');
+        tag.classList.add('selected');
     } else {
-      alert(`Você pode selecionar no máximo ${maxTags} categorias.`);
+        alert(`Você pode selecionar no máximo ${maxTags} categorias.`);
     }
-  }
-  
-  tagButtons.forEach(tag => {
+}
+
+tagButtons.forEach(tag => {
     tag.addEventListener('click', () => updateTagSelection(tag));
-  });
-  
+});
 
 
 

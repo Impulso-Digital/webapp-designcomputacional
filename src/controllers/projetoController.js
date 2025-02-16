@@ -2,47 +2,40 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const multer = require("multer");
 const path = require("path");
+const authenticateToken = require("../auth/authenticateToken");
 
-// Configuração do multer para o upload da thumbnail
+// Configuração do multer para upload de thumbnails
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/thumbnails"); // Pasta onde as imagens serão armazenadas
+    cb(null, "uploads/thumbnails");
   },
   filename: (req, file, cb) => {
     const fileName = Date.now() + path.extname(file.originalname);
     cb(null, fileName);
   },
 });
-
 const upload = multer({ storage: storage });
 
-// Função para cadastrar um novo projeto
+// Cadastrar um novo projeto
 const createProjeto = async (req, res) => {
   try {
     const { nome, descricao, tags, codigo } = req.body;
+    const userId = req.user.id;
 
-    // Valida os campos obrigatórios
     if (!nome || !descricao || !tags || !codigo) {
-      return res
-        .status(400)
-        .json({ error: "Todos os campos são obrigatórios." });
+      return res.status(400).json({ error: "Todos os campos são obrigatórios." });
     }
 
-    // ID do usuário padrão (exemplo)
-    const defaultUserId = 1;
-
-    // Processa a thumbnail se houver
     const thumbnail = req.file ? req.file.filename : null;
 
-    // Cria o projeto no banco de dados
     const newProjeto = await prisma.projeto.create({
       data: {
         nome,
         descricao,
-        tags,
+        tags: Array.isArray(tags) ? tags.join(",") : tags,
         codigo,
-        thumbnail, // Armazena o nome do arquivo da thumbnail
-        userId: defaultUserId,
+        thumbnail,
+        userId,
       },
     });
 
@@ -54,63 +47,65 @@ const createProjeto = async (req, res) => {
   }
 };
 
-// Listagem de projetos com e sem filtro (tags)
+// Buscar projetos por nome de usuário
+const getProjetosByUsername = async (req, res) => {
+  const username = req.params.username;
+  try {
+    const user = await prisma.user.findUnique({
+      where: { nome_usuario: username },
+      include: { projetos: true },
+    });
+    if (!user) return res.status(404).json({ message: "Usuário não encontrado" });
+    res.json({
+      projetos: user.projetos.map(projeto => ({
+        id: projeto.id,
+        nome: projeto.nome,
+        descricao: projeto.descricao,
+        tags: projeto.tags,
+        thumbnailUrl: projeto.thumbnail ? `/uploads/thumbnails/${projeto.thumbnail}` : null,
+      })),
+    });
+  } catch (error) {
+    console.error("Erro ao buscar projetos:", error);
+    res.status(500).json({ message: "Erro ao buscar projetos" });
+  }
+};
+
+// Buscar projetos por ID do usuário
+const getProjetosByUserId = async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const projetos = await prisma.projeto.findMany({ where: { userId: Number(userId) } });
+    return projetos.length > 0 ? res.status(200).json({ projetos }) : res.status(404).json({ message: "Nenhum projeto encontrado." });
+  } catch (error) {
+    console.error("Erro ao buscar projetos:", error);
+    res.status(500).json({ message: "Erro ao buscar projetos." });
+  }
+};
+
+// Listagem de projetos com filtros (tags, busca e ordenação)
 const getProjetos = async (req, res) => {
-  const query = req.query;
+  const { tags, search, orderBy } = req.query;
   let projetos;
   try {
-    // filtro por tags
-    if (query.tags) {
-      const tags = query.tags.split(",");
-      projetos = await prisma.projeto.findMany({
-        where: {
-          OR: tags.map((tag) => {
-            return {
-              tags: {
-                contains: tag,
-              },
-            };
-          }),
-        },
-        include: {
-          user: true,
-        },
-      });
-    } else {
-      // Busca todos os projetos no banco de dados
-      projetos = await prisma.projeto.findMany({
-        include: {
-          user: true, // Inclui os dados do usuário relacionado
-        },
+    const filtros = {};
+    if (tags) {
+      filtros.OR = tags.split(",").map(tag => ({ tags: { contains: tag } }));
+    }
+    projetos = await prisma.projeto.findMany({ where: filtros, include: { user: true } });
+    if (search) {
+      const searchTags = search.toLowerCase().split("-").filter(tag => tag.length > 1);
+      projetos = projetos.filter(projeto => searchTags.some(tag => projeto.nome.toLowerCase().includes(tag)));
+    }
+    if (orderBy) {
+      projetos.sort((a, b) => {
+        if (orderBy === "title") return a.nome.localeCompare(b.nome);
+        if (orderBy === "title-r") return b.nome.localeCompare(a.nome);
+        if (orderBy === "modifiedAt") return new Date(a.updatedAt) - new Date(b.updatedAt);
+        if (orderBy === "modifiedAt-r") return new Date(b.updatedAt) - new Date(a.updatedAt);
+        return 0;
       });
     }
-
-    // filtro por busca (APENAS PROJETOS)
-    if (query.search) {
-      const searchTags = query.search
-        .toLowerCase()
-        .split("-")
-        .filter((tag) => tag.length > 1);
-      projetos = projetos.filter((projeto) => {
-        for (let tag of searchTags) {
-          if (projeto.title.toLowerCase().includes(tag)) {
-            return true;
-          }
-        }
-        return false;
-      });
-    }
-
-    // ordenação dos projetos
-    if (query.orderBy) {
-      const order = query.orderBy;
-      try {
-        orderBy(projetos, order);
-      } catch (err) {
-        res.status(400).send(err.message);
-      }
-    }
-
     return res.status(200).json(projetos);
   } catch (error) {
     console.error("Erro ao buscar projetos:", error);
@@ -118,39 +113,4 @@ const getProjetos = async (req, res) => {
   }
 };
 
-//
-// função para ordenar os projetos por título ou data de modificação (POR ORA, DESABILITADO)
-// ordenação básica, sem uso de nenhum algoritmo otimizado
-function orderBy(projects, order) {
-  switch (order) {
-    case "title":
-    case "title-r":
-      projects.sort((a, b) => {
-        const titleA = a.title;
-        const titleB = b.title;
-        if (titleA < titleB) return -1;
-        else return 1;
-      });
-      break;
-    /*
-    case "modifiedAt":
-    case "modifiedAt-r":
-      projects.sort((a, b) => {
-        const dateA = new Date(a.modifiedAt);
-        const dateB = new Date(b.modifiedAt);
-        return dateA - dateB;
-      });
-      break;
-      */
-    default:
-      console.log("Critério de ordenação inexistente.");
-      //throw new Error("Critério de ordenação inexistente.");
-      return;
-  }
-
-  if (order[order.length - 1] === "r") projects.reverse();
-}
-
-//
-
-module.exports = { createProjeto, getProjetos, upload };
+module.exports = { createProjeto, getProjetos, getProjetosByUsername, getProjetosByUserId, upload };
