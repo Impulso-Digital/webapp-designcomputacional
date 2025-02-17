@@ -41,6 +41,10 @@ Navegue até a pasta do projeto:
    Exemplo:
    `DATABASE_URL="postgresql://usuario:senha@localhost:5432/nome_do_banco(mydb?schema=public*exemplo)"`
 
+4. Configure a variável `JWT_SECRET` que servirá para autenticação de usuário.
+   Exemplo:
+   `JWT_SECRET="minha_chave_secreta"`   
+
 ### 4. **Sincronize o Prisma com o Banco de Dados**
 
 Rode o comando ` npx prisma migrate dev`
