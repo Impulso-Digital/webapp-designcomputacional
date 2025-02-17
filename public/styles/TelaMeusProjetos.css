@@ -550,16 +550,18 @@ dialog::backdrop {
     background: white[];
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 25px;
+    padding: 30x;
     text-align: center;
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .thumbnail {
-    width: 100%;
-    height: 200px; 
-    background-color: gray; 
-    border-radius: 8px;
+    width: 100%; /* Ou um tamanho fixo, como 200px */
+    height: 300px; /* Tamanho fixo ou baseado na proporção */
+    background-size: cover; /* Faz a imagem cobrir toda a área do contêiner */
+    background-position: center; /* Garante que a imagem esteja centralizada */
+    border-radius: 8px; /* Opcional: se quiser bordas arredondadas */
+    background-repeat: no-repeat; /* Impede a repetição da imagem */
 }
 
 .info-criador {

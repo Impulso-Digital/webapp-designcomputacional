@@ -20,7 +20,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Criação de projeto com upload de arquivos
 const createProjetoWithFiles = async (req, res) => {
   // Dados do formulário
   const { nome, descricao, tags, codigo, tipoProjeto } = req.body;
@@ -53,12 +52,16 @@ const createProjetoWithFiles = async (req, res) => {
       return res.status(400).json({ error: 'Ambos os arquivos (thumbnail e projeto) são obrigatórios.' });
     }
 
+    // Caminhos completos para os arquivos
+    const thumbnailPath = `/uploads/thumbnails/${req.files.thumbnail[0].filename}`;
+    const projetoFilePath = `/uploads/projetos/${req.files.projetoFile[0].filename}`;
+
     // Atualizando o projeto com os arquivos recebidos
     const updatedProjeto = await prisma.projeto.update({
       where: { id: newProjeto.id },
       data: {
-        thumbnail: req.files.thumbnail[0].filename,
-        projetoFile: req.files.projetoFile[0].filename,
+        thumbnail: thumbnailPath,
+        projetoFile: projetoFilePath,
       },
     });
 
@@ -69,6 +72,7 @@ const createProjetoWithFiles = async (req, res) => {
     return res.status(500).json({ error: 'Erro ao criar o projeto' });
   }
 };
+
 
 // Buscar projetos por nome de usuário
 const getProjetosByUsername = async (req, res) => {
