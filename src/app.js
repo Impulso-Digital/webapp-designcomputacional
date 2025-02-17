@@ -1,34 +1,32 @@
 const express = require("express");
-const session = require('express-session');
+const session = require('express-session');  // Se necessário, configurar corretamente
 const userRoutes = require("./routes/userRoutes");
 const projetoRoutes = require("./routes/projetoRoutes");
 const path = require("path");
-const bodyParser = require("body-parser");
-const { PrismaClient } = require("@prisma/client"); // Importando PrismaClient
-const jwt = require('jsonwebtoken'); // Para gerar o token de autenticação
-const multer = require("multer");
-const { cadastrarUsuario, loginUsuario, logoutUsuario } = require("./controllers/userController");
-//const cors = require('cors');
+const { PrismaClient } = require("@prisma/client");
+const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
 
-const prisma = new PrismaClient(); // Instância do PrismaClient
+const prisma = new PrismaClient();
 
 const app = express();
 const PORT = 3000;
 
-
-//Middleware
+// Middleware
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true })); // Necessário para processar formulários
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-
-// Definir a pasta 'public' como a pasta de arquivos estáticos
+// Configuração de arquivos estáticos
 app.use(express.static(path.join(__dirname, "../public")));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
+// Teste de servidor
 app.get("/test", (req, res) => {
   res.send("Servidor está funcionando!");
 });
 
-// Rota principal
+// Rota principal (inicial)
 app.get("/", (req, res) => {
   const filePath = path.join(__dirname, "../public", "TelaInicialVisitante.html");
   res.sendFile(filePath);
@@ -38,49 +36,30 @@ app.get("/src/app.js", (req, res) => {
   res.sendFile(path.join(__dirname, "app.js"));
 });
 
-
-
-
-// Configuração do multer para uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Pasta onde as imagens serão salvas
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Nome único para cada arquivo
-  }
-});
-
-const upload = multer({ storage });
-
-
-
 // Rotas de Usuário
 app.use("/api", userRoutes);
 
 // Rotas de Projetos
 app.use("/api", projetoRoutes);
 
-
-
+// Buscar projetos por userId
 app.get('/api/projetos/:userId', async (req, res) => {
   const { userId } = req.params;
   try {
-      const projetos = await prisma.projeto.findMany({
-          where: { userId: Number(userId) }
-      });
+    const projetos = await prisma.projeto.findMany({
+      where: { userId: Number(userId) },
+    });
 
-      if (projetos.length > 0) {
-          res.status(200).json({ projetos });
-      } else {
-          res.status(404).json({ message: 'Nenhum projeto encontrado.' });
-      }
+    if (projetos.length > 0) {
+      res.status(200).json({ projetos });
+    } else {
+      res.status(404).json({ message: 'Nenhum projeto encontrado.' });
+    }
   } catch (err) {
-      console.error('Erro ao buscar projetos:', err);
-      res.status(500).json({ message: 'Erro ao buscar projetos.' });
+    console.error('Erro ao buscar projetos:', err);
+    res.status(500).json({ message: 'Erro ao buscar projetos.' });
   }
 });
-
 
 // Inicia o servidor
 app.listen(PORT, () => {

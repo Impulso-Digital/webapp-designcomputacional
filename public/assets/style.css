@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body{
     background-color: #F6F7F8;
 }
@@ -20,4 +16,80 @@ dialog::backdrop {
     background-color: blue; /* Cor do quadrado */
 }
   
+
+.tag-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.tag {
+    background-color: #f0f0f0;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.tag.selected {
+    background-color: #4caf50;
+    color: white;
+}
+
+/* Estilo para a área da thumbnail */
+.thumbnail-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.thumbnail-preview {
+    max-width: 500px;
+    max-height: 500px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.thumbnail-preview img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* Estilo para o upload de arquivos */
+.upload-files-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-file {
+    margin: 10px 0;
+}
+
+/* Estilo para o feedback visual de sucesso */
+.success-message {
+    color: green;
+    font-size: 14px;
+    margin-top: 10px;
+    display: none;
+}
+
+.success-icon {
+    margin-right: 10px;
+    color: green;
+    font-size: 18px;
+}
 

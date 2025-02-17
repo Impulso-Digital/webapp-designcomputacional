@@ -33,18 +33,29 @@ document.addEventListener("DOMContentLoaded", async () => {
             projectsList.innerHTML = '';
 
             data.projetos.forEach(projeto => {
-                const tagsHTML = Array.isArray(projeto.tags) 
-                    ? projeto.tags.map(tag => `<span class="tag">${tag}</span>`).join('') 
-                    : '';
+                // Verifique se as tags estão corretamente configuradas como array
+                const tagsHTML = Array.isArray(projeto.tags) && projeto.tags.length > 0
+                    ? projeto.tags.map(tag => `<span class="tag selected">${tag}</span>`).join('')
+                    : '<span class="tag selected">Sem tags</span>'; // Caso não haja tags
+
+                // Garantir que o tipo de projeto seja exibido corretamente
+                const projectType = projeto.tipo === 'Processing' ? 'Projeto em Processing' : 'Projeto em p5.js';
+
+                // Verificar se a URL da thumbnail é válida
+                const thumbnailUrl = projeto.thumbnailUrl ? `http://localhost:3000${projeto.thumbnailUrl}` : '/path/to/default-thumbnail.jpg'; // Definir um caminho válido ou usar o valor retornado da API
+
+                // Para depuração, adicione um console.log para verificar o valor de projeto.tags
+                console.log("Tags do projeto:", projeto.tags);
 
                 const projectItem = document.createElement("div");
                 projectItem.classList.add("projeto");
 
                 projectItem.innerHTML = `
-                    <div class="thumbnail" style="background-image: url('${projeto.thumbnailUrl}')"></div>
+                    <div class="thumbnail" style="background-image: url('${thumbnailUrl}')"></div>
                     <div class="info-criador">
                         <div class="foto-perfil"></div>
                         <h3 class="nome-criador">${projeto.nome}</h3>
+                        <p class="tipo">${projectType}</p>
                     </div>
                     <p class="descricao">${projeto.descricao}</p>
                     <div class="tags">

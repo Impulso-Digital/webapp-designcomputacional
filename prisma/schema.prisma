@@ -14,29 +14,34 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  nome      String
-  nome_usuario  String @unique
-  email     String   @unique
-  senha     String
-  role      String   @default("Usuário") //
-  createdAt DateTime @default(now())
-  lastLogin  DateTime?
-
+  id          Int      @id @default(autoincrement())  // ID único do usuário
+  nome        String   // Nome completo do usuário
+  nome_usuario String  @unique  // Nome de usuário único
+  email       String   @unique  // Email único
+  senha       String   // Senha do usuário (criptografada)
+  role        String   @default("Usuário")  // Role padrão como "Usuário"
+  createdAt   DateTime @default(now())  // Data de criação do usuário
+  lastLogin   DateTime?  // Data do último login do usuário (opcional)
   
   // Relação com o modelo Projeto
-  projetos Projeto[] @relation("UserProjetos") // Relacionamento com projetos
+  projetos    Projeto[] @relation("UserProjetos")  // Relacionamento com os projetos do usuário
 }
 
 model Projeto {
-  id        Int    @id @default(autoincrement())
-  nome      String
-  descricao String
-  tags      String
-  codigo    String
-  userId    Int // Relacionamento com o usuário 
-  user      User   @relation("UserProjetos", fields: [userId], references: [id]) // Relacionamento com o modelo User
+  id            Int      @id @default(autoincrement())  // ID único do projeto
+  nome          String   // Nome do projeto
+  descricao     String   // Descrição do projeto
+  tags          String   // Tags associadas ao projeto (separadas por vírgula)
+  codigo        String   // Código do projeto (pode ser o código em p5.js ou Processing)
+  tipoProjeto   String   // Tipo do projeto (p5.js ou Processing)
+  userId        Int      // ID do usuário associado ao projeto
+  user          User     @relation("UserProjetos", fields: [userId], references: [id])  // Relação com o usuário
+  thumbnail     String?  // Caminho do arquivo da miniatura (thumbnail)
+  projetoFile   String?  // Caminho do arquivo do projeto (ex: arquivo ZIP ou estrutura do projeto)
+  createdAt     DateTime @default(now())  // Data de criação do projeto
+  updatedAt     DateTime @updatedAt  // Data de última atualização do projeto
 }
+
 
 
 model TokenBlacklist {
