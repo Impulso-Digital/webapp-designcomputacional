@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createProjetoWithFiles, getProjetos, getUltimosProjetos, getProjetosByUsername, getProjetosByUserId } = require('../controllers/projetoController');
+const { createProjetoWithFiles, getProjetos, getUltimosProjetos, getProjetosByUsername, getProjetosByUserId, getProjetoById, getProjetosPendentes, aprovarProjeto } = require('../controllers/projetoController');
 const { upload } = require("../middleware/upload"); // Importando o middleware multer para upload de arquivos
 const authenticateToken = require("../middleware/authenticateToken");
 
@@ -12,6 +12,13 @@ router.get("/projetos", getProjetos);
 
 
 router.get("/ultimos-projetos", getUltimosProjetos); // Nova rota para os últimos projetos
+
+
+router.get("/projetos/pendentes", authenticateToken, getProjetosPendentes);
+router.put("/projetos/aprovar/:id", authenticateToken, aprovarProjeto);
+
+// **Nova Rota para buscar um projeto pelo ID**
+router.get("/projetos/:id", getProjetoById);
 
 // Rota para buscar projetos por nome de usuário
 router.get("/projetos/usuario/:username", getProjetosByUsername);

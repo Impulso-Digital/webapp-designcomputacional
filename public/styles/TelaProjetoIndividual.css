@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+}
+
+.projeto-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.info-criador {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.foto-perfil {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.tags-container {
+    margin-bottom: 20px;
+}
+
+.tag {
+    background-color: #ddd;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+}
+
+.thumbnail-container img {
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+#descricao-projeto {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
+#download-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+}
+
+#download-btn:hover {
+    background-color: #45a049;
+}

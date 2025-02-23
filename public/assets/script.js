@@ -226,9 +226,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 if (response.ok) {
-                    alert('Projeto cadastrado com sucesso!');
+                    alert('Projeto enviado para aprovação!');
                     // Redireciona para a tela de meus projetos
-                    window.location.href = '/TelaMeusProjetos.html';
+                    window.location.href = '/TelaInicialUsuario.html';
                 } else {
                     const errorData = await response.json();
                     alert(`Erro ao cadastrar o projeto: ${errorData.message || 'Tente novamente mais tarde.'}`);

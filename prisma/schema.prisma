@@ -41,6 +41,7 @@ model Projeto {
   projetoFile   String?  // Caminho do arquivo do projeto (ex: arquivo ZIP ou estrutura do projeto)
   createdAt     DateTime @default(now())  // Data de criação do projeto
   updatedAt     DateTime @updatedAt  // Data de última atualização do projeto
+  status        String   @default("pendente")
 }
 
 
