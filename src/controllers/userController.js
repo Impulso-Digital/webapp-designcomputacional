@@ -28,7 +28,7 @@ const cadastrarUsuario = async (req, res) => {
     const senhaHash = await bcrypt.hash(senha, salt);
 
     // Verifica se o arquivo de foto de perfil foi enviado
-    const fotoPerfilPath = req.files && req.files['fotoPerfil'] ? req.files['fotoPerfil'][0].path : null;
+    const fotoPerfilPath = req.files && req.files['fotoPerfil'] ? req.files['fotoPerfil'][0].filename : null;
     const now = new Date();
     now.setHours(now.getHours() - 3);
 

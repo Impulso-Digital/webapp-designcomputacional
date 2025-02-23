@@ -8,18 +8,26 @@ document.addEventListener("DOMContentLoaded", async () => {
         projetosContainer.innerHTML = ""; // Limpa a área antes de inserir os projetos
 
         const projetosHTML = projetos
-            .map(
-                (projeto) => `
-                <div class="projeto-card">
-                    <img src="${projeto.thumbnailUrl || 'assets/img/default-thumbnail.jpg'}" 
-                         alt="${projeto.nome}" class="thumbnail">
-                    <h3>${projeto.nome}</h3>
-                    <p>${projeto.descricao}</p>
-                    <a href="verProjeto.html?id=${projeto.id}" class="ver-detalhes">Ver mais</a>
+        .map((projeto) => `
+            <div class="projeto">
+                <img src="${projeto.thumbnailUrl || 'assets/img/default-thumbnail.jpg'}" 
+                     alt="${projeto.nome}" class="thumbnail">
+   
+                <div class="info-criador">
+                    <img src="http://localhost:3000${projeto.fotoPerfil || '/assets/img/default-user.jpg'}" 
+                         alt="Foto de ${projeto.nomeUsuario}" class="foto-perfil">
+                    <h3 class="nome-criador">${projeto.nomeUsuario}</h3>
                 </div>
-            `
-            )
-            .join(""); // Converte o array para uma única string otimizada
+   
+                <p class="descricao">${projeto.descricao}</p>
+   
+                <div class="tags">
+                    ${projeto.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+            </div>
+        `)
+        .join("");
+   
 
         projetosContainer.innerHTML = projetosHTML;
     } catch (error) {

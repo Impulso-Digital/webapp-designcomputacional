@@ -73,6 +73,42 @@ const createProjetoWithFiles = async (req, res) => {
   }
 };
 
+const getUltimosProjetos = async (req, res) => {
+  try {
+      const projetos = await prisma.projeto.findMany({
+          orderBy: { createdAt: "desc" }, // Ordena do mais recente para o mais antigo
+          take: 6, // Limita a 6 projetos
+          include: {
+              user: { // Associe os dados do usuário
+                  select: { nome: true, foto_perfil: true } // Obtém o nome e a foto de perfil do usuário
+              }
+          }
+      });
+
+      // Formatar os projetos para o frontend
+      const projetosFormatados = projetos.map(projeto => {
+          console.log(projeto.user?.foto_perfil); // Agora dentro do map, onde "projeto" está disponível
+
+          return {
+              id: projeto.id,
+              nome: projeto.nome,
+              descricao: projeto.descricao,
+              thumbnailUrl: projeto.thumbnail || "assets/img/default-thumbnail.jpg",
+              nomeUsuario: projeto.user?.nome || "Usuário Desconhecido",
+              // Se a foto de perfil existir, cria a URL completa, senão usa uma foto padrão
+              fotoPerfil: projeto.user?.foto_perfil ? `/uploads/fotosPerfil/${projeto.user.foto_perfil}` : "assets/img/default-user.jpg",
+              tags: projeto.tags ? projeto.tags.split(",") : []
+          };
+      });
+
+      res.json(projetosFormatados);
+  } catch (error) {
+      console.error("Erro ao buscar os últimos projetos:", error);
+      res.status(500).json({ message: "Erro ao buscar projetos" });
+  }
+};
+
+
 
 // Buscar projetos por nome de usuário
 const getProjetosByUsername = async (req, res) => {
@@ -146,4 +182,4 @@ const getProjetos = async (req, res) => {
   }
 };
 
-module.exports = { createProjetoWithFiles, getProjetos, getProjetosByUsername, getProjetosByUserId, upload };
+module.exports = { createProjetoWithFiles, getProjetos, getProjetosByUsername, getProjetosByUserId, upload, getUltimosProjetos };
