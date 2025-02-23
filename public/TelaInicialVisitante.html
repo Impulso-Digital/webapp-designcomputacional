@@ -39,7 +39,7 @@
 
             <dialog id="modal-1" class="modal-registro">
                 <div class="register-left">
-                    <form class="form-registro" id="cadastroForm">
+                    <form class="form-registro" id="cadastroForm" enctype="multipart/form-data">
             
                         <button class="close-modal" data-modal="modal-1" type="button">
                             <i class="fa-solid fa-xmark"></i>
@@ -75,23 +75,67 @@
 
                 </div>
             
-                    <div class="register-right">
-                        <div class="form-user">
-                         <div class="foto_perfil"></div>
-                         <button type="submit" class="upload_foto_perfil"> Adicionar foto de perfil</button>
-                         <label class="consent-label">
+                <div class="register-right">
+                    <div class="form-user">
+                        <!-- Container para exibir a foto de perfil selecionada -->
+                        <div class="foto_perfil">
+                            <img id="fotoPerfilPreview" src="#" alt="Foto de Perfil" style="display: none; width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+                        </div>
+                
+                        <!-- Input para selecionar a foto de perfil -->
+                        <label for="fotoPerfilInput" class="upload_foto_perfil">
+                            Adicionar foto de perfil
+                        </label>
+                        <input type="file" id="fotoPerfilInput" name="fotoPerfil" accept="image/*" style="display: none;">
+                
+                        <!-- Checkbox de termos de uso -->
+                        <label class="consent-label">
                             <input type="checkbox" class="consent-checkbox">
                             <span class="circle"></span>
                             EU LI E CONCORDO COM <br> OS TERMOS DE USO
-                         </label>
-
-                            <button id="register_button" type="submit" class="register-button">
+                        </label>
+                
+                        <!-- Botão de registrar conta -->
+                        <button id="register_button" type="submit" class="register-button">
                             REGISTRAR CONTA
-                            </button>
+                        </button>
                      </div>
                     </div>
                 </form>
             </dialog>
+
+            <script>
+                // Seleciona o input de arquivo e o elemento de pré-visualização
+                const fotoPerfilInput = document.getElementById('fotoPerfilInput');
+                const fotoPerfilPreview = document.getElementById('fotoPerfilPreview');
+            
+                // Adiciona um evento para quando o usuário selecionar uma imagem
+                fotoPerfilInput.addEventListener('change', function (event) {
+                    const file = event.target.files[0]; // Pega o arquivo selecionado
+            
+                    if (file) {
+                        const reader = new FileReader(); // Cria um FileReader para ler o arquivo
+            
+                        // Quando o arquivo for lido, atualiza a pré-visualização
+                        reader.onload = function (e) {
+                            fotoPerfilPreview.src = e.target.result; // Define o src da imagem
+                            fotoPerfilPreview.style.display = 'block'; // Exibe a imagem
+                        };
+            
+                        reader.readAsDataURL(file); // Lê o arquivo como uma URL de dados
+                    } else {
+                        fotoPerfilPreview.style.display = 'none'; // Oculta a imagem se nenhum arquivo for selecionado
+                    }
+                });
+            
+                // Adiciona um evento para o clique no botão "Adicionar foto de perfil"
+                document.querySelector('.upload_foto_perfil').addEventListener('click', function (e) {
+                    e.preventDefault(); // Evita o comportamento padrão do botão
+                    fotoPerfilInput.click(); // Abre o seletor de arquivos
+                });
+            </script>
+
+
 
             <button class="open-modal signin-button" data-modal="modal-2">
                 FAZER LOGIN

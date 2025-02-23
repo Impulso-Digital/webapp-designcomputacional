@@ -22,6 +22,7 @@ model User {
   role        String   @default("Usuário")  // Role padrão como "Usuário"
   createdAt   DateTime @default(now())  // Data de criação do usuário
   lastLogin   DateTime?  // Data do último login do usuário (opcional)
+  foto_perfil String?
   
   // Relação com o modelo Projeto
   projetos    Projeto[] @relation("UserProjetos")  // Relacionamento com os projetos do usuário

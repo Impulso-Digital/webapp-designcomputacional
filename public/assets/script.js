@@ -6,55 +6,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (registroForm) {
         registroForm.addEventListener('submit', async function (event) {
-            event.preventDefault(); // Previne o envio padrão do formulário
+            event.preventDefault();
 
-            // Coleta os dados do formulário
             const nomeCompleto = document.getElementById('register_name').value.trim();
             const nomeUsuario = document.getElementById('name').value.trim();
             const email = document.getElementById('register_email').value.trim();
             const senha = document.getElementById('register_password').value.trim();
             const confirmSenha = document.getElementById('confirm_password').value.trim();
+            const fotoPerfilInput = document.getElementById('fotoPerfilInput').files[0]; // Obtém o arquivo
 
-            // Verificando os valores dos campos
-            console.log("nomeCompleto:", nomeCompleto);
-            console.log("nomeUsuario:", nomeUsuario);
-            console.log("email:", email);
-            console.log("senha:", senha);
-            console.log("confirmSenha:", confirmSenha);
-
-            // Verifica se todos os campos foram preenchidos
             if (!nomeCompleto || !nomeUsuario || !email || !senha || !confirmSenha) {
-                // Identifica qual campo está vazio
-                if (!nomeCompleto) console.log("Campo 'Nome Completo' está vazio");
-                if (!nomeUsuario) console.log("Campo 'Nome de Usuário' está vazio");
-                if (!email) console.log("Campo 'Email' está vazio");
-                if (!senha) console.log("Campo 'Senha' está vazio");
-                if (!confirmSenha) console.log("Campo 'Confirmação de Senha' está vazio");
-
                 alert("Todos os campos são obrigatórios!");
                 return;
             }
 
-            // Verifica se as senhas coincidem
             if (senha !== confirmSenha) {
                 alert("As senhas não coincidem. Tente novamente.");
                 return;
             }
 
-            // Envia os dados para a API
+            // Criando FormData para envio de arquivo + outros dados
+            const formData = new FormData();
+            formData.append("nome", nomeCompleto);
+            formData.append("nome_usuario", nomeUsuario);
+            formData.append("email", email);
+            formData.append("senha", senha);
+            formData.append("confirmPassword", confirmSenha);
+            if (fotoPerfilInput) {
+                formData.append("fotoPerfil", fotoPerfilInput);
+            }
+
             try {
                 const response = await fetch("http://localhost:3000/api/cadastrar", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        nome: nomeCompleto,
-                        nome_usuario: nomeUsuario,
-                        email: email,
-                        senha: senha,
-                        confirmPassword: confirmSenha,
-                    }),
+                    body: formData, // Agora usando FormData
                 });
 
                 const data = await response.json();
@@ -62,16 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (response.ok) {
                     alert("Usuário cadastrado com sucesso!");
 
-                    // Supondo que a API retorne um token ao cadastrar, salve no localStorage
                     if (data.token) {
                         localStorage.setItem("token", data.token);
                     }
-                    // armazena o nome do usuário no localStorage
-                        localStorage.setItem("username", nomeUsuario);  // 
 
-                    // verifica log armazenado
-                        console.log("Nome armazenado no localStorage:", localStorage.getItem("username"));
-                    // Redireciona para a tela de usuário
+                    localStorage.setItem("username", nomeUsuario);
                     window.location.href = "TelaInicialVisitante.html";
                 } else {
                     alert(`Erro: ${data.message}`);
@@ -80,12 +60,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error("Erro ao cadastrar o usuário:", error);
                 alert("Erro ao conectar com o servidor.");
             }
-
-            
         });
-
     }
 });
+
 
 
 

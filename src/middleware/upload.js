@@ -10,9 +10,10 @@ if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// Criar subdiretórios para thumbnails e arquivos de projeto
+// Criar subdiretórios para thumbnails, arquivos de projeto e fotos de perfil
 const thumbnailsDir = path.resolve(uploadDir, 'thumbnails');
 const projetosDir = path.resolve(uploadDir, 'projetos');
+const fotosPerfilDir = path.resolve(uploadDir, 'fotosPerfil');
 
 if (!fs.existsSync(thumbnailsDir)) {
     fs.mkdirSync(thumbnailsDir, { recursive: true });
@@ -22,10 +23,21 @@ if (!fs.existsSync(projetosDir)) {
     fs.mkdirSync(projetosDir, { recursive: true });
 }
 
+if (!fs.existsSync(fotosPerfilDir)) {
+    fs.mkdirSync(fotosPerfilDir, { recursive: true });
+}
+
 // Configuração do multer para o upload de arquivos
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const folder = file.fieldname === 'thumbnail' ? thumbnailsDir : projetosDir;
+    let folder;
+    if (file.fieldname === 'thumbnail') {
+      folder = thumbnailsDir;
+    } else if (file.fieldname === 'projetoFile') {
+      folder = projetosDir;
+    } else if (file.fieldname === 'fotoPerfil') {
+      folder = fotosPerfilDir;
+    }
     cb(null, folder);
   },
   filename: (req, file, cb) => {
@@ -38,7 +50,8 @@ const storage = multer.diskStorage({
 // Inicializar o middleware de upload
 const upload = multer({ storage: storage }).fields([
   { name: 'thumbnail', maxCount: 1 },  // Permite apenas 1 thumbnail
-  { name: 'projetoFile', maxCount: 1 }  // Permite apenas 1 arquivo de projeto
+  { name: 'projetoFile', maxCount: 1 }, // Permite apenas 1 arquivo de projeto
+  { name: 'fotoPerfil', maxCount: 1 }  // Permite apenas 1 foto de perfil
 ]);
 
 module.exports = { upload };

@@ -27,20 +27,25 @@ const cadastrarUsuario = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const senhaHash = await bcrypt.hash(senha, salt);
 
+    // Verifica se o arquivo de foto de perfil foi enviado
+    const fotoPerfilPath = req.files && req.files['fotoPerfil'] ? req.files['fotoPerfil'][0].path : null;
     const now = new Date();
     now.setHours(now.getHours() - 3);
 
+    // Cria o usuário no banco de dados
     const novoUsuario = await prisma.user.create({
       data: {
         nome,
         nome_usuario,
         email,
-        senha: senhaHash, 
+        senha: senhaHash,
         role: 'user',
+        foto_perfil: fotoPerfilPath, // Salva o caminho da foto de perfil
         createdAt: now,
       },
     });
 
+    // Gera o token JWT
     const token = jwt.sign(
       { id: novoUsuario.id, nome: novoUsuario.nome, email: novoUsuario.email },
       'seu-segredo',
@@ -53,6 +58,7 @@ const cadastrarUsuario = async (req, res) => {
       nome_usuario: novoUsuario.nome_usuario,
       email: novoUsuario.email,
       role: novoUsuario.role,
+      foto_perfil: novoUsuario.foto_perfil,
       createdAt: now.toISOString(),
     });
 

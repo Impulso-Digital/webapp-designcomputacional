@@ -14,7 +14,8 @@ const deleteFolderContents = (folderPath) => {
 // Caminhos das pastas a serem deletadas
 const projetosDir = path.join(__dirname, 'uploads/projetos');
 const thumbnailsDir = path.join(__dirname, 'uploads/thumbnails');
-
+const fotoPerfilDir = path.join (__dirname, 'uploads/fotosPerfil');
 // Deletar conteúdos das pastas
 deleteFolderContents(projetosDir);
 deleteFolderContents(thumbnailsDir);
+deleteFolderContents(fotoPerfilDir);
