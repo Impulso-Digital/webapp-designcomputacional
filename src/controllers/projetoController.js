@@ -160,15 +160,20 @@ const getUltimosProjetos = async (req, res) => {
 };
 
 const getProjetoById = async (req, res) => {
-  const { id } = req.params; 
+  const id = parseInt(req.params.id, 10);
+
+  // Verifica se o ID é um número válido
+  if (isNaN(id)) {
+      return res.status(400).json({ message: "ID inválido" });
+  }
 
   console.log("ID recebido:", id);
 
   try {
       const projeto = await prisma.projeto.findUnique({
-          where: { id: parseInt(id) }, 
+          where: { id }, // Agora o ID está validado como número
           include: {
-              user: { 
+              user: {
                   select: { nome: true, foto_perfil: true }
               }
           }
@@ -188,15 +193,14 @@ const getProjetoById = async (req, res) => {
           nomeUsuario: projeto.user?.nome || "Usuário Desconhecido",
           fotoPerfil: projeto.user?.foto_perfil ? `/uploads/fotosPerfil/${projeto.user.foto_perfil}` : "/assets/img/default-user.jpg",
           tags: Array.isArray(projeto.tags) ? projeto.tags : (typeof projeto.tags === "string" ? projeto.tags.split(",") : []),
-          projetoFile: projeto.projetoFile ? projeto.projetoFile : null,
-          codigo: projeto.codigo || null // Certifique-se de que o campo `codigo` seja incluído na resposta
+          projetoFile: projeto.projetoFile || null,
+          codigo: projeto.codigo || null
       });
   } catch (error) {
       console.error("Erro ao buscar projeto:", error);
       res.status(500).json({ message: "Erro ao buscar projeto" });
   }
 };
-
 
 
 

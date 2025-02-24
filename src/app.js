@@ -60,6 +60,47 @@ app.get('/api/projetos/:userId', async (req, res) => {
     res.status(500).json({ message: 'Erro ao buscar projetos.' });
   }
 });
+app.get("/api/projetos/carrossel", async (req, res) => {
+  console.log("Requisição recebida em /api/projetos/carrossel"); // Log de depuração
+  try {
+    const idsFixos = [1, 2, 3, 4];  // IDs fixos, sem conversão extra
+    console.log("IDs a serem utilizados na consulta:", idsFixos); // Log de depuração
+
+    // Verifique se estamos fazendo a consulta corretamente com os IDs
+    const projetos = await prisma.projeto.findMany({
+      where: {
+        id: { in: idsFixos },
+        status: "aprovado"
+      },
+      select: {
+        id: true,
+        nome: true,
+        thumbnail: true
+      }
+    });
+
+    console.log("Projetos encontrados:", projetos); // Log de depuração
+
+    if (projetos.length === 0) {
+      return res.status(404).json({ message: "Nenhum projeto encontrado." });
+    }
+
+    const projetosFormatados = projetos.map(projeto => ({
+      id: projeto.id,
+      nome: projeto.nome,
+      thumbnailUrl: projeto.thumbnail ? `/uploads/thumbnails/${projeto.thumbnail}` : "/assets/img/default-thumbnail.jpg"
+    }));
+
+    res.json(projetosFormatados);  // Retornando os projetos formatados
+  } catch (error) {
+    console.error("Erro ao buscar projetos do carrossel:", error);
+    res.status(500).json({ message: "Erro ao buscar projetos do carrossel" });
+  }
+});
+
+
+
+
 
 // Inicia o servidor
 app.listen(PORT, () => {
