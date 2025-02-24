@@ -39,7 +39,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                       ? projeto.tags.split(',').map(tag => `<span class="tag selected">${tag.trim()}</span>`).join('')
                       : ''; // Não exibe "Sem tags" caso não haja tags
 
-                  const projectType = projeto.tipoProjeto === 'Processing' ? 'Projeto em Processing' : 'Projeto em p5.js';
+                  // Verifique o valor de projeto.tipoProjeto
+                  console.log("Tipo do projeto:", projeto.tipoProjeto);
+
+                  // Corrija a lógica de determinação do tipo de projeto
+                  const projectType = projeto.tipoProjeto === 'processing' ? 'Projeto em Processing' : 'Projeto em p5.js';
                   
                   // Usando o caminho completo para a thumbnail
                   const thumbnailUrl = projeto.thumbnail ? projeto.thumbnail : 'default-thumbnail.jpg'; // Fallback para uma imagem padrão

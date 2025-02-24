@@ -37,7 +37,7 @@ const createProjetoWithFiles = async (req, res) => {
         nome,
         descricao,
         tags: Array.isArray(tags) ? tags.join(",") : tags,
-        codigo,
+        codigo, // Armazenando o código como texto no banco de dados
         tipoProjeto,
         userId, // Associando o projeto ao usuário
         status: "pendente",
@@ -53,16 +53,29 @@ const createProjetoWithFiles = async (req, res) => {
       return res.status(400).json({ error: 'Ambos os arquivos (thumbnail e projeto) são obrigatórios.' });
     }
 
-    // Caminhos completos para os arquivos
+    // Criando a pasta de códigos, se não existir
+    const codigoFolderPath = path.join(__dirname, '..', '..', 'uploads', 'codigos');
+    if (!fs.existsSync(codigoFolderPath)) {
+      fs.mkdirSync(codigoFolderPath, { recursive: true }); // 'recursive: true' garante que todas as pastas pai sejam criadas
+    }
+
+    // Caminho completo para o arquivo de código
+    const codigoFilePath = path.join(codigoFolderPath, `${newProjeto.id}-codigo.txt`); // Usando .txt para o arquivo de código
+
+    // Escrevendo o código no arquivo
+    fs.writeFileSync(codigoFilePath, codigo); // Salva o código no arquivo de texto
+
+    // Caminhos completos para os outros arquivos
     const thumbnailPath = `/uploads/thumbnails/${req.files.thumbnail[0].filename}`;
     const projetoFilePath = `/uploads/projetos/${req.files.projetoFile[0].filename}`;
 
-    // Atualizando o projeto com os arquivos recebidos
+    // Atualizando o projeto com os arquivos recebidos e o caminho do arquivo de código
     const updatedProjeto = await prisma.projeto.update({
       where: { id: newProjeto.id },
       data: {
         thumbnail: thumbnailPath,
         projetoFile: projetoFilePath,
+        codigoFile: `/uploads/codigos/${newProjeto.id}-codigo.txt`, // Caminho do arquivo de código
       },
     });
 
@@ -147,15 +160,15 @@ const getUltimosProjetos = async (req, res) => {
 };
 
 const getProjetoById = async (req, res) => {
-  const { id } = req.params; // Obtém o ID do projeto da URL
+  const { id } = req.params; 
 
-  console.log("ID recebido:", id); // 👈 Verifica se o ID está chegando corretamente
+  console.log("ID recebido:", id);
 
   try {
       const projeto = await prisma.projeto.findUnique({
-          where: { id: parseInt(id) }, // Converte para número
+          where: { id: parseInt(id) }, 
           include: {
-              user: { // Inclui dados do usuário criador
+              user: { 
                   select: { nome: true, foto_perfil: true }
               }
           }
@@ -165,6 +178,8 @@ const getProjetoById = async (req, res) => {
           return res.status(404).json({ message: "Projeto não encontrado" });
       }
 
+      console.log("Tags recebidas do banco:", projeto.tags);
+
       res.json({
           id: projeto.id,
           nome: projeto.nome,
@@ -172,14 +187,17 @@ const getProjetoById = async (req, res) => {
           thumbnailUrl: projeto.thumbnail ? `/uploads/projetos/${projeto.thumbnail}` : "/assets/img/default-thumbnail.jpg",
           nomeUsuario: projeto.user?.nome || "Usuário Desconhecido",
           fotoPerfil: projeto.user?.foto_perfil ? `/uploads/fotosPerfil/${projeto.user.foto_perfil}` : "/assets/img/default-user.jpg",
-          tags: projeto.tags ? projeto.tags.split(",") : [],
-          projetoFile: projeto.projetoFile ? `/uploads/projetos/${projeto.projetoFile}` : null
+          tags: Array.isArray(projeto.tags) ? projeto.tags : (typeof projeto.tags === "string" ? projeto.tags.split(",") : []),
+          projetoFile: projeto.projetoFile ? projeto.projetoFile : null,
+          codigo: projeto.codigo || null // Certifique-se de que o campo `codigo` seja incluído na resposta
       });
   } catch (error) {
       console.error("Erro ao buscar projeto:", error);
       res.status(500).json({ message: "Erro ao buscar projeto" });
   }
 };
+
+
 
 
 // Buscar projetos por nome de usuário
@@ -231,34 +249,60 @@ const getProjetosByUserId = async (req, res) => {
 // Listagem de projetos com filtros (tags, busca e ordenação)
 const getProjetos = async (req, res) => {
   const { tags, search, orderBy } = req.query;
-  let projetos;
+
   try {
-    const filtros = {};
-    if (tags) {
-      filtros.OR = tags.split(",").map(tag => ({ tags: { contains: tag } }));
-    }
-    projetos = await prisma.projeto.findMany({ where: filtros, include: { user: true } });
-    where: {status: "aprovado"}
+      // Filtro base para projetos aprovados
+      const filtros = {
+          status: "aprovado", // Garante que apenas projetos aprovados sejam retornados
+      };
 
-    if (search) {
-      const searchTags = search.toLowerCase().split("-").filter(tag => tag.length > 1);
-      projetos = projetos.filter(projeto => searchTags.some(tag => projeto.nome.toLowerCase().includes(tag)));
-    }
+      // Filtro por tags (se fornecido)
+      if (tags) {
+          filtros.OR = tags.split(",").map(tag => ({ tags: { contains: tag } })); 
+      }
 
-    if (orderBy) {
-      projetos.sort((a, b) => {
-        if (orderBy === "title") return a.nome.localeCompare(b.nome);
-        if (orderBy === "title-r") return b.nome.localeCompare(a.nome);
-        if (orderBy === "modifiedAt") return new Date(a.updatedAt) - new Date(b.updatedAt);
-        if (orderBy === "modifiedAt-r") return new Date(b.updatedAt) - new Date(a.updatedAt);
-        return 0;
+      // Filtro por busca (se fornecido)
+      if (search) {
+          filtros.OR = [
+              { nome: { contains: search, mode: "insensitive" } }, // Busca no nome do projeto
+              { descricao: { contains: search, mode: "insensitive" } }, // Busca na descrição do projeto
+          ];
+      }
+
+      // Busca os projetos com os filtros aplicados, incluindo o código do projeto
+      const projetos = await prisma.projeto.findMany({
+          where: filtros,
+          include: {
+              user: true,  // Inclui informações do usuário
+          },
       });
-    }
-    return res.status(200).json(projetos);
+
+      // Inclui o campo 'codigo' no retorno para cada projeto
+      const projetosComCodigo = projetos.map(projeto => ({
+          ...projeto,
+          codigo: projeto.codigo || "Código não disponível",  // Garantir que o código seja incluído
+      }));
+
+      // Ordenação dos projetos (se fornecida)
+      if (orderBy) {
+          projetosComCodigo.sort((a, b) => {
+              if (orderBy === "title") return a.nome.localeCompare(b.nome);
+              if (orderBy === "title-r") return b.nome.localeCompare(a.nome);
+              if (orderBy === "modifiedAt") return new Date(a.updatedAt) - new Date(b.updatedAt);
+              if (orderBy === "modifiedAt-r") return new Date(b.updatedAt) - new Date(a.updatedAt);
+              return 0;
+          });
+      }
+
+      return res.status(200).json({
+          projetos: projetosComCodigo,  // Retorna os projetos com o campo 'codigo' incluído
+      });
   } catch (error) {
-    console.error("Erro ao buscar projetos:", error);
-    return res.status(500).json({ error: "Erro ao buscar projetos." });
+      console.error("Erro ao buscar projetos:", error);
+      return res.status(500).json({ error: "Erro ao buscar projetos." });
   }
 };
+
+
 
 module.exports = { createProjetoWithFiles, getProjetos, getProjetosByUsername, getProjetosByUserId, upload, getUltimosProjetos, getProjetoById, getProjetosPendentes, aprovarProjeto  };

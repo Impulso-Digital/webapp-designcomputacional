@@ -62,34 +62,25 @@
                     <input type="text" id="nome_projeto" name="nome_projeto" placeholder="Dê um nome para o seu projeto" class="text-box-div">
                 </div>
 
+                <!-- Thumbnail -->
                 <div class="upload-thumb">
                     <img src="./images/upload_image.png">
-                    
-                    <!-- Label que aciona o input -->
-                    <label for="projetoFile" class="upload_title">Adicione a thumbnail aqui</label>
-                    
-                    <!-- Input escondido -->
-                    <input type="file" id="projetoFile" name="projetoFile" accept=".zip,.tar,.tar.gz,.rar,.7z" style="display: none;">
-                    
-                    <div id="upload-error-message" class="error-message"></div>
-                    <div id="upload-success-message" class="success-message">
-                        <i class="fas fa-check-circle success-icon"></i> Arquivo enviado com sucesso!
+                    <label for="thumbnailFile" class="upload_title">Adicione a thumbnail aqui</label>
+                    <input type="file" id="thumbnailFile" name="thumbnailFile" accept="image/*" style="display: none;">
+                    <div id="thumbnail-error-message" class="error-message"></div>
+                    <div id="thumbnail-success-message" class="success-message">
+                        <i class="fas fa-check-circle success-icon"></i> Thumbnail enviada com sucesso!
                     </div>
                 </div>
-                
 
+                <!-- Código -->
                 <div class="upload-code">
                     <img src="./images/upload_code.png">
-                    
-                    <!-- Label que aciona o input -->
                     <label for="projetoFile" class="upload_title">Adicione o arquivo do código!</label>
-                    
-                    <!-- Input escondido -->
                     <input type="file" id="projetoFile" name="projetoFile" accept=".zip,.tar,.tar.gz,.rar,.7z" style="display: none;">
-                    
-                    <div id="upload-error-message" class="error-message"></div>
-                    <div id="upload-success-message" class="success-message">
-                        <i class="fas fa-check-circle success-icon"></i> Arquivo enviado com sucesso!
+                    <div id="projeto-error-message" class="error-message"></div>
+                    <div id="projeto-success-message" class="success-message">
+                        <i class="fas fa-check-circle success-icon"></i> Arquivo de código enviado com sucesso!
                     </div>
                 </div>
 
@@ -193,26 +184,45 @@
         });
 
         // Validação de arquivos compactados
-        document.getElementById('projetoFile').addEventListener('change', function (event) {
-            const file = event.target.files[0];
-            const errorMessage = document.getElementById('upload-error-message');
-            const successMessage = document.getElementById('upload-success-message');
-            const maxSize = 200 * 1024 * 1024; // 200MB em bytes
-            const validExtensions = ['.zip', '.tar', '.tar.gz', '.rar', '.7z'];
-            const fileExtension = file.name.split('.').pop().toLowerCase();
+// Validação do arquivo de thumbnail
+document.getElementById('thumbnailFile').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    const errorMessage = document.getElementById('thumbnail-error-message');
+    const successMessage = document.getElementById('thumbnail-success-message');
+    const maxSize = 5 * 1024 * 1024; // 5MB
 
-            // Verifica o tipo de arquivo e o tamanho
-            if (file && file.size > maxSize) {
-                errorMessage.textContent = "O arquivo é muito grande. O tamanho máximo permitido é 200MB.";
-                successMessage.style.display = 'none';
-            } else if (file && !validExtensions.includes('.' + fileExtension)) {
-                errorMessage.textContent = "Formato de arquivo inválido. Envie arquivos compactados (.zip, .tar, .tar.gz, .rar, .7z).";
-                successMessage.style.display = 'none';
-            } else {
-                errorMessage.textContent = '';
-                successMessage.style.display = 'block';
-            }
-        });
+    if (file && file.size > maxSize) {
+        errorMessage.textContent = "A imagem é muito grande. O tamanho máximo permitido é 5MB.";
+        successMessage.style.display = 'none';
+    } else if (file && !file.type.startsWith('image/')) {
+        errorMessage.textContent = "Formato de arquivo inválido. Envie apenas imagens (JPG, PNG, etc.).";
+        successMessage.style.display = 'none';
+    } else {
+        errorMessage.textContent = '';
+        successMessage.style.display = 'block';
+    }
+});
+
+// Validação do arquivo de código
+            document.getElementById('projetoFile').addEventListener('change', function (event) {
+                const file = event.target.files[0];
+                const errorMessage = document.getElementById('projeto-error-message');
+                const successMessage = document.getElementById('projeto-success-message');
+                const maxSize = 200 * 1024 * 1024; // 200MB
+                const validExtensions = ['.zip', '.tar', '.tar.gz', '.rar', '.7z'];
+                const fileExtension = file.name.split('.').pop().toLowerCase();
+
+                if (file && file.size > maxSize) {
+                    errorMessage.textContent = "O arquivo é muito grande. O tamanho máximo permitido é 200MB.";
+                    successMessage.style.display = 'none';
+                } else if (file && !validExtensions.includes('.' + fileExtension)) {
+                    errorMessage.textContent = "Formato de arquivo inválido. Envie arquivos compactados (.zip, .tar, .tar.gz, .rar, .7z).";
+                    successMessage.style.display = 'none';
+                } else {
+                    errorMessage.textContent = '';
+                    successMessage.style.display = 'block';
+                }
+            });
     </script>
 <script src="./assets/script.js"></script>
 <script src="./js/modal.js"></script>

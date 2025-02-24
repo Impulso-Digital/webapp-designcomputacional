@@ -39,6 +39,7 @@ model Projeto {
   user          User     @relation("UserProjetos", fields: [userId], references: [id])  // Relação com o usuário
   thumbnail     String?  // Caminho do arquivo da miniatura (thumbnail)
   projetoFile   String?  // Caminho do arquivo do projeto (ex: arquivo ZIP ou estrutura do projeto)
+  codigoFile    String?
   createdAt     DateTime @default(now())  // Data de criação do projeto
   updatedAt     DateTime @updatedAt  // Data de última atualização do projeto
   status        String   @default("pendente")

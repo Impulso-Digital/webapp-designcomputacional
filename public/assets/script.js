@@ -170,10 +170,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
   
+//Cadastro projeto
 
 
-
-  document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector('form');
     if (form) {
         form.addEventListener('submit', async (event) => {
@@ -184,10 +184,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const descricao = document.getElementById('descricao_projeto').value;
             const codigo = document.getElementById('codigo_projeto').value;
             const tags = Array.from(document.querySelectorAll('.tag.selected')).map(tag => tag.textContent.trim());
-            const tipoProjeto = document.getElementById('tipo_projeto').value;
+            const tipoProjeto = document.querySelector('input[name="plataforma"]:checked')?.value;
+
+                if (!tipoProjeto) {
+                    alert('Selecione uma plataforma (P5.js ou Processing).');
+                    return; // Impede o envio do formulário
+}
 
             // Coleta os arquivos
-            const thumbnailInput = document.getElementById('thumbnail');
+            const thumbnailInput = document.getElementById('thumbnailFile');
             const projetoFileInput = document.getElementById('projetoFile');
 
             // Verifica se o token está presente no localStorage

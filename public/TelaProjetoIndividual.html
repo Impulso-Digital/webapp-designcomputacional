@@ -1,17 +1,17 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/TelaProjetoIndividual.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
  
-    <title>Projeto - Nome do Projeto</title>
-    <link rel="stylesheet" href="./styles/TelaMeusProjetos.css">
+    <title>Exibição de Projeto</title>
 </head>
 
 <style>
@@ -39,15 +39,13 @@
         </div>
     
         <nav class="header-right">
-            <a href="#" class="open-modal projetos" data-modal="modal">PROJETOS</a>
-            <a href="#" class="open-modal registrar" data-modal="modal-1">MEUS PROJETOS</a>
+            <a href="./TelaProjetosUsuario.html" class="open-modal projetos" data-modal="modal" style="color: #46F782">PROJETOS</a>
+            <a href="./TelaMeusProjetos.html" class="open-modal registrar" data-modal="modal-1">MEUS PROJETOS</a>
 
             <div class="dropdown">
                 <button class="dropbtn">MINHA CONTA ⬇</button>
                 <div class="dropdown-content">
                     <a href="./TelaCadUsuario.html">CADASTRAR PROJETO</a>
-                    <a href="#editar-perfil">EDITAR PERFIL</a>
-                    <a href="#configuracoes">CONFIGURAÇÕES</a>
                     <a href="#" id="logout">SAIR</a>
                 </div>
             </div>
@@ -55,19 +53,55 @@
     
     </header>
 
+    <span class="title" id="title"> EXIBIÇÃO DE PROJETO</span>
 
-    <div class="container">
-        <h1 id="titulo-projeto"></h1>
-        <h3 id="nome-usuario"></h3>
-        <img id="thumbnail-projeto" src="" alt="Thumbnail do Projeto">
-        <p id="descricao-projeto"></p>
+    <div class="catalogo" id="projetos-container">
+        <div class="account-tags">
+            <div class="account">
+                <img id="foto-perfil" src="./assets/placeholder_perfil.png" alt="">
+                <h2 id="nome-usuario">NOME DE USUÁRIO</h2>
+            </div>
+    
+            <div id="tags-container" class="tag-group">
 
-        <h4>Tags:</h4>
-        <div id="tags-container"></div>
+            </div>
+        </div>
 
-        <a id="download-link" href="#" download>Baixe o código do projeto aqui</a>
-    </div>
+        <img id="thumbnail-projeto" src="" alt="Thumbnail do Projeto" class="thumbnail">
 
+        <h1 id="titulo-projeto">Título do Projeto</h1>
+        <span id="descricao-projeto">Descrição do projeto...</span>
+    
+        <h1>Baixe arquivos referente ao código abaixo:</h1>
+        <a id="download-link" href="#" download class="botao-download">Download arquivos</a>
+    
+        <h1>Código:</h1>
+<pre><code id="codigo-projeto" class="project-code">Código do projeto...</code></pre>
+
+
+
+
+
+    <footer>
+        <div class="footer-left">
+            <h1>@2025 IMPULSODIGITAL</h1>
+            <a href="termos.html">TERMOS</a>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://facebook.com"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com"><i class="fab fa-instagram"></i></a>
+            <a href="https://youtube.com"><i class="fab fa-youtube"></i></a>
+            <img src="./assets/logo-designcomputacional.png">
+        </div>
+    </footer>
+    
+    <script src="./js/menu-user.js"></script>
     <script src="./js/projeto-individual.js" async></script>
+
+
+    
+
 </body>
+
 </html>
