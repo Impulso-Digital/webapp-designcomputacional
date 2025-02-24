@@ -61,6 +61,9 @@ No código existem alguns comandos para teste. Se você desejar resetar todos os
 `npm run resetAll`.
 (AVISO: Esse comando irá reiniciar completamente o banco de dados)
 
+Para acessar o banco de dados e alterar informações (como a role de um usuário), basta rodar o comando:
+`npx prisma studio` e acessar o http://localhost:5555.
+
 
 ## 🎯 Funcionalidades
 
