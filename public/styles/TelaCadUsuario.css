@@ -438,30 +438,32 @@ footer img{
 
 
 
-
+/* Estilo base para o dialog */
 dialog {
     visibility: hidden;
     position: absolute;
     z-index: -1;
 }
 
-
+/* Estilo do modal */
 .modal-registro {
-    width: 60%;
-    height: 70%;
+    width: 60%; /* Largura do modal */
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
+    max-height: 80%; /* Altura máxima */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: none;
     border-radius: 10px;
     padding: 30px;
-    background: #E6E6E6;
+    background: #E6E6E6; /* Cor de fundo */
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Alinhar itens verticalmente */
     gap: 20px;
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito grande */
 }
 
-
+/* Botão de fechar */
 .close-modal {
     background: none;
     border: none;
@@ -469,16 +471,21 @@ dialog {
     font-size: 20px;
     color: #666;
     position: absolute;
-    top: 10px;  /* Ajuste a distância do topo conforme necessário */
-    right: 10px;  /* Ajuste a distância da direita conforme necessário */
+    top: 10px;
+    right: 10px;
 }
 
+.close-modal:hover {
+    color: #005505; /* Cor ao passar o mouse */
+}
 
+/* Fundo escuro do modal */
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro */
 }
 
-.como-usar{
+/* Estilo do link "Dúvidas sobre como cadastrar o projeto?" */
+.como-usar {
     font-family: 'IBM Plex Sans', sans-serif;
     display: flex;
     justify-content: end;
@@ -486,6 +493,46 @@ dialog::backdrop {
     font-weight: 600;
     margin-bottom: -50px;
     cursor: pointer;
+    color: #005505; /* Cor do link */
+    text-decoration: none; /* Remove sublinhado */
+}
+
+.como-usar:hover {
+    text-decoration: underline; /* Sublinhado ao passar o mouse */
+}
+
+/* Estilo do "como-usar-box" */
+.como-usar-box {
+    background-color: #fff; /* Fundo branco */
+    border: 1px solid #ddd; /* Borda sutil */
+    border-radius: 10px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    margin-top: 20px; /* Espaçamento acima do box */
+}
+
+.como-usar-box h1 {
+    font-size: 24px; /* Tamanho do título */
+    color: #333; /* Cor do título */
+    margin-bottom: 15px; /* Espaçamento abaixo do título */
+    text-align: center; /* Centraliza o título */
+}
+
+.como-usar-box ul {
+    list-style-type: disc; /* Bullet points */
+    padding-left: 20px; /* Espaçamento à esquerda da lista */
+    margin: 0; /* Remove margens padrão */
+}
+
+.como-usar-box li {
+    font-size: 16px; /* Tamanho da fonte */
+    color: #555; /* Cor do texto */
+    margin-bottom: 10px; /* Espaçamento entre os itens */
+    line-height: 1.6; /* Espaçamento entre linhas */
+}
+
+.como-usar-box li strong {
+    color: #005505; /* Cor para palavras destacadas */
+    font-weight: 600; /* Peso da fonte */
 }
 
 

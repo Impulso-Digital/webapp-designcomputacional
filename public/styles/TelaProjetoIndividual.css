@@ -299,9 +299,17 @@ dialog {
     font-size: 20px;
 }
 
-.project-code{
+pre {
     background-color: #B8B8B8;
     color: black;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-x: auto;
+    max-width: 100%;
 }
 
 
@@ -328,7 +336,7 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px;
-    margin-top: 63%; /* Isso empurra a div para o final */
+    margin-top: 137%; /* Isso empurra a div para o final */
     display: flex;
     /* flex-direction: row; */
     padding: 15px;
@@ -344,13 +352,13 @@ footer {
 }
 
 footer h1{
-    color: white;
+    color: #808080;
     font-weight: 300;
     font-size: 30px;
 }
 
 footer a{
-    color: white;
+    color: #B3B3B3;
     font-size: 30px;
 }
 
@@ -361,8 +369,9 @@ footer a{
     align-items: center;
 }
 
+
+
+
 footer img{
     width: 110px;
 }
-
-
