@@ -145,19 +145,16 @@ header {
     width: 80%;
     gap: 10px; /* Espaço entre os projetos */
     background-color: white;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 2%;
+    margin: 2% auto; /* Mantém centralizado */
     padding: 20px;
     border-radius: 10px;
 
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
     flex-direction: column;
-    
+    position: relative; /* Remove o absolute para que o footer reconheça */
 }
+
 
 .title {
     font-size: 35px;
@@ -245,4 +242,47 @@ header {
     text-align: left;
     margin-left: 23px;
     margin-bottom: 15px;
+}
+
+footer {
+    background-color: #000000;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Bebas Neue', sans-serif;
+    position: relative; /* Mantém o rodapé no fluxo da página */
+    width: 100%;
+    margin-top: 50px; 
+}
+
+
+
+.footer-left{
+    display: flex;
+    gap: 50px;    
+}
+
+footer h1{
+    color: white;
+    font-weight: 300;
+    font-size: 30px;
+}
+
+footer a{
+    color: white;
+    font-size: 30px;
+}
+
+.social-icons{
+    font-size: 30px;
+    display: flex;
+    gap: 50px;
+    align-items: center;
+}
+
+footer img{
+    width: 110px;
 }
