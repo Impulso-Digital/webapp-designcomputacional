@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Preenche os dados na página
       document.getElementById("titulo-projeto").textContent = projeto.nome;
       document.getElementById("descricao-projeto").textContent = projeto.descricao;
-      document.getElementById("nome-usuario").textContent = `Criado por: ${projeto.nomeUsuario}`;
+      document.getElementById("nome-usuario").textContent = ` ${projeto.nomeUsuario}`;
       document.getElementById("foto-perfil").src = projeto.fotoPerfil || "./assets/placeholder_perfil.png";
 
       // Exibe o código do projeto

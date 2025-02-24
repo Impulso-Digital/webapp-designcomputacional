@@ -1,0 +1,26 @@
+document.addEventListener("DOMContentLoaded", () => {
+    // Adiciona um pequeno atraso para garantir que os projetos sejam renderizados
+    setTimeout(() => {
+        // Seleciona todos os projetos na tela inicial
+        const projetos = document.querySelectorAll(".projeto");
+
+        console.log(`Encontrados ${projetos.length} projetos.`); // Verifique quantos projetos foram encontrados
+
+        projetos.forEach(projeto => {
+            // Adiciona um evento de clique a cada projeto
+            projeto.addEventListener("click", () => {
+                console.log("Projeto clicado!"); // Verifique se o clique está sendo detectado
+                // Obtém o ID do projeto a partir do atributo data-id
+                const projetoId = projeto.getAttribute("data-id");
+
+                if (!projetoId) {
+                    console.error("ID do projeto não encontrado.");
+                    return;
+                }
+
+                // Redireciona para a página do projeto individual com o ID
+                window.location.href = `TelaProjetoIndividual.html?id=${projetoId}`;
+            });
+        });
+    }, 100); // 100ms de atraso (ajuste conforme necessário)
+});

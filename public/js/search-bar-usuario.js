@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         // Redireciona para a página de resultados com o termo de pesquisa na URL
-        window.location.href = `TelaResultadosPesquisa.html?search=${encodeURIComponent(searchTerm)}`;
+        window.location.href = `TelaBuscaUsuario.html?search=${encodeURIComponent(searchTerm)}`;
     }
 
     // Adiciona o evento de clique e enter ao botão de busca

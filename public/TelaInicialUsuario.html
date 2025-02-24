@@ -22,13 +22,14 @@
             <div class="search-box">
                 <input 
                     type="text" 
+                    id="search-input" 
                     placeholder="Buscar categoria ou usuário" 
                     class="text-box"
                 >
-
-                <button class="search-button">
+                <button id="search-button" class="search-button"> 
                     <i class="fas fa-search"></i>
                 </button>
+            </div>
                 
             </div>
         </div>
@@ -43,6 +44,7 @@
                 <div class="dropdown-content">
                     <a href="./TelaCadUsuario.html">CADASTRAR PROJETO</a>
                     <a href="./TelaInicialVisitante.html" id="logout">SAIR</a>
+                      <!-- O link "Aprovar Projetos" será inserido aqui via JavaScript -->
                 </div>
             </div>
 
@@ -51,20 +53,17 @@
     
        </header>
 
-    <div class="box-info">
+       <div class="box-info">
         <span class="title-info">VOCÊ JÁ OUVIU FALAR SOBRE A DISCIPLINA DE DESIGN COMPUTACIONAL? <br> 
             DESCUBRA COMO CRIATIVIDADE E TECNOLOGIA SE UNEM PARA REVOLUCIONAR O DESIGN INTERATIVO!</span>
-        <a href="TelaSobreUsuario.html" class="button-info">
+        <a href="sobre.html" class="button-info">
             EXPLORAR A DISCIPLINA
         </a>
     </div>
 
     <div class="carrossel">
         <div class="imagens">
-            <div class="imagem" style="background: red;"></div>
-            <div class="imagem" style="background: blue;"></div>
-            <div class="imagem" style="background: green;"></div>
-            <div class="imagem" style="background: orange;"></div>
+            <!-- As imagens do carrossel serão carregadas aqui -->
         </div>
         <button class="seta esquerda" onclick="mudarImagem(-1)">❮</button>
         <button class="seta direita" onclick="mudarImagem(1)">❯</button>
@@ -72,152 +71,13 @@
 
     <div id="projetos-recentes" class="catalogo"></div>
 
-
-    <!-- <div class="catalogo">
-        <div class="projeto">
-            <div class="thumbnail"></div>
-            <div class="info-criador">
-                <div class="foto-perfil"></div>
-                <h3 class="nome-criador">Nome do Usuário</h3>
-            </div>
-            <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ducimus quo eaque</p>
-            <div class="tags">
-                <span class="tag">Categoria 1</span>
-                <span class="tag">Categoria 2</span>
-                <span class="tag">Categoria 3</span>
-            </div>
-        </div>
-        
-    
-        <div class="projeto">
-            <div class="thumbnail"></div>
-            <div class="info-criador">
-                <div class="foto-perfil"></div>
-                <h3 class="nome-criador">Nome do Usuário</h3>
-            </div>
-            <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ducimus quo eaque</p>
-            <div class="tags">
-                <span class="tag">Categoria 1</span>
-                <span class="tag">Categoria 2</span>
-                <span class="tag">Categoria 3</span>
-            </div>
-        </div>
-
-        <div class="projeto">
-            <div class="thumbnail"></div>
-            <div class="info-criador">
-                <div class="foto-perfil"></div>
-                <h3 class="nome-criador">Nome do Usuário</h3>
-            </div>
-            <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ducimus quo eaque</p>
-            <div class="tags">
-                <span class="tag">Categoria 1</span>
-                <span class="tag">Categoria 2</span>
-                <span class="tag">Categoria 3</span>
-            </div>
-        </div>
-
-        <div class="projeto">
-            <div class="thumbnail"></div>
-            <div class="info-criador">
-                <div class="foto-perfil"></div>
-                <h3 class="nome-criador">Nome do Usuário</h3>
-            </div>
-            <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ducimus quo eaque</p>
-            <div class="tags">
-                <span class="tag">Categoria 1</span>
-                <span class="tag">Categoria 2</span>
-                <span class="tag">Categoria 3</span>
-            </div>
-        </div>
-        
-    
-        <div class="projeto">
-            <div class="thumbnail"></div>
-            <div class="info-criador">
-                <div class="foto-perfil"></div>
-                <h3 class="nome-criador">Nome do Usuário</h3>
-            </div>
-            <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ducimus quo eaque</p>
-            <div class="tags">
-                <span class="tag">Categoria 1</span>
-                <span class="tag">Categoria 2</span>
-                <span class="tag">Categoria 3</span>
-            </div>
-        </div>
-
-        <div class="projeto">
-            <div class="thumbnail"></div>
-            <div class="info-criador">
-                <div class="foto-perfil"></div>
-                <h3 class="nome-criador">Nome do Usuário</h3>
-            </div>
-            <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ducimus quo eaque</p>
-            <div class="tags">
-                <span class="tag">Categoria 1</span>
-                <span class="tag">Categoria 2</span>
-                <span class="tag">Categoria 3</span>
-            </div>
-        </div>
-
-        <div class="projeto">
-            <div class="thumbnail"></div>
-            <div class="info-criador">
-                <div class="foto-perfil"></div>
-                <h3 class="nome-criador">Nome do Usuário</h3>
-            </div>
-            <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ducimus quo eaque</p>
-            <div class="tags">
-                <span class="tag">Categoria 1</span>
-                <span class="tag">Categoria 2</span>
-                <span class="tag">Categoria 3</span>
-            </div>
-        </div>
-        
-    
-        <div class="projeto">
-            <div class="thumbnail"></div>
-            <div class="info-criador">
-                <div class="foto-perfil"></div>
-                <h3 class="nome-criador">Nome do Usuário</h3>
-            </div>
-            <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ducimus quo eaque</p>
-            <div class="tags">
-                <span class="tag">Categoria 1</span>
-                <span class="tag">Categoria 2</span>
-                <span class="tag">Categoria 3</span>
-            </div>
-        </div>
-
-        <div class="projeto">
-            <div class="thumbnail"></div>
-            <div class="info-criador">
-                <div class="foto-perfil"></div>
-                <h3 class="nome-criador">Nome do Usuário</h3>
-            </div>
-            <p class="descricao">Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum ducimus quo eaque</p>
-            <div class="tags">
-                <span class="tag">Categoria 1</span>
-                <span class="tag">Categoria 2</span>
-                <span class="tag">Categoria 3</span>
-            </div>
-        </div> -->
-
-        
-
-        
-    
-    </div>
-
-        
-
-        
-    
+           
     </div>
     
     <script src="./js/carrossel-index.js"></script>
     <script src="./js/ultimos-projetos.js"></script>
-
+    <script src="./js/search-bar-usuario.js"></script>
+    <script src="./js/projeto-individual-telainicialjs"></script>
 
 
 

@@ -26,4 +26,6 @@ router.get("/projetos/usuario/:username", getProjetosByUsername);
 // Rota para buscar projetos por ID de usuário
 router.get("/projetos/user/:userId", getProjetosByUserId);
 
+
+
 module.exports = router;

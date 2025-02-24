@@ -387,17 +387,15 @@ dialog::backdrop {
 
 .carrossel {
     position: absolute;
-    /* top: 50%; */
     margin-top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
     width: 70%;
     height: 70%;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
 
 .imagens {
     display: flex;
@@ -409,6 +407,15 @@ dialog::backdrop {
 .imagem {
     min-width: 100%;
     height: 100%;
+    position: relative; /* Para garantir que o background seja aplicado corretamente */
+    overflow: hidden; /* Isso vai garantir que a imagem não ultrapasse os limites da div */
+}
+
+.imagem .thumbnail {
+    width: 100%;
+    height: 100%;
+    background-size: cover; /* A imagem irá cobrir completamente a área do contêiner */
+    background-position: center; /* A imagem será centralizada */
 }
 
 .seta {
@@ -416,8 +423,6 @@ dialog::backdrop {
     top: 50%;
     transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.5);
-    /* background: none; */
-    /* border: none; */
     color: white;
     border: none;
     padding: 10px;
@@ -510,20 +515,28 @@ dialog::backdrop {
     text-align-last: left;
 }
 
-.tags {
+/* Estilo unificado para as tags */
+.tag-group, .tags {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
+    gap: 10px;
     margin-top: 10px;
 }
 
 .tag {
-    background: #B5B5B5;
-    color: 4C4C4C;
-    font-size: 12px;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 8px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #000000;
+    transition: background-color 0.3s, color 0.3s;
+    color: #005505; /* Cor do texto */
+}
+
+.tag.selected {
+    background-color: #4caf50;
+    color: white;
 }
 
 
