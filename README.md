@@ -55,7 +55,7 @@ Rode o comando ` npx prisma migrate dev`
 
 E o servidor estará rodando em `http://localhost:3000`.
 
-### 5. **Comandos para Desenvolvedor**
+### 6. **Comandos para Desenvolvedor**
 
 No código existem alguns comandos para teste. Se você desejar resetar todos os projetos criados, todos os usuários e todos os ID's, rode o comando:
 `npm run resetAll`.
