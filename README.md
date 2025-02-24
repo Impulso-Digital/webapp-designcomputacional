@@ -79,12 +79,12 @@ No código existem alguns comandos para teste. Se você desejar resetar todos os
 | **RF 002** | Implementar sistema de autenticação.                                                              |   ✅   |
 | **RF 003** | Permitir a definição de papéis para os usuários (ex.: administrador, usuário, visitante).         |   ✅   |
 | **RF 004** | Disponibilizar uma página inicial com informações gerais e links para funcionalidades principais. |   ✅   |
-| **RF 005** | Permitir que usuários adicionem, editem ou excluam conteúdos conforme suas permissões.            |   🛠️   |
+| **RF 005** | Permitir que usuários adicionem, editem ou excluam conteúdos conforme suas permissões.            |   ✅   |
 | **RF 006** | Exibir uma lista de conteúdos cadastrados.                                                        |   ✅   |
 | **RF 007** | Permitir busca por conteúdo, com base em palavras-chave ou outras características básicas.        |   ✅  |
 | **RF 008** | Organizar os conteúdos por categorias.                                                            |   ✅  |
 | **RF 009** | Permitir a visualização detalhada de cada conteúdo.                                               |   ✅   |
-| **RF 010** | Oferecer orientação básica para o uso da plataforma.                                              |   ⏳   |
+| **RF 010** | Oferecer orientação básica para o uso da plataforma.                                              |   ✅   |
 
 
 
