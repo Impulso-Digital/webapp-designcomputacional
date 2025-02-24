@@ -88,10 +88,17 @@ const loginUsuario = async (req, res) => {
   try {
     const user = await prisma.user.findUnique({ where: { email } });
 
-    if (user && await bcrypt.compare(senha, user.senha)) { // Comparação segura
+    if (user && await bcrypt.compare(senha, user.senha)) {
+      // Inclua a role no payload do token
       const token = jwt.sign(
-        { id: user.id, nome: user.nome, nome_usuario: user.nome_usuario, email: user.email },
-        process.env.JWT_SECRET, // Agora está consistente
+        { 
+          id: user.id, 
+          nome: user.nome, 
+          nome_usuario: user.nome_usuario, 
+          email: user.email,
+          role: user.role // Adicionando a role aqui
+        },
+        process.env.JWT_SECRET,
         { expiresIn: "1h" }
       );
 

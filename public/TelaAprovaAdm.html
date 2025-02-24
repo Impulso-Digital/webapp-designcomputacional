@@ -72,10 +72,33 @@
         </div>
     </footer>
     
+    <script> 
+        document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+        // Decodificando o token para verificar a role
+        const payload = JSON.parse(atob(token.split('.')[1]));
+
+        // Verificando se o usuário tem a role 'admin'
+        if (payload.role !== 'admin') {
+            // Se não for admin, redireciona para a página inicial ou outra página
+            alert("Permissões insuficientes. Você não tem acesso a esta página.");
+            window.location.href = "TelaInicialUsuario.html"; // Redireciona para uma página de erro ou inicial
+        }
+    } else {
+        // Caso o usuário não esteja logado, redireciona para a tela de login
+        alert("Por favor, faça login para acessar esta página.");
+        window.location.href = "TelaInicialVisitante.html"; // Ou a página de login
+    }
+});
+
+    </script>
     <script src="./js/menu-user.js"></script>
     
 
     
+    <script src="./js/aprovar-projects.js"></script>
 
 </body>
 

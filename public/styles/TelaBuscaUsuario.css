@@ -155,31 +155,74 @@ header {
 
 
 .catalogo {
-    width: 80%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanho igual */
-    gap: 10px; /* Espaço entre os projetos */
-    background-color: white;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
     padding: 20px;
-    border-radius: 10px;
 }
 
-
 .projeto {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: flex-start;
-    background: white[];
-    border-radius: 10px;
+    background-color: #fff;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 30x;
-    text-align: center;
-    font-family: 'IBM Plex Sans', sans-serif;
+    overflow: hidden;
+    width: 300px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.projeto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.thumbnail {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.info-criador {
+    padding: 15px;
+}
+
+.nome-criador {
+    font-size: 18px;
+    margin: 0;
+    color: #333;
+}
+
+.tipo {
+    font-size: 14px;
+    color: #777;
+    margin: 5px 0;
+}
+
+.descricao {
+    font-size: 14px;
+    color: #555;
+    padding: 0 15px 15px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 0 15px 15px;
+}
+
+.tag {
+    background-color: #e0e0e0;
+    border-radius: 12px;
+    padding: 5px 10px;
+    font-size: 12px;
+    color: #333;
+}
+
+.tag.selected {
+    background-color: #4caf50;
+    color: white;
 }
 
 

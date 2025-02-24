@@ -38,4 +38,22 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+    // Botão "AINDA NÃO POSSUI UMA CONTA?" no modal de login
+    const modalRegistroButton = document.getElementById('modal_registro_button');
+    if (modalRegistroButton) {
+        modalRegistroButton.addEventListener('click', function () {
+            // Fechar o modal de login
+            const modalLogin = document.getElementById('modal-2');
+            modalLogin.close();
+            modalLogin.style.visibility = 'hidden';
+            modalLogin.style.zIndex = '-1';
+
+            // Abrir o modal de registro
+            const modalRegistro = document.getElementById('modal-1');
+            modalRegistro.style.visibility = 'visible';
+            modalRegistro.style.zIndex = '1000';
+            modalRegistro.showModal();
+        });
+    }
 });

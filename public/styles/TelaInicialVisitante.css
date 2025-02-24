@@ -515,20 +515,28 @@ dialog::backdrop {
     text-align-last: left;
 }
 
-.tags {
+/* Estilo unificado para as tags */
+.tag-group, .tags {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 5px;
+    gap: 10px;
     margin-top: 10px;
 }
 
 .tag {
-    background: #B5B5B5;
-    color: 4C4C4C;
-    font-size: 12px;
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #ffffff;
+    padding: 8px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #000000;
+    transition: background-color 0.3s, color 0.3s;
+    color: #005505; /* Cor do texto */
+}
+
+.tag.selected {
+    background-color: #4caf50;
+    color: white;
 }
 
 

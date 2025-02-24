@@ -8,26 +8,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         projetosContainer.innerHTML = ""; // Limpa a área antes de inserir os projetos
 
         const projetosHTML = projetos
-        .map((projeto) => `
-            <div class="projeto">
-                <img src="${projeto.thumbnailUrl || 'assets/img/default-thumbnail.jpg'}" 
-                     alt="${projeto.nome}" class="thumbnail">
-   
-                <div class="info-criador">
-                    <img src="http://localhost:3000${projeto.fotoPerfil || '/assets/img/default-user.jpg'}" 
-                         alt="Foto de ${projeto.nomeUsuario}" class="foto-perfil">
-                    <h3 class="nome-criador">${projeto.nomeUsuario}</h3>
+            .map((projeto) => `
+                <div class="projeto" data-id="${projeto.id}"> <!-- Adiciona o data-id aqui -->
+                    <img src="${projeto.thumbnailUrl || 'assets/img/default-thumbnail.jpg'}" 
+                         alt="${projeto.nome}" class="thumbnail">
+       
+                    <div class="info-criador">
+                        <img src="http://localhost:3000${projeto.fotoPerfil || '/assets/img/default-user.jpg'}" 
+                             alt="Foto de ${projeto.nomeUsuario}" class="foto-perfil">
+                        <h3 class="nome-criador">${projeto.nomeUsuario}</h3>
+                    </div>
+       
+                    <p class="descricao">${projeto.descricao}</p>
+       
+                    <div class="tags">
+                        ${projeto.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
                 </div>
-   
-                <p class="descricao">${projeto.descricao}</p>
-   
-                <div class="tags">
-                    ${projeto.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                </div>
-            </div>
-        `)
-        .join("");
-   
+            `)
+            .join("");
 
         projetosContainer.innerHTML = projetosHTML;
     } catch (error) {

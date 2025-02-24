@@ -421,7 +421,8 @@ dialog::backdrop {
 
 
 
-.tag-group {
+/* Estilo unificado para as tags */
+.tag-group, .tags {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -436,6 +437,7 @@ dialog::backdrop {
     cursor: pointer;
     border: 1px solid #ccc;
     transition: background-color 0.3s, color 0.3s;
+    color: #4C4C4C; /* Cor do texto */
 }
 
 .tag.selected {

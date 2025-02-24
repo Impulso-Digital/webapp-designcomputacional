@@ -150,6 +150,19 @@ header {
 }
 
 
+.aprovar-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.aprovar-btn:hover {
+    background-color: #45a049;
+}
+
 
 
 
