@@ -179,15 +179,30 @@ dialog {
 
 
 .upload_foto_perfil {
-    background: #CCCCCC;
-    color: #808080;
-    padding: 6px;
-    border-radius: 2px;
-    border-color: #999999;
-    width: 150px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    background: #000000; /* Cor de fundo verde */
+    color: white; /* Cor do texto */
+    padding: 10px 20px; /* Espaçamento interno */
+    border-radius: 25px; /* Bordas arredondadas */
+    border: none; /* Remove a borda */
+    font-size: 16px; /* Tamanho da fonte */
+    cursor: pointer; /* Cursor de ponteiro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Espaço entre o ícone e o texto */
+    width: 200px; /* Largura fixa */
+    margin: 0 auto; /* Centraliza o botão */
+    transition: background 0.3s ease; /* Transição suave */
+}
+
+/* Efeito de hover no botão */
+.upload_foto_perfil:hover {
+    background: #004400; /* Cor de fundo mais escura ao passar o mouse */
+}
+
+/* Ícone do botão */
+.upload_foto_perfil i {
+    font-size: 18px; /* Tamanho do ícone */
 }
 
 
@@ -199,7 +214,7 @@ dialog {
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 24px;
-    color: #808080;
+    color: #000000;
 }
 
 
@@ -210,7 +225,7 @@ dialog {
 /* Estilo para o botão "Registrar-se" */
 .register-button {
     width: 250px;
-    background-color: #666666;
+    background-color: #000000;
     color: white;
     padding: 5px;
     border: none;
@@ -247,7 +262,7 @@ dialog {
 .form-group label {
     display: block;
     font-size: 20px;
-    color: #808080;
+    color: #000000;
     margin-top: 15px;
 }
 
@@ -261,7 +276,7 @@ dialog {
 }
 
 .form-group input::placeholder {
-    color: #CCCCCC;
+    color: #707070;
   }
 
 
@@ -270,6 +285,7 @@ dialog::backdrop {
 }
 
 
+/* Estilo geral para o modal */
 .modal-login {
     width: 50%;
     height: 45%;
@@ -283,50 +299,60 @@ dialog::backdrop {
     display: flex;
     justify-content: space-between;
     gap: 20px;
+    color: black; /* Define a cor do texto como preto */
 }
 
-.title-login{
+/* Título do modal */
+.title-login {
     font-size: 45px;
-    color: #4D4D4D;
+    color: black; /* Texto preto */
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
+/* Labels dos campos de formulário */
 .form-login label {
     display: block;
     font-size: 20px;
-    color: #808080;
+    color: black; /* Texto preto */
     margin-top: 15px;
 }
 
-
+/* Campos de input */
 .form-login input {
     width: 350px;
     padding: 10px;
     margin-top: 25px;
     border: none;
     font-size: 16px;
-
+    color: black; /* Texto preto */
 }
 
+/* Placeholder dos campos de input */
 .form-login input::placeholder {
-    color: #CCCCCC;
-  }
+    color: #CCCCCC; /* Placeholder cinza */
+}
 
-.login-main a{
+/* Link "Esqueci minha senha" */
+.login-main a {
     font-size: 18px;
-    color: #B3B3B3;
+    color: black; /* Texto preto */
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
+    text-decoration: none; /* Remove sublinhado */
 }
 
+.login-main a:hover {
+    text-decoration: underline; /* Sublinhado ao passar o mouse */
+}
+
+/* Botão de login */
 .login-button {
     width: 200px;
-    background-color: #666666;
-    color: white;
+    background-color: black; /* Fundo preto */
+    color: white; /* Texto branco */
     padding: 4px;
     border: none;
     border-radius: 55px;
@@ -340,16 +366,18 @@ dialog::backdrop {
     margin-right: auto;
 }
 
-.call-register{
+/* Texto "Ainda não possui uma conta?" */
+.call-register {
     font-size: 35px;
-    color: #4D4D4D;
+    color: black; /* Texto preto */
     text-align: center;
 }
 
-.modal-registro-button{
+/* Botão "Criar conta" */
+.modal-registro-button {
     width: 200px;
-    background-color: #666666;
-    color: white;
+    background-color: black; /* Fundo preto */
+    color: white; /* Texto branco */
     padding: 4px;
     border: none;
     border-radius: 55px;
@@ -358,7 +386,6 @@ dialog::backdrop {
     margin-top: 10px; /* Espaço acima do botão */
     font-family: 'Bebas Neue', sans-serif;
     font-weight: 300;
-
 }
 
 
@@ -494,11 +521,29 @@ dialog::backdrop {
 
 }
 
-.foto-perfil {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: gray; /* Cor temporária */
+/* Estilo para o contêiner da foto de perfil */
+.foto_perfil {
+    width: 150px; /* Tamanho da moldura */
+    height: 150px; /* Tamanho da moldura */
+    border-radius: 50%; /* Moldura redonda */
+    background-color: #f0f0f0; /* Cor de fundo da moldura */
+    margin-bottom: 20px; /* Espaço abaixo da foto */
+    margin-left: auto;
+    margin-right: auto; /* Centraliza o contêiner */
+    overflow: hidden; /* Garante que a imagem não ultrapasse o contêiner */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc; /* Borda sutil */
+}
+
+/* Estilo para a imagem de pré-visualização */
+#fotoPerfilPreview {
+    width: 100%; /* Ocupa 100% do contêiner */
+    height: 100%; /* Ocupa 100% do contêiner */
+    object-fit: cover; /* Ajusta a imagem para cobrir o contêiner sem distorcer */
+    border-radius: 50%; /* Mantém a borda arredondada */
+    display: none; /* Inicialmente oculta */
 }
 
 .nome-criador {
