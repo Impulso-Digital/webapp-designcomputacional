@@ -186,10 +186,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const tags = Array.from(document.querySelectorAll('.tag.selected')).map(tag => tag.textContent.trim());
             const tipoProjeto = document.querySelector('input[name="plataforma"]:checked')?.value;
 
-                if (!tipoProjeto) {
-                    alert('Selecione uma plataforma (P5.js ou Processing).');
-                    return; // Impede o envio do formulário
-}
+            if (!tipoProjeto) {
+                alert('Selecione uma plataforma (P5.js ou Processing).');
+                return; // Impede o envio do formulário
+            }
 
             // Coleta os arquivos
             const thumbnailInput = document.getElementById('thumbnailFile');
@@ -212,12 +212,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Verifica se o arquivo de thumbnail foi selecionado
             if (thumbnailInput && thumbnailInput.files.length > 0) {
-                formData.append('thumbnail', thumbnailInput.files[0]);
+                const thumbnailFile = thumbnailInput.files[0];
+                const maxSize = 5 * 1024 * 1024; // 5MB
+
+                if (thumbnailFile.size > maxSize) {
+                    alert('A thumbnail é muito grande. O tamanho máximo permitido é 5MB.');
+                    return;
+                }
+
+                if (!thumbnailFile.type.startsWith('image/')) {
+                    alert('Formato de arquivo inválido. Envie apenas imagens (JPG, PNG, etc.).');
+                    return;
+                }
+
+                formData.append('thumbnail', thumbnailFile);
             }
 
             // Verifica se o arquivo de projeto foi selecionado
             if (projetoFileInput && projetoFileInput.files.length > 0) {
-                formData.append('projetoFile', projetoFileInput.files[0]);
+                const projetoFile = projetoFileInput.files[0];
+                const maxSize = 200 * 1024 * 1024; // 200MB
+                const validExtensions = ['.zip', '.tar', '.tar.gz', '.rar', '.7z'];
+                const fileExtension = projetoFile.name.split('.').pop().toLowerCase();
+
+                if (projetoFile.size > maxSize) {
+                    alert('O arquivo de código é muito grande. O tamanho máximo permitido é 200MB.');
+                    return;
+                }
+
+                if (!validExtensions.includes('.' + fileExtension)) {
+                    alert('Formato de arquivo inválido. Envie arquivos compactados (.zip, .tar, .tar.gz, .rar, .7z).');
+                    return;
+                }
+
+                formData.append('projetoFile', projetoFile);
             }
 
             // Envia os dados para o servidor
@@ -245,6 +273,47 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+    // Validação do arquivo de thumbnail
+    document.getElementById('thumbnailFile').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        const errorMessage = document.getElementById('thumbnail-error-message');
+        const successMessage = document.getElementById('thumbnail-success-message');
+        const maxSize = 5 * 1024 * 1024; // 5MB
+
+        if (file && file.size > maxSize) {
+            errorMessage.textContent = "A imagem é muito grande. O tamanho máximo permitido é 5MB.";
+            successMessage.style.display = 'none';
+        } else if (file && !file.type.startsWith('image/')) {
+            errorMessage.textContent = "Formato de arquivo inválido. Envie apenas imagens (JPG, PNG, etc.).";
+            successMessage.style.display = 'none';
+        } else {
+            errorMessage.textContent = '';
+            successMessage.style.display = 'block';
+        }
+    });
+
+    // Validação do arquivo de código
+    document.getElementById('projetoFile').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        const errorMessage = document.getElementById('projeto-error-message');
+        const successMessage = document.getElementById('projeto-success-message');
+        const maxSize = 200 * 1024 * 1024; // 200MB
+        const validExtensions = ['.zip', '.tar', '.tar.gz', '.rar', '.7z'];
+        const fileExtension = file.name.split('.').pop().toLowerCase();
+
+        if (file && file.size > maxSize) {
+            errorMessage.textContent = "O arquivo é muito grande. O tamanho máximo permitido é 200MB.";
+            successMessage.style.display = 'none';
+        } else if (file && !validExtensions.includes('.' + fileExtension)) {
+            errorMessage.textContent = "Formato de arquivo inválido. Envie arquivos compactados (.zip, .tar, .tar.gz, .rar, .7z).";
+            successMessage.style.display = 'none';
+        } else {
+            errorMessage.textContent = '';
+            successMessage.style.display = 'block';
+        }
+    });
+
 
 
 

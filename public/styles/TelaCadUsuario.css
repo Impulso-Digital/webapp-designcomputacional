@@ -369,20 +369,24 @@ form button {
     margin: 10px 0;
 }
 
-/* Estilo para o feedback visual de sucesso */
+/* Mensagens de sucesso */
 .success-message {
-    color: green;
+    display: none; /* Inicialmente oculto */
+    color: #4caf50; /* Verde */
     font-size: 14px;
     margin-top: 10px;
-    display: none;
 }
 
 .success-icon {
-    margin-right: 10px;
-    color: green;
-    font-size: 18px;
+    margin-right: 5px;
 }
 
+/* Mensagens de erro */
+.error-message {
+    color: #ff0000; /* Vermelho */
+    font-size: 14px;
+    margin-top: 10px;
+}
 
 
 
