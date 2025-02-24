@@ -13,83 +13,6 @@
 
     <title>Cadastro de Projeto</title>
 
-    <style>
-        .tag-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .tag {
-            background-color: #f0f0f0;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            cursor: pointer;
-            border: 1px solid #ccc;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .tag.selected {
-            background-color: #4caf50;
-            color: white;
-        }
-
-        /* Estilo para a área da thumbnail */
-        .thumbnail-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .thumbnail-preview {
-            max-width: 500px;
-            max-height: 500px;
-            margin-bottom: 10px;
-            display: none;
-        }
-
-        .thumbnail-preview img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        /* Estilo para o upload de arquivos */
-        .upload-files-container {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .upload-file {
-            margin: 10px 0;
-        }
-
-        /* Estilo para o feedback visual de sucesso */
-        .success-message {
-            color: green;
-            font-size: 14px;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .success-icon {
-            margin-right: 10px;
-            color: green;
-            font-size: 18px;
-        }
-    </style>
 </head>
 
 <body>
@@ -111,8 +34,6 @@
                 <button class="dropbtn">MINHA CONTA ⬇</button>
                 <div class="dropdown-content">
                     <a href="#cadastrar-projeto">CADASTRAR PROJETO</a>
-                    <a href="#editar-perfil">EDITAR PERFIL</a>
-                    <a href="#configuracoes">CONFIGURAÇÕES</a>
                     <a href="#" id="logout">SAIR</a>
                 </div>
             </div>
@@ -125,26 +46,71 @@
 
     <div class="content">
         <form id="formCadastroProjeto" enctype="multipart/form-data">
-            <!-- Área de upload e pré-visualização da thumbnail -->
             <div class="thumbnail-container">
-                <label for="thumbnail-upload">Thumbnail do Projeto:</label>
-                <input type="file" id="thumbnail" accept="image/*">
-                
-                <div id="thumbnail-preview" class="thumbnail-preview">
-                    <img id="thumbnail-image" src="" alt="Thumbnail Preview">
+
+                <label for="">Linguagem Utilizada:</label>
+
+                <div class="radio-select">
+                    <label for=""><input type="radio" name="plataforma" value="p5js"> P5.js</label>
+                    <label for=""><input type="radio" name="plataforma" value="processing"> Processing</label>
                 </div>
-                <div id="error-message" class="error-message"></div>
-            </div>
-            <input type="hidden" name="projectId" id="projectId" value="">
-            <div class="desc-cat-up">
-                <div class="desc-cat">
-                    <label for="project_name">Nome do Projeto:</label>
-                    <input type="text" id="nome_projeto" name="nome_projeto" placeholder="Insira o nome do seu projeto">
 
-                    <label for="project_description">Descrição:</label>
-                    <textarea id="descricao_projeto" name="descricao" placeholder="Adicione uma breve descrição explicando o objetivo e a funcionalidade do seu código."></textarea>
+                <div class="name-group">
 
-                    <label for="categorias">Categorias (Escolha de 1 a 5):</label>
+                <div class="name-text-box">
+                    <label for="project_name" class="project-name">Nome do Projeto:</label>
+                    <input type="text" id="nome_projeto" name="nome_projeto" placeholder="Dê um nome para o seu projeto" class="text-box-div">
+                </div>
+
+                <div class="upload-thumb">
+                    <img src="./images/upload_image.png">
+                    
+                    <!-- Label que aciona o input -->
+                    <label for="projetoFile" class="upload_title">Adicione a thumbnail aqui</label>
+                    
+                    <!-- Input escondido -->
+                    <input type="file" id="projetoFile" name="projetoFile" accept=".zip,.tar,.tar.gz,.rar,.7z" style="display: none;">
+                    
+                    <div id="upload-error-message" class="error-message"></div>
+                    <div id="upload-success-message" class="success-message">
+                        <i class="fas fa-check-circle success-icon"></i> Arquivo enviado com sucesso!
+                    </div>
+                </div>
+                
+
+                <div class="upload-code">
+                    <img src="./images/upload_code.png">
+                    
+                    <!-- Label que aciona o input -->
+                    <label for="projetoFile" class="upload_title">Adicione o arquivo do código!</label>
+                    
+                    <!-- Input escondido -->
+                    <input type="file" id="projetoFile" name="projetoFile" accept=".zip,.tar,.tar.gz,.rar,.7z" style="display: none;">
+                    
+                    <div id="upload-error-message" class="error-message"></div>
+                    <div id="upload-success-message" class="success-message">
+                        <i class="fas fa-check-circle success-icon"></i> Arquivo enviado com sucesso!
+                    </div>
+                </div>
+
+
+
+
+                
+                </div>
+
+                <label for="project_description">Descrição:</label>
+                <textarea id="descricao_projeto" name="descricao" placeholder="Adicione uma breve descrição explicando o objetivo e a funcionalidade do seu código."></textarea>
+
+                
+
+
+
+
+
+
+
+                <label for="categorias">Categorias (Escolha de 1 a 5):</label>
                     <div id="categorias" class="tag-group">
                         <span class="tag" data-value="animacao">Animação</span>
                         <span class="tag" data-value="arte-generativa">Arte Generativa</span>
@@ -169,29 +135,17 @@
                         <span class="tag" data-value="visualizacoes-abstratas">Visualizações Abstratas</span>
                         <span class="tag" data-value="webcam">Webcam</span>
                     </div>
-                </div>
 
-                <div class="upload-images">
-                    <img src="./images/upload_img.png">
-                    <label for="upload" class="upload_title">Adicione arquivos compactados sobre o projeto aqui</label>
-                    <input type="file" id="projetoFile" name="projetoFile" accept=".zip,.tar,.tar.gz,.rar,.7z">
-                    <div id="upload-error-message" class="error-message"></div>
-                    <div id="upload-success-message" class="success-message">
-                        <i class="fas fa-check-circle success-icon"></i> Arquivo enviado com sucesso!
-                    </div>
-                </div>
+                <label for="project_code">Código:</label>
+                <textarea id="codigo_projeto" name="codigo" placeholder="Insira seu código nesta seção!"></textarea>    
+
+
+                
             </div>
 
-            <label for="project_code">Código:</label>
-            <textarea id="codigo_projeto" name="codigo" placeholder="Insira seu código nesta seção!"></textarea>
-
-            <label for="tipo_projeto">Tipo de Projeto:</label>
-            <select id="tipo_projeto" name="tipo_projeto">
-                <option value="p5js">p5.js</option>
-                <option value="processing">Processing</option>
-            </select>
             
 
+    
             <div class="botoes">
                 <button type="submit" class="enviar">Enviar Projeto</button>
                 <button type="reset" class="cancelar">Cancelar</button>

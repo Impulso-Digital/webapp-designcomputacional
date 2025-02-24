@@ -140,178 +140,168 @@ header {
 }
 
 
-.content {
-    width: 70%;
+
+
+
+
+
+.box-info {
+    display: flex; 
+    font-family: 'Bebas Neue', sans-serif;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 4rem;
+}
+
+
+
+
+
+
+
+dialog {
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+
+.modal-registro {
+    width: 60%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 10px;
+    padding: 30px;
+    background: #E6E6E6;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Estilo para o lado esquerdo */
+.register-left {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+}
+
+/* Estilo para o lado direito */
+.register-right {
+    width: 350px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;   
+}
+
+
+
+
+
+.title {
+    font-size: 45px;
+    color: white; 
+    font-family: 'Bebas Neue', sans-serif;
+    display: flex;
+    margin-left: 10%;
+    margin-top: 3%;
+}
+
+
+
+
+/* Catalogo */
+
+.catalogo {
+    width: 80%;
+    height: 700px;
     gap: 10px; /* Espaço entre os projetos */
     background-color: white;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 2%;
-    padding: 35px;
+    margin-top: 1%;
+    padding: 30px 55px;
     border-radius: 10px;
+    font-family: 'IBM Plex Sans', sans-serif;
+
+}
+
+
+
+
+
+
+.catalogo img{
+    width: 50px;
+    margin-right: 45px;
+    margin-left: 15px;
+}
+
+.account{
     display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente o conteúdo */
-}
-
-.title {
-    font-size: 55px;
-    color: white; 
-    font-family: 'Bebas Neue', sans-serif;
-    display: flex;
-    margin-left: 15%;
-    margin-top: 3%;
-}
-
-.content img {
-    width: 100px;
-    height: 400px;
-    object-fit: cover; /* Mantém a proporção da imagem, sem distorcer */
-    border-radius: 15px;
-    
-}
-
-form {
-    width: 100%;
-    max-width: 1450px;
-    /* margin: 20px auto; */
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    font-family: 'IBM Plex Sans', 'sans-serif';
-}
-
-form label {
-    font-weight: bold;
-    color: black;
-    font-size: 24px;
-    display: flex;
-    margin-top: 25px;
-}
-
-.radio-select{
-    display: flex;
-    gap: 15px;
-}
-
-form input[type="radio"]{
-    transform: scale(1.5);
-    margin-right: 5px;
-}
-
-
-
-
-form input[type="text"],
-form textarea {
-    width: 100%;
-    padding: 10px;
+    align-items: center;
     border: 1px solid black;
-    border-radius: 5px;
-    resize: vertical;
-    font-size: 14px;
-
+    border-radius: 50px;
+    padding: 15px;
 }
 
-form textarea {
-    min-height: 80px;
-    margin-bottom: 15px;
+.account h2{
+    margin-right: 45px;
 }
 
-.botoes {
+.account-tags{
     display: flex;
-    gap: 10px;
     justify-content: space-between;
 }
 
-form button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.enviar {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.enviar:hover {
-    background-color: #45a049;
-}
-
-.cancelar {
-    background-color: #f44336;
-    color: white;
-}
-
-.cancelar:hover {
-    background-color: #d32f2f;
-}
-
-
-
-
-
-.upload-thumb, .upload-code {
+.tag-group {
     display: flex;
-    flex-direction: column;
-    gap: 10px; 
-    text-align: center;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
 }
 
-.upload-thumb img, .upload-code img {
-    margin-top: 30px;
-    width: 150px;
-    height: auto;
+.tag {
+    background-color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 20px;
+    cursor: pointer;
     border: 1px solid black;
-    padding: 0 25px;
-    margin-bottom: -20px;
+    font-weight: 700;
+    color: #005505;
 }
 
-.upload-thumb label, .upload-code label {
-    font-size: 15px;
+.catalogo h1{
+    font-size: 30px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.catalogo a{
+
+    font-size: 20px;
     color: #005505;
     border: 1px solid black;
     border-radius: 5px;
     padding: 5px 15px;
     cursor: pointer;
+    text-decoration: none;
+    font-weight: 600;
 }
 
-#upload, #projetoFile {
-    display: none;
+.catalogo span{
+    font-size: 20px;
 }
 
-.name-group {
-    display: flex;
-    gap: 25px;
-    width: 100%; 
-
-}
-
-
-.text-box-div {
-    max-width: 1000px; 
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: center; 
-}
-
-.name-text-box {
-    display: flex;
-    flex-direction: column;
-    width: 100%; 
-}
-
-.project-name{
-    margin-bottom: 15px;
+.project-code{
+    background-color: #B8B8B8;
+    color: black;
 }
 
 
@@ -327,95 +317,15 @@ form button {
 
 
 
-
-
-.tag-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.tag {
-    background-color: #f0f0f0;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 14px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.tag.selected {
-    background-color: #4caf50;
-    color: white;
-}
-
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-/* Estilo para o upload de arquivos */
-.upload-files-container {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.upload-file {
-    margin: 10px 0;
-}
-
-/* Estilo para o feedback visual de sucesso */
-.success-message {
-    color: green;
-    font-size: 14px;
-    margin-top: 10px;
-    display: none;
-}
-
-.success-icon {
-    margin-right: 10px;
-    color: green;
-    font-size: 18px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Estilos para o footer */
 footer {
     background-color: #000000;
     color: #fff;
     text-align: center;
     padding: 10px;
-    margin-top: 60%; /* Isso empurra a div para o final */
+    margin-top: 63%; /* Isso empurra a div para o final */
     display: flex;
+    /* flex-direction: row; */
     padding: 15px;
     align-items: center;
     font-family: 'Bebas Neue', sans-serif;
