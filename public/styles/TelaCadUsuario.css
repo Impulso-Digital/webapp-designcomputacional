@@ -386,29 +386,6 @@ form button {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 footer {
     background-color: #000000;
     color: #fff;
@@ -449,5 +426,71 @@ footer a{
 footer img{
     width: 110px;
 }
+
+
+
+
+
+
+
+
+
+dialog {
+    visibility: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+
+.modal-registro {
+    width: 60%;
+    height: 70%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 10px;
+    padding: 30px;
+    background: #E6E6E6;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+.close-modal {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #666;
+    position: absolute;
+    top: 10px;  /* Ajuste a distância do topo conforme necessário */
+    right: 10px;  /* Ajuste a distância da direita conforme necessário */
+}
+
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro */
+}
+
+.como-usar{
+    font-family: 'IBM Plex Sans', sans-serif;
+    display: flex;
+    justify-content: end;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: -50px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
 
 
